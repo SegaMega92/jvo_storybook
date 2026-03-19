@@ -16,7 +16,7 @@ const config = {
   "framework": "@storybook/react-vite",
   viteFinal: async (config) => {
     // Set base path for GitHub Pages deployment
-    config.base = '/jvo/';
+    config.base = '/jvo_storybook/';
     return config;
   },
 };
