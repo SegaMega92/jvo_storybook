@@ -9,11 +9,10 @@ export default {
   component: AwardsSection,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'white',
-      values: [
-        { name: 'white', value: '#FFFFFF' },
-      ],
+    docs: {
+      description: {
+        component: 'Секция наград и достижений. Карточки с источником, описанием и бейджем.',
+      },
     },
   },
   tags: ['autodocs'],

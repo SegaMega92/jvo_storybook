@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './AgentWorkflowDemo.module.css';
-import automateIcon from '../../../../assets/icon_agent.svg';
-import agentLogo from '../../../../assets/agent_logo.svg';
+import automateIcon from '../../../assets/icons/agent-icon.svg';
+import agentLogo from '../../../assets/icons/agent-logo.svg';
 
 /**
  * AgentWorkflowDemo - интерактивная иллюстрация рабочего процесса агента

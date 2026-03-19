@@ -5,12 +5,10 @@ export default {
   component: BannerSection,
   parameters: {
     layout: 'padded',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#1E1B2E' },
-      ],
+    docs: {
+      description: {
+        component: 'CTA-баннер с заголовком, подзаголовком и кнопкой. Градиентный фиолетовый фон.',
+      },
     },
   },
   tags: ['autodocs'],

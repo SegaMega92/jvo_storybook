@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './HeroBlock.module.css';
 import { Button } from '../Button';
-import defaultCheckIcon from '../../../assets/check-icon-gradient.svg';
+import defaultCheckIcon from '../../assets/icons/check-gradient.svg';
 
 /**
  * HeroBlock - блок с карточкой фич и иллюстрацией/видео

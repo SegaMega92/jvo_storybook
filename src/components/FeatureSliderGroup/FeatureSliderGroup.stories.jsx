@@ -5,7 +5,13 @@ export default {
   component: FeatureSliderGroup,
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      description: {
+        component: 'Группа слайдеров с pinned-навигацией. Табы переключают между секциями, каждая секция — отдельный FeatureSlider.',
+      },
+    },
   },
+  tags: ['autodocs'],
 };
 
 // URL градиента

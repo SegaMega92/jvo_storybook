@@ -5,10 +5,13 @@ export default {
   component: ProductsSlider,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'light',
+    docs: {
+      description: {
+        component: 'Горизонтальный слайдер продуктов JVO. Карточки с названием, описанием и бейджем "Скоро".',
+      },
     },
   },
+  tags: ['autodocs'],
 };
 
 export const Default = {

@@ -2,10 +2,10 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ComparisonSlider.module.css';
 import { SectionHeader } from '../SectionHeader';
-import chevronLeft from '../../../assets/chevron-left.svg';
-import chevronRight from '../../../assets/chevron-right.svg';
-import checkmarkIcon from '../../../assets/сhekmakr.png';
-import crossIcon from '../../../assets/cross.png';
+import chevronLeft from '../../assets/icons/chevron-left.svg';
+import chevronRight from '../../assets/icons/chevron-right.svg';
+import checkmarkIcon from '../../assets/misc/checkmark.png';
+import crossIcon from '../../assets/misc/cross.png';
 
 // Данные слайдов (9 штук из Figma)
 const defaultSlides = [

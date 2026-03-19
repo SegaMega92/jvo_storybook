@@ -1,16 +1,15 @@
 import { Typography } from './index';
 
 export default {
-  title: 'Components/Typography',
+  title: 'Foundations/Typography',
   component: Typography,
   parameters: {
     layout: 'padded',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#FFFFFF' },
-        { name: 'dark', value: '#292538' },
-      ],
+    backgrounds: { default: 'light' },
+    docs: {
+      description: {
+        component: 'Компонент типографики. Поддерживает варианты от h1 до caption с настройками выравнивания и ширины.',
+      },
     },
   },
   tags: ['autodocs'],

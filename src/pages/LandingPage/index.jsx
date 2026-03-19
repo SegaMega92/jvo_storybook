@@ -17,28 +17,28 @@ import { FAQSection } from '../../components/FAQSection';
 import { Footer } from '../../components/Footer';
 import { Spacer } from '../../components/Spacer';
 import { AgentWorkflowDemo } from '../../components/Illustrations/AgentWorkflowDemo';
-import illustrationCommunication from '../../../assets/illustration_commenication_1.svg';
+import illustrationCommunication from '../../assets/illustrations/communication.svg';
 
 // Assets for HeroBlock
-import heroIllustration from '../../../assets/hero-illustration-agent.png';
-import heroGradient from '../../../assets/hero-gradient.png';
-import tagIconAgent from '../../../assets/tag-icon-agent.svg';
+import heroIllustration from '../../assets/hero/illustration-agent.png';
+import heroGradient from '../../assets/hero/gradient.png';
+import tagIconAgent from '../../assets/icons/tag-agent.svg';
 
 // Assets for FeatureSlider slides
-import slideAutoresponse1 from '../../../assets/slide/Работа тональности.png';
-import slideAutoresponse2 from '../../../assets/slide/Работа тональности2.png';
-import slideAutoresponse3 from '../../../assets/slide/Работа тональности3.png';
-import slideAutoresponse4 from '../../../assets/slide/Работа тональности4.png';
-import slideCrossSell1 from '../../../assets/slide/Умные кросс-продажи.png';
-import slideCrossSell2 from '../../../assets/slide/Умные кросс-продажи2.png';
-import slideCrossSell3 from '../../../assets/slide/Умные кросс-продажи3.png';
-import slideAnalytics1 from '../../../assets/slide/Аналитические отчеты.png';
-import slideAnalytics2 from '../../../assets/slide/Аналитические отчеты2.png';
-import slideAnalytics3 from '../../../assets/slide/Аналитические отчеты3.png';
-import slideAnalytics4 from '../../../assets/slide/Аналитические отчеты4.png';
-import gradientViolet from '../../../assets/slide/gradient1.svg';
-import gradientPink from '../../../assets/slide/gradient2.svg';
-import gradientMagenta from '../../../assets/slide/gradient3.svg';
+import slideAutoresponse1 from '../../assets/slides/tonality-1.png';
+import slideAutoresponse2 from '../../assets/slides/tonality-2.png';
+import slideAutoresponse3 from '../../assets/slides/tonality-3.png';
+import slideAutoresponse4 from '../../assets/slides/tonality-4.png';
+import slideCrossSell1 from '../../assets/slides/cross-sales-1.png';
+import slideCrossSell2 from '../../assets/slides/cross-sales-2.png';
+import slideCrossSell3 from '../../assets/slides/cross-sales-3.png';
+import slideAnalytics1 from '../../assets/slides/analytics-1.png';
+import slideAnalytics2 from '../../assets/slides/analytics-2.png';
+import slideAnalytics3 from '../../assets/slides/analytics-3.png';
+import slideAnalytics4 from '../../assets/slides/analytics-4.png';
+import gradientViolet from '../../assets/slides/gradient-violet.svg';
+import gradientPink from '../../assets/slides/gradient-pink.svg';
+import gradientMagenta from '../../assets/slides/gradient-magenta.svg';
 
 // Обёртка для левой иллюстрации с градиентом
 const LeftIllustration = () => (

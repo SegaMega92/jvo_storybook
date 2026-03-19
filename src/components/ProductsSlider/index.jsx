@@ -1,8 +1,18 @@
 import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './ProductsSlider.module.css';
-import chevronLeft from '../../../assets/chevron-left.svg';
-import chevronRight from '../../../assets/chevron-right.svg';
+import chevronLeft from '../../assets/icons/chevron-left.svg';
+import chevronRight from '../../assets/icons/chevron-right.svg';
+
+// Product images
+import pricingAgentIcon from '../../assets/products/pricing-agent-icon.png';
+import pricingAgentScreenshot from '../../assets/products/pricing-agent-screenshot.png';
+import supplyPlannerIcon from '../../assets/products/supply-planner-icon.png';
+import supplyPlannerScreenshot from '../../assets/products/supply-planner-screenshot.png';
+import seoProIcon from '../../assets/products/seo-pro-icon.png';
+import seoProScreenshot from '../../assets/products/seo-pro-screenshot.png';
+import agencyIcon from '../../assets/products/agency-icon.png';
+import agencyScreenshot from '../../assets/products/agency-screenshot.png';
 
 // Данные продуктов по умолчанию
 const defaultProducts = [
@@ -10,25 +20,33 @@ const defaultProducts = [
     id: 'pricing-agent',
     name: 'Агент ценообразования',
     description: 'Управление ценами на основе данных о воронке продаж, текущих остатках и динамике спроса',
-    color: 'violet',
-  },
-  {
-    id: 'reports-agent',
-    name: 'Агент отчётов',
-    description: 'Управление ценами на основе данных о воронке продаж, текущих остатках и динамике спроса',
-    color: 'gray',
-  },
-  {
-    id: 'seo-pro',
-    name: 'SEO Pro',
-    description: 'Управление ценами на основе данных о воронке продаж, текущих остатках и динамике спроса',
-    color: 'gray',
+    color: 'green',
+    icon: pricingAgentIcon,
+    image: pricingAgentScreenshot,
   },
   {
     id: 'supply-planner',
     name: 'Планировщик поставок',
-    description: 'Управление ценами на основе данных о воронке продаж, текущих остатках и динамике спроса',
-    color: 'gray',
+    description: 'Управление товарными запасами и защита от обнуления остатков',
+    color: 'red',
+    icon: supplyPlannerIcon,
+    image: supplyPlannerScreenshot,
+  },
+  {
+    id: 'seo-pro',
+    name: 'SEO Pro',
+    description: 'Автоматическая оптимизация карточек товаров для максимального охвата в поисковой выдаче',
+    color: 'yellow',
+    icon: seoProIcon,
+    image: seoProScreenshot,
+  },
+  {
+    id: 'agency',
+    name: 'Агентство продвижения',
+    description: 'Комплексное управление маркетплейсами под ключ — от вывода бренда и консалтинга до продвижения карточек в топ и ведения рекламы',
+    color: 'pink',
+    icon: agencyIcon,
+    image: agencyScreenshot,
   },
 ];
 
@@ -102,17 +120,17 @@ export function ProductsSlider({
           {products.map((product) => (
             <div key={product.id} className={styles.card}>
               <div className={styles.cardContent}>
-                <div className={`${styles.tag} ${product.color === 'violet' ? styles.tagViolet : styles.tagGray}`}>
-                  <div className={`${styles.tagIcon} ${product.color === 'violet' ? styles.tagIconViolet : styles.tagIconGray}`}>
+                <div className={styles.tag}>
+                  <div className={styles.tagIcon}>
                     {product.icon && <img src={product.icon} alt="" className={styles.tagIconImg} />}
                   </div>
-                  <span className={`${styles.tagText} ${product.color === 'violet' ? styles.tagTextViolet : styles.tagTextGray}`}>
+                  <span className={styles.tagText}>
                     {product.name}
                   </span>
                 </div>
                 <p className={styles.cardDescription}>{product.description}</p>
               </div>
-              <div className={`${styles.cardImage} ${product.color === 'violet' ? styles.cardImageViolet : styles.cardImageGray}`}>
+              <div className={`${styles.cardImage} ${styles[`cardImage${product.color?.charAt(0).toUpperCase()}${product.color?.slice(1)}`] || styles.cardImageGray}`}>
                 {product.image && <img src={product.image} alt="" className={styles.cardImg} />}
               </div>
             </div>
@@ -149,7 +167,7 @@ ProductsSlider.propTypes = {
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
-      color: PropTypes.oneOf(['violet', 'gray']),
+      color: PropTypes.oneOf(['violet', 'gray', 'green', 'red', 'yellow', 'pink']),
       icon: PropTypes.string,
       image: PropTypes.string,
     })

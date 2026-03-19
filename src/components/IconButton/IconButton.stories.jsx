@@ -1,15 +1,18 @@
 import { IconButton } from './index';
-import chevronRight from '../../../assets/chevron-right.svg';
+import chevronRight from '../../assets/icons/chevron-right.svg';
 
 export default {
   title: 'Components/IconButton',
   component: IconButton,
   parameters: {
     layout: 'centered',
-    backgrounds: {
-      default: 'light',
+    docs: {
+      description: {
+        component: 'Кнопка с иконкой. Варианты: default, primary, ghost. Размеры: small, medium, large.',
+      },
     },
   },
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',

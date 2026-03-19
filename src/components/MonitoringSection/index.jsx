@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import styles from './MonitoringSection.module.css';
 import { FeatureCard } from '../FeatureCard';
-import chevronRight from '../../../assets/chevron-right.svg';
+import chevronRight from '../../assets/icons/chevron-right.svg';
 
 /**
  * MonitoringSection - секция с двумя карточками и навигацией

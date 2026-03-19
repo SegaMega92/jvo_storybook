@@ -5,11 +5,11 @@ export default {
   component: HeroSection,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#FFFFFF' },
-      ],
+    backgrounds: { default: 'light' },
+    docs: {
+      description: {
+        component: 'Главный экран лендинга с заголовком, подзаголовком, CTA-кнопкой и декоративными элементами (aurora, badge, interface preview).',
+      },
     },
   },
   tags: ['autodocs'],

@@ -5,10 +5,14 @@ export default {
   component: FAQSection,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'dark',
+    backgrounds: { default: 'dark' },
+    docs: {
+      description: {
+        component: 'Секция FAQ (часто задаваемые вопросы). Тёмный фон #15181F, аккордеон с вопросами, иконка продукта.',
+      },
     },
   },
+  tags: ['autodocs'],
 };
 
 export const Default = {

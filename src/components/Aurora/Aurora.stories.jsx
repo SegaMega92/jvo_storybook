@@ -5,11 +5,10 @@ export default {
   component: Aurora,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#FFFFFF' },
-      ],
+    docs: {
+      description: {
+        component: 'Анимированный градиентный фон "Aurora". Используется как декоративный элемент на страницах.',
+      },
     },
   },
   tags: ['autodocs'],

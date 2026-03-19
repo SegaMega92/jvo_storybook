@@ -1,18 +1,21 @@
 import { HeroBlock } from './index';
 import { SectionHeader } from '../SectionHeader';
-import heroIllustration from '../../../assets/hero-illustration-agent.png';
-import heroGradient from '../../../assets/hero-gradient.png';
-import tagIconAgent from '../../../assets/tag-icon-agent.svg';
+import heroIllustration from '../../assets/hero/illustration-agent.png';
+import heroGradient from '../../assets/hero/gradient.png';
+import tagIconAgent from '../../assets/icons/tag-agent.svg';
 
 export default {
   title: 'Sections/HeroBlock',
   component: HeroBlock,
   parameters: {
     layout: 'padded',
-    backgrounds: {
-      default: 'light',
+    docs: {
+      description: {
+        component: 'Герой-блок с иллюстрацией/видео, списком фич и CTA-кнопкой. Варианты: default (карточка с градиентом) и flat (без обёртки).',
+      },
     },
   },
+  tags: ['autodocs'],
   argTypes: {
     variant: {
       control: 'select',

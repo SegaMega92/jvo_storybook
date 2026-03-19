@@ -1,15 +1,15 @@
 import { Header } from './index';
 
 export default {
-  title: 'Components/Header',
+  title: 'Sections/Header',
   component: Header,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'white',
-      values: [
-        { name: 'white', value: '#FFFFFF' },
-      ],
+    backgrounds: { default: 'light' },
+    docs: {
+      description: {
+        component: 'Фиксированная шапка сайта с навигацией, телефоном и кнопками входа/CTA. Адаптивная — на мобильном бургер-меню.',
+      },
     },
   },
   tags: ['autodocs'],

@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './AgentChatDemo.module.css';
-import automateIcon from '../../../../assets/icon_agent.svg';
+import automateIcon from '../../../assets/icons/agent-icon.svg';
 
 /**
  * AgentChatDemo - интерактивная иллюстрация с анимацией чата агента

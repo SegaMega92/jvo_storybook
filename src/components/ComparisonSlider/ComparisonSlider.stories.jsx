@@ -5,10 +5,13 @@ export default {
   component: ComparisonSlider,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'light',
+    docs: {
+      description: {
+        component: 'Слайдер сравнения "Агент vs Конкуренты". Показывает преимущества решения в виде сменяющихся карточек.',
+      },
     },
   },
+  tags: ['autodocs'],
 };
 
 // Дефолтный вариант с 10 слайдами

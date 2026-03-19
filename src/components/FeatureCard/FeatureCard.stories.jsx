@@ -1,16 +1,19 @@
 import { FeatureCard } from './index';
-import featureCardAlerts from '../../../assets/feature-card-alerts.png';
-import featureCardAutomation from '../../../assets/feature-card-automation.png';
+import featureCardAlerts from '../../assets/features/card-alerts.png';
+import featureCardAutomation from '../../assets/features/card-automation.png';
 
 export default {
   title: 'Components/FeatureCard',
   component: FeatureCard,
   parameters: {
     layout: 'centered',
-    backgrounds: {
-      default: 'light',
+    docs: {
+      description: {
+        component: 'Карточка фичи с изображением, заголовком и описанием. Используется в секции MonitoringSection.',
+      },
     },
   },
+  tags: ['autodocs'],
 };
 
 // Приоритезация алертов

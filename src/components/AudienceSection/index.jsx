@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './AudienceSection.module.css';
 
 // Фото для отзывов
-import avatarAnna from '../../../assets/feemale.png';
-import avatarElena from '../../../assets/feemale2.png';
-import avatarNatalya from '../../../assets/feemale3.png';
-import avatarDmitriy from '../../../assets/male1.png';
-import avatarAleksandr from '../../../assets/male2.png';
-import avatarMikhail from '../../../assets/male3.png';
+import avatarAnna from '../../assets/avatars/female-1.png';
+import avatarElena from '../../assets/avatars/female-2.png';
+import avatarNatalya from '../../assets/avatars/female-3.png';
+import avatarDmitriy from '../../assets/avatars/male-1.png';
+import avatarAleksandr from '../../assets/avatars/male-2.png';
+import avatarMikhail from '../../assets/avatars/male-3.png';
 
 // Данные табов (контент для каждой аудитории)
 const defaultTabs = [

@@ -1,10 +1,59 @@
 /* ===========================================
-   JVO Design Tokens - Based on jvo.ru/agent
+   JVO Design Tokens - Based on Figma Guideline
    =========================================== */
 
 :root {
   /* =========================================
-     Colors - Brand (from JVO Figma)
+     Colors - Base (from Figma)
+     ========================================= */
+  --color-base-black: #15181f;
+  --color-base-gray: #e9ebf0;
+  --color-base-white: #ffffff;
+
+  /* =========================================
+     Colors - Pink
+     ========================================= */
+  --color-pink-light: #ffdbf1;
+  --color-pink-main: #ff8fda;
+  --color-pink-dark: #3f0030;
+
+  /* =========================================
+     Colors - Violet
+     ========================================= */
+  --color-violet-light: #ead7fe;
+  --color-violet-main: #c16ffb;
+  --color-violet-dark: #300247;
+
+  /* =========================================
+     Colors - Orange
+     ========================================= */
+  --color-orange-light: #ffdbd2;
+  --color-orange-main: #ff965f;
+  --color-orange-dark: #381300;
+
+  /* =========================================
+     Colors - Red
+     ========================================= */
+  --color-red-light: #fea4a4;
+  --color-red-main: #fa4646;
+  --color-red-dark: #480404;
+
+  /* =========================================
+     Colors - Green
+     ========================================= */
+  --color-green-light: #d8f995;
+  --color-green-main: #b8ee49;
+  --color-green-dark: #172104;
+
+  /* =========================================
+     Colors - Yellow
+     ========================================= */
+  --color-yellow-light: #ffecb7;
+  --color-yellow-main: #facf61;
+  --color-yellow-dark: #2a1e01;
+
+  /* =========================================
+     Colors - Semantic aliases
      ========================================= */
   /* Dark theme */
   --color-bg-dark: #282537;
@@ -12,22 +61,28 @@
   --color-bg-card: #292538;
   --color-bg-card-hover: #363347;
 
-  /* Light theme (main page) */
-  --color-bg-light: #FFFFFF;
+  /* Light theme */
+  --color-bg-light: var(--color-base-white);
   --color-bg-light-secondary: #F5F5F7;
-  --color-dark: #101010;
+  --color-dark: var(--color-base-black);
   --color-heading: #200131;
-  --color-text-dark-primary: #101010;
+  --color-text-dark-primary: var(--color-base-black);
   --color-text-dark-secondary: #505050;
 
-  --color-white: #FFFFFF;
-  --color-text-primary: #FFFFFF;
+  --color-white: var(--color-base-white);
+  --color-text-primary: var(--color-base-white);
   --color-text-secondary: rgba(255, 255, 255, 0.7);
   --color-text-muted: rgba(255, 255, 255, 0.5);
 
-  --color-accent-pink: #FF8FDA;
+  /* Accent colors */
+  --color-accent-pink: var(--color-pink-main);
   --color-accent-pink-hover: #ff7ad0;
-  --color-accent-purple: #A855F7;
+  --color-accent-purple: var(--color-violet-main);
+  --color-accent-violet: var(--color-violet-main);
+  --color-accent-orange: var(--color-orange-main);
+  --color-accent-red: var(--color-red-main);
+  --color-accent-green: var(--color-green-main);
+  --color-accent-yellow: var(--color-yellow-main);
 
   --color-border: rgba(198, 203, 213, 0.2);
   --color-border-hover: rgba(198, 203, 213, 0.4);

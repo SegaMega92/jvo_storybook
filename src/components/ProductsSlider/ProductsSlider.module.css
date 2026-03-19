@@ -83,9 +83,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 540px;
   min-width: 540px;
   flex-shrink: 0;
@@ -101,6 +99,7 @@
   flex-direction: column;
   gap: 24px;
   width: 100%;
+  margin-bottom: 24px;
 }
 
 /* Тег продукта */
@@ -111,13 +110,6 @@
   padding: 6px 14px 6px 6px;
   border-radius: 16px;
   width: fit-content;
-}
-
-.tagViolet {
-  background: #ead7fe;
-}
-
-.tagGray {
   background: #e9ebf0;
 }
 
@@ -129,14 +121,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-}
-
-.tagIconViolet {
-  background: #300247;
-}
-
-.tagIconGray {
-  background: #15181f;
 }
 
 .tagIconImg {
@@ -151,13 +135,6 @@
   font-weight: 500;
   line-height: 1;
   white-space: nowrap;
-}
-
-.tagTextViolet {
-  color: #300247;
-}
-
-.tagTextGray {
   color: #15181f;
 }
 
@@ -188,6 +165,22 @@
 
 .cardImageGray {
   background: #e9ebf0;
+}
+
+.cardImageGreen {
+  background: #d8f995;
+}
+
+.cardImageRed {
+  background: #fea4a4;
+}
+
+.cardImageYellow {
+  background: #ffecb7;
+}
+
+.cardImagePink {
+  background: #ffdbf1;
 }
 
 .cardImg {

@@ -1,14 +1,18 @@
 import { Footer } from './index';
 
 export default {
-  title: 'Components/Footer',
+  title: 'Sections/Footer',
   component: Footer,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'dark',
+    backgrounds: { default: 'dark' },
+    docs: {
+      description: {
+        component: 'Подвал сайта. Тёмный фон #15181F, 5 колонок навигации, контакты, копирайт.',
+      },
     },
   },
+  tags: ['autodocs'],
 };
 
 export const Default = {

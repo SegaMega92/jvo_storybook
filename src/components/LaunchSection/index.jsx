@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import styles from './LaunchSection.module.css';
 
 // Изображения карточек
-import card1Img from '../../../assets/запуск и внедрение/1.png';
-import card2Img from '../../../assets/запуск и внедрение/2.png';
-import card3Img from '../../../assets/запуск и внедрение/3.png';
-import card4Img from '../../../assets/запуск и внедрение/4.png';
+import card1Img from '../../assets/launch/step-1.png';
+import card2Img from '../../assets/launch/step-2.png';
+import card3Img from '../../assets/launch/step-3.png';
+import card4Img from '../../assets/launch/step-4.png';
 
 // Градиенты для фона карточек
-import gradient1 from '../../../assets/запуск и внедрение/пgradient1.svg';
-import gradient2 from '../../../assets/запуск и внедрение/пgradient2.svg';
-import gradient3 from '../../../assets/запуск и внедрение/пgradient3.svg';
-import gradient4 from '../../../assets/запуск и внедрение/пgradient4.svg';
+import gradient1 from '../../assets/launch/gradient-1.svg';
+import gradient2 from '../../assets/launch/gradient-2.svg';
+import gradient3 from '../../assets/launch/gradient-3.svg';
+import gradient4 from '../../assets/launch/gradient-4.svg';
 
 // Данные карточек по умолчанию
 const defaultCards = [

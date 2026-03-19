@@ -2,21 +2,21 @@ import PropTypes from 'prop-types';
 import styles from './Footer.module.css';
 
 // Partner logos
-import itCompanyLogo from '../../../assets/footer/Clip path group.svg';
-import ozonLogo from '../../../assets/footer/Clip path group2.svg';
-import moscowClusterLogo from '../../../assets/footer/московский кластер.svg';
-import wbPartnerLogo from '../../../assets/footer/партнер вб.svg';
-import skolkovoLogo from '../../../assets/footer/сколково.svg';
+import itCompanyLogo from '../../assets/footer/logo-it-company.svg';
+import ozonLogo from '../../assets/footer/logo-ozon.svg';
+import moscowClusterLogo from '../../assets/footer/logo-moscow-cluster.svg';
+import wbPartnerLogo from '../../assets/footer/logo-wb-partner.svg';
+import skolkovoLogo from '../../assets/footer/logo-skolkovo.svg';
 
 // Payment systems
-import paymentSystemsLogo from '../../../assets/footer/платежные системы.svg';
+import paymentSystemsLogo from '../../assets/footer/logo-payment-systems.svg';
 
 // Social media icons
-import vcRuIcon from '../../../assets/footer/Subtract.svg';
-import youtubeIcon from '../../../assets/footer/Subtract-1.svg';
-import dzenIcon from '../../../assets/footer/Subtract-2.svg';
-import telegramIcon from '../../../assets/footer/Subtract-3.svg';
-import vkIcon from '../../../assets/footer/Subtract-4.svg';
+import vcRuIcon from '../../assets/footer/social-vc.svg';
+import youtubeIcon from '../../assets/footer/social-youtube.svg';
+import dzenIcon from '../../assets/footer/social-dzen.svg';
+import telegramIcon from '../../assets/footer/social-telegram.svg';
+import vkIcon from '../../assets/footer/social-vk.svg';
 
 // Navigation links data
 const navLinksColumn1 = [

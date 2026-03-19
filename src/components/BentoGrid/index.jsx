@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './BentoGrid.module.css';
 
 // Feature images
-import imgScenarios from '../../../assets/features/img-3.png';
-import imgStrategies from '../../../assets/features/img-4.png';
-import imgControl from '../../../assets/features/img-6.png';
-import imgBadge50k from '../../../assets/features/img-1.png';
-import imgSettings from '../../../assets/features/img-2.png';
-import imgMultibrand from '../../../assets/features/img-5.png';
-import imgCenterIcon from '../../../assets/features/img.png';
+import imgScenarios from '../../assets/bento/scenarios.png';
+import imgStrategies from '../../assets/bento/strategies.png';
+import imgControl from '../../assets/bento/control.png';
+import imgBadge50k from '../../assets/bento/badge-50k.png';
+import imgSettings from '../../assets/bento/settings.png';
+import imgMultibrand from '../../assets/bento/multibrand.png';
+import imgCenterIcon from '../../assets/bento/center-icon.png';
 
 /**
  * BentoGrid - сетка фич в стиле bento

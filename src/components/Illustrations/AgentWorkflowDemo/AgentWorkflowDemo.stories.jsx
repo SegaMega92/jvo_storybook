@@ -5,15 +5,14 @@ export default {
   component: AgentWorkflowDemo,
   parameters: {
     layout: 'centered',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#f6f3fe' },
-        { name: 'white', value: '#ffffff' },
-        { name: 'dark', value: '#1a1a2e' },
-      ],
+    backgrounds: { default: 'light' },
+    docs: {
+      description: {
+        component: 'Интерактивная демонстрация рабочего процесса агента. Показывает автоматизацию задачи с эффектом печатания.',
+      },
     },
   },
+  tags: ['autodocs'],
   decorators: [
     (Story) => (
       <div style={{

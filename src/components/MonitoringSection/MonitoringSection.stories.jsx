@@ -1,16 +1,20 @@
 import { MonitoringSection } from './index';
 import { AgentChatDemo } from '../Illustrations/AgentChatDemo';
-import illustrationCommunication from '../../../assets/illustration_commenication_1.svg';
+import illustrationCommunication from '../../assets/illustrations/communication.svg';
 
 export default {
   title: 'Sections/MonitoringSection',
   component: MonitoringSection,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'light',
+    backgrounds: { default: 'light' },
+    docs: {
+      description: {
+        component: 'Секция "Мониторинг и аналитика". Две карточки с иллюстрациями, навигация точками. Интерактивная демонстрация AgentChatDemo.',
+      },
     },
   },
+  tags: ['autodocs'],
 };
 
 // Обёртка для левой иллюстрации с градиентом

@@ -5,11 +5,10 @@ export default {
   component: LogoMarquee,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'white',
-      values: [
-        { name: 'white', value: '#FFFFFF' },
-      ],
+    docs: {
+      description: {
+        component: 'Бегущая строка с логотипами партнёров/клиентов. Бесконечная анимация, настраиваемая скорость и направление.',
+      },
     },
   },
   tags: ['autodocs'],

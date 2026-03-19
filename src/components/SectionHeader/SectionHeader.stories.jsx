@@ -1,12 +1,18 @@
 import { SectionHeader } from './index';
-import tagIconAgent from '../../../assets/tag-icon-agent.svg';
+import tagIconAgent from '../../assets/icons/tag-agent.svg';
 
 export default {
-  title: 'Sections/SectionHeader',
+  title: 'Components/SectionHeader',
   component: SectionHeader,
   parameters: {
     layout: 'fullscreen',
+    docs: {
+      description: {
+        component: 'Заголовок секции. Поддерживает тег с иконкой, заголовок (h1/h2/h3), подзаголовок, кнопку и кастомный контент.',
+      },
+    },
   },
+  tags: ['autodocs'],
   argTypes: {
     as: {
       control: 'select',

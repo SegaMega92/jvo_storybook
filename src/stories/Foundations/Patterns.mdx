@@ -1,0 +1,112 @@
+{/* Patterns.mdx */}
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Patterns" />
+
+# Паттерны
+
+Декоративные паттерны для фонов.
+
+## Точечный паттерн
+
+Основной паттерн — сетка из полупрозрачных точек, используется поверх градиентов.
+
+### Варианты
+
+| Название | Размер сетки | Использование |
+|----------|--------------|---------------|
+| `--pattern-dots` | 2×2px | Стандартный (плотный) |
+| `--pattern-dots-sparse` | 3×3px | Разреженный |
+| `--pattern-dots-extra-sparse` | 4×4px | Очень разреженный |
+| `--pattern-dots-dark` | 2×2px | Тёмные точки (для светлых фонов) |
+
+### CSS-переменные
+
+Определены в `styles/patterns.css`:
+
+```css
+:root {
+  --pattern-dots: url("data:image/svg+xml,...");
+  --pattern-dots-sparse: url("data:image/svg+xml,...");
+  --pattern-dots-extra-sparse: url("data:image/svg+xml,...");
+  --pattern-dots-dark: url("data:image/svg+xml,...");
+}
+```
+
+### Использование
+
+#### Способ 1: Псевдоэлемент
+
+```css
+.card {
+  position: relative;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--pattern-dots);
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+```
+
+#### Способ 2: CSS-класс
+
+```jsx
+<div className="pattern-dots">
+  Контент с паттерном
+</div>
+```
+
+### Примеры использования
+
+- **HeroBlock** — паттерн поверх градиентного фона
+- **FeatureSlider** — паттерн на слайдах
+- **LaunchSection** — паттерн на карточках
+- **MonitoringSection** — паттерн на иллюстрациях
+
+## Градиенты
+
+### Фиолетовый градиент (тёмный фон)
+
+```css
+background: linear-gradient(
+  135deg,
+  #300247 0%,
+  #520A7A 25%,
+  #7505AD 50%,
+  #9B3AD4 75%,
+  #C16FFB 100%
+);
+```
+
+### Светлый градиент (карточки)
+
+```css
+background: radial-gradient(
+  ellipse at 100% 0%,
+  rgba(200, 160, 255, 0.8) 0%,
+  rgba(180, 140, 250, 0.4) 40%,
+  rgba(246, 243, 254, 0) 80%
+);
+background-color: #f6f3fe;
+```
+
+## Комбинирование
+
+Типичный паттерн использования — градиент + точечный паттерн + контент:
+
+```jsx
+<div className={styles.card}>
+  {/* Слой 1: Градиент (z-index: 0) */}
+  <img src={gradient} className={styles.gradient} />
+
+  {/* Слой 2: Паттерн через ::after (z-index: 1) */}
+
+  {/* Слой 3: Контент (z-index: 2) */}
+  <img src={content} className={styles.content} />
+</div>
+```

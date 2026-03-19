@@ -5,12 +5,11 @@ export default {
   component: Button,
   parameters: {
     layout: 'centered',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#FFFFFF' },
-        { name: 'dark', value: '#292538' },
-      ],
+    backgrounds: { default: 'light' },
+    docs: {
+      description: {
+        component: 'Основная кнопка. Поддерживает варианты primary, secondary, outline, ghost и три размера.',
+      },
     },
   },
   tags: ['autodocs'],

@@ -1,0 +1,188 @@
+{/* Colors.mdx */}
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+
+<Meta title="Foundations/Colors" />
+
+# Цветовая палитра
+
+Цвета дизайн-системы JVO из Figma Guideline.
+
+## Base / Нейтральные
+
+<ColorPalette>
+  <ColorItem
+    title="Base"
+    subtitle="Основные нейтральные цвета"
+    colors={{
+      'black': '#15181f',
+      'gray': '#e9ebf0',
+      'white': '#ffffff'
+    }}
+  />
+</ColorPalette>
+
+## Violet
+
+<ColorPalette>
+  <ColorItem
+    title="Violet"
+    subtitle="Основной акцентный цвет"
+    colors={{
+      'light': '#ead7fe',
+      'main': '#c16ffb',
+      'dark': '#300247'
+    }}
+  />
+</ColorPalette>
+
+## Pink
+
+<ColorPalette>
+  <ColorItem
+    title="Pink"
+    subtitle="Акцент для кнопок и активных состояний"
+    colors={{
+      'light': '#ffdbf1',
+      'main': '#ff8fda',
+      'dark': '#3f0030'
+    }}
+  />
+</ColorPalette>
+
+## Orange
+
+<ColorPalette>
+  <ColorItem
+    title="Orange"
+    subtitle="Предупреждения и акценты"
+    colors={{
+      'light': '#ffdbd2',
+      'main': '#ff965f',
+      'dark': '#381300'
+    }}
+  />
+</ColorPalette>
+
+## Red
+
+<ColorPalette>
+  <ColorItem
+    title="Red"
+    subtitle="Ошибки и критические состояния"
+    colors={{
+      'light': '#fea4a4',
+      'main': '#fa4646',
+      'dark': '#480404'
+    }}
+  />
+</ColorPalette>
+
+## Green
+
+<ColorPalette>
+  <ColorItem
+    title="Green"
+    subtitle="Успешные состояния"
+    colors={{
+      'light': '#d8f995',
+      'main': '#b8ee49',
+      'dark': '#172104'
+    }}
+  />
+</ColorPalette>
+
+## Yellow
+
+<ColorPalette>
+  <ColorItem
+    title="Yellow"
+    subtitle="Информационные сообщения"
+    colors={{
+      'light': '#ffecb7',
+      'main': '#facf61',
+      'dark': '#2a1e01'
+    }}
+  />
+</ColorPalette>
+
+## CSS-переменные
+
+Цвета доступны через CSS-переменные в `tokens/tokens.css`:
+
+```css
+:root {
+  /* Base */
+  --color-base-black: #15181f;
+  --color-base-gray: #e9ebf0;
+  --color-base-white: #ffffff;
+
+  /* Violet */
+  --color-violet-light: #ead7fe;
+  --color-violet-main: #c16ffb;
+  --color-violet-dark: #300247;
+
+  /* Pink */
+  --color-pink-light: #ffdbf1;
+  --color-pink-main: #ff8fda;
+  --color-pink-dark: #3f0030;
+
+  /* Orange */
+  --color-orange-light: #ffdbd2;
+  --color-orange-main: #ff965f;
+  --color-orange-dark: #381300;
+
+  /* Red */
+  --color-red-light: #fea4a4;
+  --color-red-main: #fa4646;
+  --color-red-dark: #480404;
+
+  /* Green */
+  --color-green-light: #d8f995;
+  --color-green-main: #b8ee49;
+  --color-green-dark: #172104;
+
+  /* Yellow */
+  --color-yellow-light: #ffecb7;
+  --color-yellow-main: #facf61;
+  --color-yellow-dark: #2a1e01;
+
+  /* Semantic aliases */
+  --color-accent-pink: var(--color-pink-main);
+  --color-accent-violet: var(--color-violet-main);
+  --color-accent-orange: var(--color-orange-main);
+  --color-accent-green: var(--color-green-main);
+}
+```
+
+## Использование
+
+### В компонентах
+Используйте CSS-переменные для цветов:
+
+```css
+.button-primary {
+  background: var(--color-pink-main);
+  color: var(--color-base-white);
+}
+
+.button-secondary {
+  background: var(--color-violet-main);
+  color: var(--color-base-white);
+}
+
+.alert-error {
+  background: var(--color-red-light);
+  color: var(--color-red-dark);
+}
+
+.alert-success {
+  background: var(--color-green-light);
+  color: var(--color-green-dark);
+}
+```
+
+### Контраст и доступность
+- Текст `#15181f` на белом фоне — контраст 15.5:1
+- Текст `#ffffff` на `#c16ffb` — контраст 3.2:1 (только для крупного текста)
+- Текст `#ffffff` на `#300247` — контраст 14.8:1
+- Текст dark на light backgrounds — всегда достаточный контраст

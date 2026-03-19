@@ -6,11 +6,10 @@ export default {
   component: FeatureSection,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#FFFFFF' },
-      ],
+    docs: {
+      description: {
+        component: 'Секция с описанием фичи. Два колонки: текст с буллетами и медиа (видео или изображение). Поддерживает reversed layout.',
+      },
     },
   },
   tags: ['autodocs'],

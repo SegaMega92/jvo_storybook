@@ -14,10 +14,31 @@ const preview = {
     backgrounds: {
       default: 'dark',
       values: [
+        // Base
+        { name: 'white', value: '#ffffff' },
+        { name: 'gray', value: '#e9ebf0' },
+        { name: 'black', value: '#15181f' },
+        // Theme
         { name: 'dark', value: '#282537' },
         { name: 'darker', value: '#1a1825' },
-        { name: 'light', value: '#ffffff' },
-        { name: 'gray', value: '#f8f9fa' },
+        // Violet
+        { name: 'violet-light', value: '#ead7fe' },
+        { name: 'violet-dark', value: '#300247' },
+        // Pink
+        { name: 'pink-light', value: '#ffdbf1' },
+        { name: 'pink-dark', value: '#3f0030' },
+        // Orange
+        { name: 'orange-light', value: '#ffdbd2' },
+        { name: 'orange-dark', value: '#381300' },
+        // Green
+        { name: 'green-light', value: '#d8f995' },
+        { name: 'green-dark', value: '#172104' },
+        // Yellow
+        { name: 'yellow-light', value: '#ffecb7' },
+        { name: 'yellow-dark', value: '#2a1e01' },
+        // Red
+        { name: 'red-light', value: '#fea4a4' },
+        { name: 'red-dark', value: '#480404' },
       ],
     },
 

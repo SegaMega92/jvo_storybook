@@ -5,10 +5,14 @@ export default {
   component: FeatureSlider,
   parameters: {
     layout: 'fullscreen',
-    backgrounds: {
-      default: 'dark',
+    backgrounds: { default: 'dark' },
+    docs: {
+      description: {
+        component: 'Слайдер с фичами на тёмном фоне. Автопрокрутка, кнопки навигации, прогресс-бар. Используется для демонстрации возможностей агента.',
+      },
     },
   },
+  tags: ['autodocs'],
   argTypes: {
     autoplayInterval: {
       control: { type: 'number', min: 1000, max: 15000, step: 500 },
