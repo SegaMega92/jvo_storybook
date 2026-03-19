@@ -17,7 +17,7 @@ import { HeroBlock } from '../../components/HeroBlock';
 import { MonitoringSection } from '../../components/MonitoringSection';
 import { FeatureSliderGroup } from '../../components/FeatureSliderGroup';
 import { ComparisonSlider } from '../../components/ComparisonSlider';
-import { BentoGrid } from '../../components/BentoGrid';
+// BentoGrid заменён на AdvantagesSection для кастомного контента
 import { AudienceSection } from '../../components/AudienceSection';
 import { LaunchSection } from '../../components/LaunchSection';
 import { ProductsSlider } from '../../components/ProductsSlider';
@@ -317,18 +317,18 @@ const comparisonSlides = [
   },
 ];
 
-// Данные для BentoGrid (переопределяем через props)
+// Данные для BentoGrid — 7 преимуществ из документа
 const bentoItems = [
   {
     id: 'multistrategies',
     title: typograph('Мультистратегии через промпт'),
-    description: typograph('Объединение любых параметров (маржа, остатки, воронка продаж, CTR) в один сценарий простыми словами. Все функции доступны сразу, без доплат.'),
+    description: typograph('Объединение любых параметров (маржа, остатки, воронка продаж, CTR) в один сценарий простыми словами. В отличие от других сервисов, все функции доступны сразу, без доплат.'),
     color: '#8B5CF6',
   },
   {
     id: 'analytics',
     title: typograph('Глубокая аналитика воронки'),
-    description: typograph('Агент принимает решения на основе реальных данных вашего магазина, а не просто копирует цены конкурентов.'),
+    description: typograph('Агент автоматизации ценообразования на маркетплейсах принимает решения на основе реальных данных вашего магазина, а не просто копирует цены конкурентов.'),
     color: '#EC4899',
   },
   {
@@ -355,7 +355,93 @@ const bentoItems = [
     description: typograph('полная автоматизация на «Автопилоте» или ручное подтверждение каждого изменения в «Полуавтомате».'),
     color: '#EF4444',
   },
+  {
+    id: 'stock-link',
+    title: typograph('Связка с остатками'),
+    description: typograph('принимает решения на основе реального товарного запаса и скорости его оборота.'),
+    color: '#06B6D4',
+  },
 ];
+
+// Компонент для секции преимуществ (вместо BentoGrid)
+const AdvantagesSection = ({ items }) => (
+  <section style={{
+    padding: '80px 24px',
+    maxWidth: '1200px',
+    margin: '0 auto',
+  }}>
+    <h2 style={{
+      fontFamily: 'RF Dewi Extended, sans-serif',
+      fontSize: '48px',
+      fontWeight: 700,
+      textAlign: 'center',
+      marginBottom: '48px',
+      color: '#15181f',
+    }}>
+      {typograph('Преимущества Агента ценообразования')}
+    </h2>
+    <div style={{
+      display: 'grid',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+      gap: '24px',
+    }}>
+      {items.map((item) => (
+        <div key={item.id} style={{
+          background: '#f6f6f9',
+          borderRadius: '16px',
+          padding: '24px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '12px',
+        }}>
+          <div style={{
+            width: '48px',
+            height: '48px',
+            borderRadius: '12px',
+            background: item.color,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </div>
+          <h3 style={{
+            fontFamily: 'Manrope, sans-serif',
+            fontSize: '18px',
+            fontWeight: 600,
+            color: '#15181f',
+            margin: 0,
+          }}>
+            {item.title}
+          </h3>
+          <p style={{
+            fontFamily: 'Manrope, sans-serif',
+            fontSize: '15px',
+            fontWeight: 400,
+            color: '#505050',
+            margin: 0,
+            lineHeight: 1.5,
+          }}>
+            {item.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+);
+
+AdvantagesSection.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      color: PropTypes.string,
+    })
+  ).isRequired,
+};
 
 // Моковый аватар (data URL)
 const mockAvatar = (color) => `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Ccircle cx='24' cy='24' r='24' fill='${encodeURIComponent(color)}'/%3E%3Ccircle cx='24' cy='18' r='8' fill='white' opacity='0.5'/%3E%3Ccircle cx='24' cy='42' r='14' fill='white' opacity='0.5'/%3E%3C/svg%3E`;
@@ -515,10 +601,10 @@ export function PricingAgentPage({ className = '' }) {
           <HeroBlock
             variant="flat"
             features={typographArray([
-              'Защита от Out-of-Stock, потери позиции в рейтинге и обнуления остатков',
+              'Защита от Out-of-Stock, потери позиций в рейтинге и обнуления остатков',
               'Управление оборачиваемостью: выявляет падение продаж и помогает реализовать неликвид',
               'Контроль целевой маржи и продаж матрицы с заданной доходностью',
-              'Оплата за результат — от 1,5 руб. за действие',
+              'Оплата за результат — от 1,5 руб. за действие.',
             ])}
             buttonText="Подключить Агента"
             buttonHref="#demo"
@@ -551,8 +637,8 @@ export function PricingAgentPage({ className = '' }) {
 
         <Spacer size="xl" />
 
-        {/* BentoGrid - пока используем стандартный */}
-        <BentoGrid />
+        {/* Преимущества Агента ценообразования */}
+        <AdvantagesSection items={bentoItems} />
 
         <Spacer size="xl" />
 
