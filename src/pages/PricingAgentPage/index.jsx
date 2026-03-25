@@ -134,15 +134,15 @@ const featureSliderSections = [
     panelBackground: gradientSoftEntry,
     slides: [
       {
-        title: typograph('Динамическое торможение спроса'),
-        description: typograph('плавно поднимает цену при риске обнуления остатков, способствуя сохранению позиций в поиске.'),
-        media: <SlideImage src={dynamicBrakingImg} alt="Динамическое торможение спроса" />,
-        background: gradientSoftEntry,
-      },
-      {
         title: typograph('Разделение стратегий FBO и FBS'),
         description: typograph('позволяет настраивать разные сценарии управления ценой в зависимости от оборачиваемости или остатков'),
         media: <SlideImage src={fboFbsStrategiesImg} alt="Разделение стратегий FBO и FBS" />,
+        background: gradientSoftEntry,
+      },
+      {
+        title: typograph('Динамическое торможение спроса'),
+        description: typograph('плавно поднимает цену при риске обнуления остатков, способствуя сохранению позиций в поиске.'),
+        media: <SlideImage src={dynamicBrakingImg} alt="Динамическое торможение спроса" />,
         background: gradientSoftEntry,
       },
       {
