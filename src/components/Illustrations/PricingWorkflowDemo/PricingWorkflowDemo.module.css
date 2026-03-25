@@ -1,0 +1,420 @@
+/* PricingWorkflowDemo - интерактивная иллюстрация для Агента ценообразования */
+/* По макету Figma (node 3-120) */
+
+/* Внешняя обёртка - занимает всё пространство родителя */
+.wrapper {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Контейнер для интерактивных элементов */
+.container {
+  position: relative;
+  width: 360px;
+  height: 360px;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Состояния с crossfade
+   ======================================== */
+.state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.stateVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ========================================
+   Состояние 1: Кнопка "Автоматизировать"
+   ======================================== */
+.automateButton {
+  display: flex;
+  align-items: center;
+  gap: 9.654px;
+  height: 41.028px;
+  padding: 0 14.48px 0 9.654px;
+  background: linear-gradient(104.91deg, #aa50ea 14.597%, #e877ff 111.68%);
+  border: none;
+  border-radius: 9.654px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.automateButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(170, 80, 234, 0.4);
+}
+
+.automateButton:active {
+  transform: scale(0.98);
+}
+
+.automateIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28.961px;
+  height: 28.961px;
+  background: #aa50ea;
+  border-radius: 6px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.automateIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.automateText {
+  font-family: var(--font-family-primary);
+  font-size: 16.894px;
+  font-weight: 500;
+  line-height: 21.721px;
+  white-space: nowrap;
+}
+
+/* ========================================
+   Состояние 2: Логотип агента + крупный текст
+   ======================================== */
+.agentHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.agentLogo {
+  height: 24px;
+  width: auto;
+}
+
+.agentDescription {
+  width: 284px;
+  font-family: var(--font-family-heading);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 20px;
+  letter-spacing: -0.48px;
+  color: #2b2b2b;
+  text-align: center;
+}
+
+/* ========================================
+   Состояние 3: Чат-пузырь с алгоритмом
+   ======================================== */
+.chatBubble {
+  position: absolute;
+  left: 18px;
+  top: 135px;
+  display: flex;
+  flex-direction: column;
+  gap: 7.5px;
+  padding: 12px;
+  background: white;
+  border-radius: 9px;
+  max-width: 324px;
+}
+
+/* Тег агента */
+.agentTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(234, 215, 254, 0.6);
+  border-radius: 12px;
+  width: fit-content;
+}
+
+.agentDot {
+  width: 9px;
+  height: 9px;
+  background: #c16ffb;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.agentName {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  color: #300247;
+  white-space: nowrap;
+}
+
+/* ========================================
+   Состояние 3: Пошаговый алгоритм
+   ======================================== */
+.chatBubbleExpanded {
+  position: relative;
+  top: auto;
+  left: auto;
+  width: 324px;
+  max-width: 324px;
+  padding: 12px;
+}
+
+.stepsContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 300px;
+  padding: 6px 12px 18px 12px;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: relative;
+}
+
+.stepItem {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  padding-bottom: 10px;
+  position: relative;
+  width: 100%;
+}
+
+.stepItem:last-child {
+  padding-bottom: 0;
+}
+
+/* Счётчик шага */
+.stepCounter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #2b2b2b;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: white;
+  position: relative;
+  z-index: 2;
+}
+
+.stepNumber {
+  font-family: var(--font-family-primary);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 1;
+  color: #2b2b2b;
+  text-align: center;
+}
+
+/* Финальный шаг с галочкой */
+.stepCounterDone {
+  background: #83d2b3;
+  border-color: #2b2b2b;
+}
+
+/* Текст шага */
+.stepText {
+  flex: 1;
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 13px;
+  color: #2b2b2b;
+  padding-top: 2px;
+}
+
+.stepTextMultiline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Вертикальная линия между шагами */
+.stepConnector {
+  position: absolute;
+  left: 7px;
+  top: 15px;
+  width: 1px;
+  height: calc(100% - 5px);
+  background: #2b2b2b;
+  z-index: 1;
+}
+
+.stepItem:last-child .stepConnector {
+  display: none;
+}
+
+/* ========================================
+   Блок оценки алгоритма
+   ======================================== */
+.rateBlock {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  border: 0.5px solid #eaeaea;
+  border-radius: 6px;
+  margin-top: 12px;
+  width: fit-content;
+}
+
+.rateText {
+  font-family: var(--font-family-primary);
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+  color: #555;
+  padding: 0 6px;
+  white-space: nowrap;
+}
+
+.rateButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.rateButton:hover {
+  background: rgba(234, 215, 254, 0.4);
+}
+
+.rateIcon {
+  width: 12px;
+  height: 12px;
+  color: #2b2b2b;
+}
+
+.rateIconDown {
+  transform: rotate(180deg);
+}
+
+/* ========================================
+   Кнопка "Запустить" (перезапуск)
+   ======================================== */
+.launchButton {
+  position: relative;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9.654px;
+  width: 324px;
+  height: 41px;
+  padding: 0 14.48px 0 9.654px;
+  background: linear-gradient(111.447deg, #aa50ea 14.597%, #e877ff 111.68%);
+  border: none;
+  border-radius: 9.654px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.launchButtonVisible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.launchButton:hover {
+  box-shadow: 0 4px 20px rgba(170, 80, 234, 0.4);
+}
+
+.launchButton:active {
+  transform: scale(0.98);
+}
+
+.launchIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28.961px;
+  height: 28.961px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.launchIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.launchText {
+  font-family: var(--font-family-primary);
+  font-size: 16.894px;
+  font-weight: 500;
+  line-height: 21.721px;
+  white-space: nowrap;
+}
+
+/* ========================================
+   Курсор печатания
+   ======================================== */
+.cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background: #c16ffb;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  animation: blink 0.6s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+/* ========================================
+   Адаптив
+   ======================================== */
+@media (max-width: 640px) {
+  .container {
+    transform: scale(0.9);
+    transform-origin: center center;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    transform: scale(0.8);
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    transform: scale(0.7);
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    transform: scale(0.6);
+  }
+}

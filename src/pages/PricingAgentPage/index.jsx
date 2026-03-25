@@ -12,7 +12,7 @@ import agencyScreenshot from '../../assets/products/agency-screenshot.png';
 
 // MonitoringSection illustrations
 import illustrationCommunication from '../../assets/illustrations/communication.svg';
-import { AgentWorkflowDemo } from '../../components/Illustrations/AgentWorkflowDemo';
+import { PricingWorkflowDemo } from '../../components/Illustrations/PricingWorkflowDemo';
 
 // Pricing Agent images - FeatureSlider slides
 import dynamicBrakingImg from '../../assets/pricing-agent/dynamic-braking.png';
@@ -73,11 +73,11 @@ const LeftIllustration = () => (
   </div>
 );
 
-// Обёртка для правой иллюстрации с градиентом и интерактивным AgentWorkflowDemo
+// Обёртка для правой иллюстрации с градиентом и интерактивным PricingWorkflowDemo
 const RightIllustration = () => (
   <div className={styles.illustrationWrapperRight}>
     <div className={styles.dotsPattern} />
-    <AgentWorkflowDemo />
+    <PricingWorkflowDemo />
   </div>
 );
 
