@@ -10,6 +10,38 @@ import seoProScreenshot from '../../assets/products/seo-pro-screenshot.png';
 import agencyIcon from '../../assets/products/agency-icon.png';
 import agencyScreenshot from '../../assets/products/agency-screenshot.png';
 
+// Pricing Agent images - FeatureSlider slides
+import dynamicBrakingImg from '../../assets/pricing-agent/dynamic-braking.png';
+import fboFbsStrategiesImg from '../../assets/pricing-agent/fbo-fbs-strategies.png';
+import softOosEntryImg from '../../assets/pricing-agent/soft-oos-entry.png';
+import stuckSkuSearchImg from '../../assets/pricing-agent/stuck-sku-search.png';
+import effectivePriceSearchImg from '../../assets/pricing-agent/effective-price-search.png';
+import alertPriceImg from '../../assets/pricing-agent/alert-price.png';
+import effectivePriceNewproductsImg from '../../assets/pricing-agent/effective-price-search-newproducts.png';
+import marginThresholdImg from '../../assets/pricing-agent/margin-threshold.png';
+import smartEntryImg from '../../assets/pricing-agent/smart-entry.png';
+import instantPriceRollbackImg from '../../assets/pricing-agent/instant-price-rollback.png';
+import minPriceProtectionImg from '../../assets/pricing-agent/min-price-protection.png';
+import marginThresholdScaleImg from '../../assets/pricing-agent/margin-threshold-scale.png';
+import salesTrendsRecoveryImg from '../../assets/pricing-agent/sales-trends-recovery.png';
+import profitOptimizationImg from '../../assets/pricing-agent/profit-optimization.png';
+
+// Pricing Agent images - Bento section
+import bentoLibraryImg from '../../assets/pricing-agent/bento-library.png';
+import bentoTwoModesImg from '../../assets/pricing-agent/bento-two-modes.png';
+import bentoNewproductsIconImg from '../../assets/pricing-agent/bento-newproducts-icon.png';
+import bentoMultistrategiesImg from '../../assets/pricing-agent/bento-multistrategies.png';
+import bentoAnalyticsIconImg from '../../assets/pricing-agent/bento-analytics-icon.png';
+import bentoStockIconImg from '../../assets/pricing-agent/bento-stock-icon.png';
+import bentoEconomyIconImg from '../../assets/pricing-agent/bento-economy-icon.png';
+
+// Avatar images for AudienceSection
+import avatarSupplierMedium from '../../assets/pricing-agent/avatars/avatar-supplier-medium.png';
+import avatarSupplierLarge from '../../assets/pricing-agent/avatars/avatar-supplier-large.png';
+import avatarManager from '../../assets/pricing-agent/avatars/avatar-manager.png';
+import avatarMonobrand from '../../assets/pricing-agent/avatars/avatar-monobrand.png';
+import avatarEcomHead from '../../assets/pricing-agent/avatars/avatar-ecom-head.png';
+
 // Import all sections
 import { Header } from '../../components/Header';
 import { SectionHeader } from '../../components/SectionHeader';
@@ -17,7 +49,6 @@ import { HeroBlock } from '../../components/HeroBlock';
 import { MonitoringSection } from '../../components/MonitoringSection';
 import { FeatureSliderGroup } from '../../components/FeatureSliderGroup';
 import { ComparisonSlider } from '../../components/ComparisonSlider';
-// BentoGrid заменён на AdvantagesSection для кастомного контента
 import { AudienceSection } from '../../components/AudienceSection';
 import { LaunchSection } from '../../components/LaunchSection';
 import { ProductsSlider } from '../../components/ProductsSlider';
@@ -25,83 +56,47 @@ import { FAQSection } from '../../components/FAQSection';
 import { Footer } from '../../components/Footer';
 import { Spacer } from '../../components/Spacer';
 
-// Моковый компонент для изображений-заглушек
-const MockImage = ({ color = '#C16FFB', label = '' }) => (
-  <div
+// Компонент для изображения слайда
+const SlideImage = ({ src, alt }) => (
+  <img
+    src={src}
+    alt={alt}
     style={{
       width: '100%',
       height: '100%',
-      minHeight: '200px',
-      background: `linear-gradient(135deg, ${color} 0%, ${color}99 100%)`,
+      objectFit: 'contain',
       borderRadius: '12px',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      color: 'white',
-      fontFamily: 'Manrope, sans-serif',
-      fontSize: '14px',
-      fontWeight: 600,
-      textAlign: 'center',
-      padding: '20px',
     }}
-  >
-    {label}
-  </div>
-);
-
-MockImage.propTypes = {
-  color: PropTypes.string,
-  label: PropTypes.string,
-};
-
-// Компонент для слайда
-const SlideImage = ({ color, label }) => (
-  <MockImage color={color} label={label} />
+  />
 );
 
 SlideImage.propTypes = {
-  color: PropTypes.string,
-  label: PropTypes.string,
+  src: PropTypes.string.isRequired,
+  alt: PropTypes.string,
 };
 
 // Данные для MonitoringSection
 const monitoringCards = [
   {
-    image: <MockImage color="#9B6FE8" label="Приоритезация алертов" />,
+    image: <img src={stuckSkuSearchImg} alt="Приоритезация алертов" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
     imageAlt: 'Приоритезация алертов',
     title: 'Приоритезация алертов',
     description: typograph('система распределяет найденные отклонения по уровням критичности — от рекомендованных до важных и критических — для фокусировки на задачах, требующих решения в первую очередь.'),
   },
   {
-    image: <MockImage color="#7B5FC7" label="Мгновенная автоматизация" />,
+    image: <img src={alertPriceImg} alt="Мгновенная автоматизация" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
     imageAlt: 'Мгновенная автоматизация',
     title: 'Мгновенная автоматизация',
     description: typograph('часть созданных задач в один клик передается в работу профильным Агентам для исполнения — от управления ценами до подготовки ответов на отзывы.'),
   },
 ];
 
-// Градиенты для слайдов (цвета)
-const COLORS = {
-  violet: '#8B5CF6',
-  pink: '#EC4899',
-  blue: '#3B82F6',
-  green: '#10B981',
-  orange: '#F59E0B',
-};
-
-// Inline SVG градиенты для panelBackground
-const createGradientSvg = (color1, color2) => {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:${color1}"/><stop offset="100%" style="stop-color:${color2}"/></linearGradient></defs><rect width="600" height="400" fill="url(#g)"/></svg>`;
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-};
-
-const GRADIENTS = {
-  violet: createGradientSvg('#8B5CF6', '#6D28D9'),
-  pink: createGradientSvg('#EC4899', '#BE185D'),
-  blue: createGradientSvg('#3B82F6', '#1D4ED8'),
-  green: createGradientSvg('#10B981', '#047857'),
-  orange: createGradientSvg('#F59E0B', '#D97706'),
-};
+// Градиенты для слайдов
+import gradientStuckSku from '../../assets/pricing-agent/gradient-stuck-sku.svg';
+import gradientMinPrice from '../../assets/pricing-agent/gradient-min-price.svg';
+import gradientSoftEntry from '../../assets/pricing-agent/gradient-soft-entry.svg';
+import gradientEffectivePrice from '../../assets/pricing-agent/gradient-effective-price.svg';
+import gradientMargin from '../../assets/pricing-agent/gradient-margin.svg';
 
 // Данные для FeatureSliderGroup — 5 секций
 const featureSliderSections = [
@@ -111,25 +106,25 @@ const featureSliderSections = [
     sectionDescription: typograph('Защита карточки от выпадения из выдачи из-за обнуления остатков.'),
     buttonText: 'Оставить заявку',
     buttonHref: '#demo',
-    panelBackground: GRADIENTS.violet,
+    panelBackground: gradientSoftEntry,
     slides: [
       {
         title: typograph('Динамическое торможение спроса'),
         description: typograph('плавно поднимает цену при риске обнуления остатков, способствуя сохранению позиций в поиске.'),
-        media: <SlideImage color={COLORS.violet} label="Торможение спроса" />,
-        background: GRADIENTS.violet,
+        media: <SlideImage src={dynamicBrakingImg} alt="Динамическое торможение спроса" />,
+        background: gradientSoftEntry,
       },
       {
         title: typograph('Разделение стратегий FBO и FBS'),
         description: typograph('позволяет настраивать разные сценарии управления ценой в зависимости от оборачиваемости или остатков'),
-        media: <SlideImage color={COLORS.violet} label="FBO / FBS" />,
-        background: GRADIENTS.violet,
+        media: <SlideImage src={fboFbsStrategiesImg} alt="Разделение стратегий FBO и FBS" />,
+        background: gradientSoftEntry,
       },
       {
         title: typograph('Мягкий вход в OOS'),
         description: typograph('фиксирует максимально высокую цену перед обнулением, чтобы избежать демпинга при возврате товара в наличие.'),
-        media: <SlideImage color={COLORS.violet} label="Мягкий вход" />,
-        background: GRADIENTS.violet,
+        media: <SlideImage src={softOosEntryImg} alt="Мягкий вход в OOS" />,
+        background: gradientSoftEntry,
       },
     ],
   },
@@ -139,25 +134,25 @@ const featureSliderSections = [
     sectionDescription: typograph('Высвобождение «замороженного» капитала и возврат денег в оборот.'),
     buttonText: 'Оставить заявку',
     buttonHref: '#demo',
-    panelBackground: GRADIENTS.pink,
+    panelBackground: gradientStuckSku,
     slides: [
       {
         title: typograph('Автоматический поиск зависших SKU'),
         description: typograph('выявляет товары с низкой оборачиваемостью и помечает их как цели для распродажи.'),
-        media: <SlideImage color={COLORS.pink} label="Поиск SKU" />,
-        background: GRADIENTS.pink,
+        media: <SlideImage src={stuckSkuSearchImg} alt="Автоматический поиск зависших SKU" />,
+        background: gradientStuckSku,
       },
       {
         title: typograph('Поиск эффективной цены'),
         description: typograph('система плавно снижает или повышает цену небольшими шагами до первого всплеска заказов, что позволяет быстро вывести позицию из простоя, не снижая цену больше, чем того требует рынок.'),
-        media: <SlideImage color={COLORS.pink} label="Эффективная цена" />,
-        background: GRADIENTS.pink,
+        media: <SlideImage src={effectivePriceSearchImg} alt="Поиск эффективной цены" />,
+        background: gradientStuckSku,
       },
       {
         title: typograph('Режим «Алерт → Цена»'),
         description: typograph('позволяет изменить цену и запустить распродажу неликвида в один клик прямо из уведомления.'),
-        media: <SlideImage color={COLORS.pink} label="Алерт → Цена" />,
-        background: GRADIENTS.pink,
+        media: <SlideImage src={alertPriceImg} alt="Режим Алерт-Цена" />,
+        background: gradientStuckSku,
       },
     ],
   },
@@ -167,19 +162,19 @@ const featureSliderSections = [
     sectionDescription: typograph('Безопасный старт продаж и поиск рыночной цены'),
     buttonText: 'Оставить заявку',
     buttonHref: '#demo',
-    panelBackground: GRADIENTS.blue,
+    panelBackground: gradientEffectivePrice,
     slides: [
       {
         title: typograph('Поиск эффективной цены'),
         description: typograph('тестирование разных уровней скидки до появления первых заказов. Позволяет нащупать спрос за несколько дней, сохраняя максимум прибыли.'),
-        media: <SlideImage color={COLORS.blue} label="Тестирование цены" />,
-        background: GRADIENTS.blue,
+        media: <SlideImage src={effectivePriceNewproductsImg} alt="Поиск эффективной цены" />,
+        background: gradientEffectivePrice,
       },
       {
         title: typograph('Соблюдение порога маржинальности'),
         description: typograph('установка минимальной цены, ниже которой Агент не опустится. Данные можно загружать массово для всей матрицы, гарантируя поиск точки спроса только в безопасном для бизнеса диапазоне'),
-        media: <SlideImage color={COLORS.blue} label="Порог маржи" />,
-        background: GRADIENTS.blue,
+        media: <SlideImage src={marginThresholdImg} alt="Соблюдение порога маржинальности" />,
+        background: gradientEffectivePrice,
       },
     ],
   },
@@ -189,25 +184,25 @@ const featureSliderSections = [
     sectionDescription: typograph('Автоматизация входа и выхода из распродаж'),
     buttonText: 'Оставить заявку',
     buttonHref: '#demo',
-    panelBackground: GRADIENTS.green,
+    panelBackground: gradientMinPrice,
     slides: [
       {
         title: typograph('Интеллектуальный вход'),
         description: typograph('анализирует условия акций и рекомендует только те SKU, которые соответствуют целевой прибыли.'),
-        media: <SlideImage color={COLORS.green} label="Интеллектуальный вход" />,
-        background: GRADIENTS.green,
+        media: <SlideImage src={smartEntryImg} alt="Интеллектуальный вход" />,
+        background: gradientMinPrice,
       },
       {
         title: typograph('Мгновенный откат цен'),
         description: typograph('автоматически возвращает базовую цену в момент завершения акции, исключая торговлю в минус.'),
-        media: <SlideImage color={COLORS.green} label="Откат цен" />,
-        background: GRADIENTS.green,
+        media: <SlideImage src={instantPriceRollbackImg} alt="Мгновенный откат цен" />,
+        background: gradientMinPrice,
       },
       {
         title: typograph('Защита минимальной цены'),
         description: typograph('блокирует любое снижение ниже установленного порога, даже при принудительных скидках маркетплейса.'),
-        media: <SlideImage color={COLORS.green} label="Защита цены" />,
-        background: GRADIENTS.green,
+        media: <SlideImage src={minPriceProtectionImg} alt="Защита минимальной цены" />,
+        background: gradientMinPrice,
       },
     ],
   },
@@ -217,25 +212,25 @@ const featureSliderSections = [
     sectionDescription: typograph('Системное управление выручкой и доходностью каждого SKU'),
     buttonText: 'Оставить заявку',
     buttonHref: '#demo',
-    panelBackground: GRADIENTS.orange,
+    panelBackground: gradientMargin,
     slides: [
       {
         title: typograph('Соблюдение порога маржинальности'),
         description: typograph('блокирует снижение цены ниже установленного лимита. Поддерживает массовую загрузку параметров минимальной доходности для всей матрицы, предотвращая продажи в убыток.'),
-        media: <SlideImage color={COLORS.orange} label="Порог маржи" />,
-        background: GRADIENTS.orange,
+        media: <SlideImage src={marginThresholdScaleImg} alt="Соблюдение порога маржинальности" />,
+        background: gradientMargin,
       },
       {
         title: typograph('Восстановление трендов продаж'),
         description: typograph('выявляет артикулы с падающей динамикой заказов и корректирует цену для возврата карточки в целевой объем продаж и сохранения позиций в выдаче.'),
-        media: <SlideImage color={COLORS.orange} label="Тренды продаж" />,
-        background: GRADIENTS.orange,
+        media: <SlideImage src={salesTrendsRecoveryImg} alt="Восстановление трендов продаж" />,
+        background: gradientMargin,
       },
       {
         title: typograph('Оптимизация прибыли'),
         description: typograph('находит соотношение цены и спроса, при котором увеличивается объем заказов с сохранением максимально возможной маржинальности.'),
-        media: <SlideImage color={COLORS.orange} label="Оптимизация" />,
-        background: GRADIENTS.orange,
+        media: <SlideImage src={profitOptimizationImg} alt="Оптимизация прибыли" />,
+        background: gradientMargin,
       },
     ],
   },
@@ -317,134 +312,116 @@ const comparisonSlides = [
   },
 ];
 
-// Данные для BentoGrid — 7 преимуществ из документа
+// Данные для BentoGrid — 7 преимуществ из документа (порядок по макету Figma)
 const bentoItems = [
   {
-    id: 'multistrategies',
-    title: typograph('Мультистратегии через промпт'),
-    description: typograph('Объединение любых параметров (маржа, остатки, воронка продаж, CTR) в один сценарий простыми словами. В отличие от других сервисов, все функции доступны сразу, без доплат.'),
-    color: '#8B5CF6',
-  },
-  {
-    id: 'analytics',
-    title: typograph('Глубокая аналитика воронки'),
-    description: typograph('Агент автоматизации ценообразования на маркетплейсах принимает решения на основе реальных данных вашего магазина, а не просто копирует цены конкурентов.'),
-    color: '#EC4899',
+    id: 'library',
+    title: typograph('Библиотека стратегий'),
+    description: typograph('Запуск готовых сценариев (новинки, неликвид, OOS) от лидеров рынка в один клик.'),
+    image: bentoLibraryImg,
+    size: 'wide', // cols 1-2, row 1
+    layout: 'image-left',
   },
   {
     id: 'economy',
     title: typograph('Прозрачная экономика'),
     description: typograph('Модель оплаты за результат позволяет платить только за действия, исключая переплаты за простой системы'),
-    color: '#3B82F6',
-  },
-  {
-    id: 'newproducts',
-    title: typograph('Бесшовная работа с новинками'),
-    description: typograph('Гибкие алгоритмы вывода новых артикулов в топ, недоступные в классических репрайсерах цен для Wildberries и Ozon'),
-    color: '#10B981',
-  },
-  {
-    id: 'library',
-    title: typograph('Библиотека стратегий'),
-    description: typograph('запуск готовых сценариев (новинки, неликвид, OOS) от лидеров рынка в один клик.'),
-    color: '#F59E0B',
+    image: bentoEconomyIconImg,
+    imageType: 'icon', // col 3, row 1
   },
   {
     id: 'modes',
-    title: typograph('2 режима контроля'),
+    title: typograph('Два режима контроля'),
     description: typograph('полная автоматизация на «Автопилоте» или ручное подтверждение каждого изменения в «Полуавтомате».'),
-    color: '#EF4444',
+    image: bentoTwoModesImg,
+    layout: 'image-left', // col 1, row 2 - телефон слева, текст справа
+  },
+  {
+    id: 'analytics',
+    title: typograph('Глубокая аналитика воронки'),
+    description: typograph('Агент принимает решения на основе реальных данных вашего магазина, а не просто копирует цены конкурентов.'),
+    image: bentoAnalyticsIconImg,
+    imageType: 'icon', // col 2, row 2
   },
   {
     id: 'stock-link',
     title: typograph('Связка с остатками'),
     description: typograph('принимает решения на основе реального товарного запаса и скорости его оборота.'),
-    color: '#06B6D4',
+    image: bentoStockIconImg,
+    imageType: 'icon', // col 3, row 2
+  },
+  {
+    id: 'newproducts',
+    title: typograph('Бесшовная работа с новинками'),
+    description: typograph('Гибкие алгоритмы вывода новых артикулов в топ, недоступные в классических репрайсерах цен для Wildberries и Ozon'),
+    image: bentoNewproductsIconImg,
+    imageType: 'icon', // col 1, row 3
+  },
+  {
+    id: 'multistrategies',
+    title: typograph('Мультистратегии через промпт'),
+    description: typograph('Объединение любых параметров (маржа, остатки, воронка продаж, CTR) в один сценарий простыми словами. В отличие от других сервисов, все функции доступны сразу, без доплат.'),
+    image: bentoMultistrategiesImg,
+    size: 'wide', // cols 2-3, row 3
+    layout: 'image-right',
   },
 ];
 
-// Компонент для секции преимуществ (вместо BentoGrid)
-const AdvantagesSection = ({ items }) => (
-  <section style={{
-    padding: '80px 24px',
-    maxWidth: '1200px',
-    margin: '0 auto',
-  }}>
-    <h2 style={{
-      fontFamily: 'RF Dewi Extended, sans-serif',
-      fontSize: '48px',
-      fontWeight: 700,
-      textAlign: 'center',
-      marginBottom: '48px',
-      color: '#15181f',
-    }}>
-      {typograph('Преимущества Агента ценообразования')}
-    </h2>
-    <div style={{
-      display: 'grid',
-      gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-      gap: '24px',
-    }}>
-      {items.map((item) => (
-        <div key={item.id} style={{
-          background: '#f6f6f9',
-          borderRadius: '16px',
-          padding: '24px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '12px',
-        }}>
-          <div style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '12px',
-            background: item.color,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
+// Компонент BentoGrid секции преимуществ
+const BentoSection = ({ items }) => (
+  <section className={styles.bentoSection}>
+    <div className={styles.bentoGrid}>
+      {items.map((item) => {
+        const cardClasses = [
+          styles.bentoCard,
+          item.size === 'wide' ? styles.bentoCardWide : '',
+          item.layout === 'image-left' ? styles.bentoCardImageLeft : '',
+          item.layout === 'image-right' ? styles.bentoCardImageRight : '',
+        ].filter(Boolean).join(' ');
+
+        return (
+          <div key={item.id} className={cardClasses}>
+            {item.imageType === 'icon' ? (
+              <>
+                <div className={styles.bentoIconWrapper}>
+                  <img src={item.image} alt="" className={styles.bentoIcon} />
+                </div>
+                <div className={styles.bentoText}>
+                  <h3 className={styles.bentoTitle}>{item.title}</h3>
+                  <p className={styles.bentoDescription}>{item.description}</p>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className={styles.bentoImageWrapper}>
+                  <img src={item.image} alt="" className={styles.bentoImage} />
+                </div>
+                <div className={styles.bentoText}>
+                  <h3 className={styles.bentoTitle}>{item.title}</h3>
+                  <p className={styles.bentoDescription}>{item.description}</p>
+                </div>
+              </>
+            )}
           </div>
-          <h3 style={{
-            fontFamily: 'Manrope, sans-serif',
-            fontSize: '18px',
-            fontWeight: 600,
-            color: '#15181f',
-            margin: 0,
-          }}>
-            {item.title}
-          </h3>
-          <p style={{
-            fontFamily: 'Manrope, sans-serif',
-            fontSize: '15px',
-            fontWeight: 400,
-            color: '#505050',
-            margin: 0,
-            lineHeight: 1.5,
-          }}>
-            {item.description}
-          </p>
-        </div>
-      ))}
+        );
+      })}
     </div>
   </section>
 );
 
-AdvantagesSection.propTypes = {
+BentoSection.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
-      color: PropTypes.string,
+      image: PropTypes.string,
+      imageType: PropTypes.string,
+      size: PropTypes.string,
+      layout: PropTypes.string,
     })
   ).isRequired,
 };
-
-// Моковый аватар (data URL)
-const mockAvatar = (color) => `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Ccircle cx='24' cy='24' r='24' fill='${encodeURIComponent(color)}'/%3E%3Ccircle cx='24' cy='18' r='8' fill='white' opacity='0.5'/%3E%3Ccircle cx='24' cy='42' r='14' fill='white' opacity='0.5'/%3E%3C/svg%3E`;
 
 // Данные для AudienceSection
 const audienceTabs = [
@@ -453,7 +430,7 @@ const audienceTabs = [
     label: 'Среднему поставщику',
     description: typograph('Избавляет от операционного хаоса и ручного контроля матрицы. Позволяет расти без найма людей, фокусируясь на точках прибыли, которые нашёл Агент.'),
     testimonial: {
-      avatar: mockAvatar('#9B6FE8'),
+      avatar: avatarSupplierMedium,
       name: 'Средний поставщик',
       text: typograph('Описание опыта среднего поставщика с системой ценообразования Дживио.'),
     },
@@ -463,9 +440,9 @@ const audienceTabs = [
     label: 'Крупному поставщику',
     description: typograph('Снимает ограничения роста, освобождая до 70% времени. Команда управляет большей матрицей без потери маржи и увеличения ФОТ.'),
     testimonial: {
-      avatar: mockAvatar('#7B5FC7'),
+      avatar: avatarSupplierLarge,
       name: 'Игорь, коммерческий директор (бытовая техника)',
-      text: typograph('«Раньше работали с классическим репрайсером, но там за каждый чих — контроль маржи или работу с акциями — требовали перехода на другой тариф. В JVO все инструменты доступны сразу, тариф зависит от матрицы и кол-ва действий Агента, всё прозрачно. Мы настроили через промпт сложную мультистратегию, которая учитывает и остатки, и темпы продаж, и теперь система сама балансирует ценами на 5 000 артикулов»'),
+      text: typograph('«В других репрайсерах за каждую функцию — контроль маржи, акции — требовали доплату. В JVO всё включено сразу. Настроили мультистратегию через промпт, и теперь система сама балансирует ценами на 5 000 артикулов»'),
     },
   },
   {
@@ -473,9 +450,9 @@ const audienceTabs = [
     label: 'Собственнику монобренда',
     description: typograph('Разрывает зависимость роста штата от выручки. Заменяет обучение сотрудников готовыми AI-сценариями, исключая ошибки из-за человеческого фактора.'),
     testimonial: {
-      avatar: mockAvatar('#EC4899'),
+      avatar: avatarMonobrand,
       name: 'Оксана, собственник бренда (косметика)',
-      text: typograph('«Для меня критически важна была раскачка новинок. Другие сервисы предлагали только шаблоны, которые не учитывали нашу экономику. Агент Дживио за две недели нащупал идеальную цену запуска, не слив маржу в ноль. В итоге мы вывели в топ 15 новых позиций за месяц, просто ставя задачи системе обычными словами»'),
+      text: typograph('«Для меня важна была раскачка новинок. Другие сервисы предлагали шаблоны без учёта нашей экономики. Агент за две недели нашёл идеальную цену запуска. Вывели в топ 15 позиций за месяц, ставя задачи обычными словами»'),
     },
   },
   {
@@ -483,7 +460,7 @@ const audienceTabs = [
     label: 'Руководителю e-com',
     description: typograph('Возвращает роль стратега при управлении тысячами SKU. Система сама находит проблемы в воронке и даёт инструменты для их мгновенного исправления.'),
     testimonial: {
-      avatar: mockAvatar('#3B82F6'),
+      avatar: avatarEcomHead,
       name: 'Руководитель e-com',
       text: typograph('Описание опыта руководителя e-com с системой ценообразования Дживио.'),
     },
@@ -493,7 +470,7 @@ const audienceTabs = [
     label: 'Менеджеру маркетплейсов',
     description: typograph('Освобождает до 4 часов в день от рутины и Excel. Позволяет перейти от «тушения пожаров» к поиску точек роста и повышению своей экспертности.'),
     testimonial: {
-      avatar: mockAvatar('#10B981'),
+      avatar: avatarManager,
       name: 'Дмитрий, ведущий менеджер (одежда)',
       text: typograph('«Я просто пишу текстом: "Не падай ниже маржи 15% и тормози продажи, если остаток меньше 50 штук". Теперь я трачу на цены 10 минут в день вместо четырех часов»'),
     },
@@ -538,12 +515,12 @@ const faqs = [
   {
     id: 2,
     question: 'С какими именно ценами работает Агент на Wildberries и Ozon?',
-    answer: typograph('На Wildberries: Агент управляет базовой ценой или скидкой продавца. Система учитывает СПП (скидка от площадки), обновляя данные раз в 3 часа, и корректирует цену так, чтобы итоговая стоимость для покупателя соответствовала вашей стратегии. На Ozon: Агент меняет либо стартовую цену (до перечеркивания), либо цену со скидкой («Ваша цена»).'),
+    answer: typograph('На Wildberries: Агент управляет базовой ценой или скидкой продавца. Система учитывает СПП (скидка от площадки), обновляя данные раз в 3 часа, и корректирует цену так, чтобы итоговая стоимость для покупателя соответствовала вашей стратегии.\nНа Ozon: Агент меняет либо стартовую цену (до перечеркивания), либо цену со скидкой («Ваша цена»).'),
   },
   {
     id: 3,
     question: 'Может ли Агент управлять участием в акциях на Ozon?',
-    answer: typograph('Да, Агент умеет автоматически заходить в акции и выходить из них на основе заданного сценария (например, если участие становится убыточным). Это касается любых акций площадки, включая эластичный бустинг.'),
+    answer: typograph('Да, Агент умеет автоматически заходить в акции и выходить из них на основе заданного сценария (например, если участие становится убыточным). Это касается любых акций площадки, включая эластичный бустинг. Агент не сравнивает акции между собой, а работает по условиям вашего промпта. Акции, созданные поставщиком вручную, обычно не входят в зону управления Агента.'),
   },
   {
     id: 4,
@@ -553,7 +530,7 @@ const faqs = [
   {
     id: 5,
     question: 'Не упадет ли процент выкупа, если Агент снизит цену?',
-    answer: typograph('Это риск обычных репрайсеров цен для маркетплейсов, которые резко демпингуют. Агент Дживио работает иначе: он меняет цену плавно, пошагово в пределах нескольких процентов. При таких колебаниях у покупателя не возникает мотивации отказываться от уже заказанного товара ради незначительной экономии.'),
+    answer: typograph('Это риск обычных репрайсеров цен для маркетплейсов, которые резко демпингуют. Агент Дживио работает иначе: он меняет цену плавно, пошагово в пределах нескольких процентов.. При таких колебаниях у покупателя не возникает мотивации отказываться от уже заказанного товара ради незначительной экономии. Плавность изменений сохраняет ваш процент выкупа и позиции карточки.'),
   },
   {
     id: 6,
@@ -568,7 +545,7 @@ const faqs = [
   {
     id: 8,
     question: 'Учитывает ли Агент автоматически стоимость хранения и логистики?',
-    answer: typograph('Да, при настройке стратегий, ориентированных на показатели маржи и маржинальности, система учитывает стоимость хранения и логистики. Если же используется упрощенная модель управления, эти расходы закладываются пользователем в порог минимальной цены.'),
+    answer: typograph('Да, при настройке стратегий, ориентированных на показатели маржи и маржинальности, система учитывает стоимость хранения и логистики. Если же используется упрощенная модель управления, эти расходы закладываются пользователем в порог минимальной цены, ниже которого Агент не опускается. Это позволяет сохранять целевую доходность при любом выбранном сценарии управления.'),
   },
   {
     id: 9,
@@ -608,7 +585,7 @@ export function PricingAgentPage({ className = '' }) {
             ])}
             buttonText="Подключить Агента"
             buttonHref="#demo"
-            illustration={<MockImage color="#7C3AED" label="Hero Illustration" />}
+            videoSrc="https://kinescope.io/embed/fiCG9ns1ZgH9jMX5gGEvgm"
           />
         </div>
 
@@ -637,8 +614,8 @@ export function PricingAgentPage({ className = '' }) {
 
         <Spacer size="xl" />
 
-        {/* Преимущества Агента ценообразования */}
-        <AdvantagesSection items={bentoItems} />
+        {/* Преимущества Агента ценообразования - Bento Grid */}
+        <BentoSection items={bentoItems} />
 
         <Spacer size="xl" />
 
@@ -663,7 +640,7 @@ export function PricingAgentPage({ className = '' }) {
         {/* Другие продукты */}
         <ProductsSlider
           title="Другие решения системы Дживио"
-          subtitle={typograph('Для автоматизации бизнеса на маркетплейсах используйте наши ИИ-продукты:')}
+          subtitle={typograph('Используйте наши ИИ-продукты для автоматизации бизнеса на маркетплейсах')}
           products={products}
         />
 

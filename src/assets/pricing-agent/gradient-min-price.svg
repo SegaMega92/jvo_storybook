@@ -1,0 +1,15 @@
+<svg width="660" height="660" viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="660" height="660" rx="16" fill="url(#paint0_linear_84_5463)"/>
+<rect width="660" height="660" rx="16" fill="url(#pattern0_84_5463)" style="mix-blend-mode:overlay"/>
+<defs>
+<linearGradient id="paint0_linear_84_5463" x1="877.5" y1="253.5" x2="-53" y2="-20.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#29E5B0"/>
+<stop offset="0.553813" stop-color="#D1EE95"/>
+<stop offset="0.959056" stop-color="#FFECB7"/>
+</linearGradient>
+<pattern id="pattern0_84_5463" patternUnits="userSpaceOnUse" patternTransform="matrix(1.5 0 0 1.5 0 0)" preserveAspectRatio="none" viewBox="0 0 3 3" width="1" height="1">
+<g id="pattern0_84_5463_inner">
+<rect width="1" height="1" fill="white"/>
+</g>
+</pattern></defs>
+</svg>

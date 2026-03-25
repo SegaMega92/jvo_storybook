@@ -1,0 +1,17 @@
+<svg width="660" height="660" viewBox="0 0 660 660" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<rect width="660" height="660" rx="16" fill="#E9EBF0"/>
+<rect width="660" height="660" rx="16" fill="url(#paint0_radial_84_6988)"/>
+<rect width="660" height="660" rx="16" fill="url(#pattern0_84_6988)" style="mix-blend-mode:overlay"/>
+<defs>
+<radialGradient id="paint0_radial_84_6988" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(330 -180.278) rotate(90) scale(840.278 1378.93)">
+<stop stop-color="#69A5FA"/>
+<stop offset="0.342302" stop-color="#BFCDFF"/>
+<stop offset="0.558585" stop-color="#A5CAFD"/>
+<stop offset="1" stop-color="#FDE4FA"/>
+</radialGradient>
+<pattern id="pattern0_84_6988" patternUnits="userSpaceOnUse" patternTransform="matrix(1.5 0 0 1.5 0 0)" preserveAspectRatio="none" viewBox="0 0 3 3" width="1" height="1">
+<g id="pattern0_84_6988_inner">
+<rect width="1" height="1" fill="white"/>
+</g>
+</pattern></defs>
+</svg>
