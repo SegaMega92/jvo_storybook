@@ -11,7 +11,7 @@ import agencyIcon from '../../assets/products/agency-icon.png';
 import agencyScreenshot from '../../assets/products/agency-screenshot.png';
 
 // MonitoringSection illustrations
-import illustrationCommunication from '../../assets/illustrations/communication.svg';
+import illustrationAlerts from '../../assets/pricing-agent/illustration-alerts.png';
 import { PricingWorkflowDemo } from '../../components/Illustrations/PricingWorkflowDemo';
 
 // Pricing Agent images - FeatureSlider slides
@@ -66,7 +66,7 @@ const LeftIllustration = () => (
   <div className={styles.illustrationWrapper}>
     <div className={styles.dotsPattern} />
     <img
-      src={illustrationCommunication}
+      src={illustrationAlerts}
       alt="Приоритезация алертов"
       className={styles.illustrationImg}
     />
