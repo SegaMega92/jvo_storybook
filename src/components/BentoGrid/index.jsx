@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styles from './BentoGrid.module.css';
 
-// Feature images
+// Default images (for backwards compatibility)
 import imgScenarios from '../../assets/bento/scenarios.png';
 import imgStrategies from '../../assets/bento/strategies.png';
 import imgControl from '../../assets/bento/control.png';
@@ -11,11 +11,69 @@ import imgSettings from '../../assets/bento/settings.png';
 import imgMultibrand from '../../assets/bento/multibrand.png';
 import imgCenterIcon from '../../assets/bento/center-icon.png';
 
+// Default items for Agent Communication landing
+const defaultItems = [
+  {
+    id: 'scenarios',
+    title: 'Лёгкий старт с готовыми сценариями',
+    description: 'Запускайте Агента в пару кликов, используя проверенную библиотеку промптов и сценариев от лидеров рынка',
+    image: imgScenarios,
+    size: 'wide',
+    layout: 'image-left',
+  },
+  {
+    id: 'strategies',
+    title: 'Уникальные мультистратегии',
+    description: 'Настраивайте собственные сценарии любой сложности, комбинируя правила и условия под задачи своего бренда',
+    image: imgStrategies,
+    imageType: 'icon',
+  },
+  {
+    id: 'control',
+    title: 'Два режима контроля',
+    description: 'Используйте «Автопилот» для полной автоматизации или «Гибридный» для подтверждения действий Агента',
+    image: imgControl,
+    layout: 'image-left',
+  },
+  {
+    id: 'center',
+    type: 'center',
+    title: 'Гибкость\nи безопасность управления',
+    image: imgCenterIcon,
+  },
+  {
+    id: 'prompt',
+    title: 'Промт до 50 000 знаков',
+    description: 'Прописывайте в промте все технические нюансы и спецификации, чтобы Агент отвечал на уровне эксперта',
+    image: imgBadge50k,
+    imageType: 'badge',
+  },
+  {
+    id: 'settings',
+    title: 'Мгновенная настройка',
+    description: 'Меняйте логику работы простыми промтами, Агент сразу применит изменения к выбранным товарам',
+    image: imgSettings,
+    imageType: 'icon',
+  },
+  {
+    id: 'multibrand',
+    title: 'Мультибрендовость',
+    description: 'Работайте с несколькими брендами одновременно, Агент автоматически определяет бренд при коммуникации',
+    image: imgMultibrand,
+    size: 'wide',
+    layout: 'image-right',
+  },
+];
+
 /**
- * BentoGrid - сетка фич в стиле bento
+ * BentoGrid - универсальная сетка фич в стиле bento
  * 7 блоков в сетке 3x3 с различными span'ами
+ *
+ * @param {Array} items - массив элементов для отображения
+ * @param {string} variant - вариант сетки: 'default' (с центральным блоком) или 'simple' (все блоки одинаковые)
+ * @param {string} className - дополнительный CSS класс
  */
-export function BentoGrid({ className = '' }) {
+export function BentoGrid({ items = defaultItems, variant = 'default', className = '' }) {
   const gridRef = useRef(null);
 
   // Анимация появления при скролле
@@ -40,102 +98,122 @@ export function BentoGrid({ className = '' }) {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <section className={`${styles.section} ${className}`}>
-      <div className={styles.grid} ref={gridRef}>
-        {/* Block 1: Лёгкий старт (row 1, col 1-2) */}
-        <div className={`${styles.block} ${styles.block1}`}>
-          <div className={styles.illustrationLarge}>
-            <img src={imgScenarios} alt="" className={styles.illustrationImg} />
-          </div>
-          <div className={styles.textContent}>
-            <h3 className={styles.title}>Лёгкий старт с готовыми сценариями</h3>
-            <p className={styles.description}>
-              запускайте Агента в пару кликов, используя проверенную библиотеку промптов и сценариев от лидеров рынка
-            </p>
-          </div>
-        </div>
+  // Рендер блока в зависимости от типа
+  const renderBlock = (item, index) => {
+    // Собираем классы для блока
+    const blockClasses = [styles.block];
 
-        {/* Block 2: Мультистратегии (row 1, col 3) */}
-        <div className={`${styles.block} ${styles.block2}`}>
-          <div className={styles.iconWrapper}>
-            <img src={imgStrategies} alt="" className={styles.icon} />
-          </div>
-          <div className={styles.textContent}>
-            <h3 className={styles.title}>Уникальные мультистратегии</h3>
-            <p className={styles.description}>
-              настраивайте собственные сценарии любой сложности, комбинируя правила и условия под задачи своего бренда
-            </p>
-          </div>
-        </div>
+    // Центральный блок со специальным оформлением
+    if (item.type === 'center') {
+      blockClasses.push(styles.blockCenter);
 
-        {/* Block 3: Два режима контроля (row 2, col 1) */}
-        <div className={`${styles.block} ${styles.block3}`}>
-          <div className={styles.illustrationControl}>
-            <img src={imgControl} alt="" className={styles.illustrationImg} />
-          </div>
-          <div className={styles.textContent}>
-            <h3 className={styles.title}>Два режима контроля</h3>
-            <p className={styles.description}>
-              используйте «Автопилот» для полной автоматизации или «Полуавтомат» для подтверждения действий Агента
-            </p>
-          </div>
-        </div>
-
-        {/* Block 4: Центральный заголовок (row 2, col 2) */}
-        <div className={`${styles.block} ${styles.blockCenter}`}>
+      return (
+        <div key={item.id} className={blockClasses.join(' ')}>
           <div className={styles.centerIconWrapper}>
-            <img src={imgCenterIcon} alt="" className={styles.centerIcon} />
+            <img src={item.image} alt="" className={styles.centerIcon} />
           </div>
           <h2 className={styles.centerTitle}>
-            Гибкость<br />и безопасность управления
+            {item.title.split('\n').map((line, i) => (
+              <span key={i}>{line}{i < item.title.split('\n').length - 1 && <br />}</span>
+            ))}
           </h2>
         </div>
+      );
+    }
 
-        {/* Block 5: 50К знаков (row 2, col 3) */}
-        <div className={`${styles.block} ${styles.block5}`}>
-          <div className={styles.badge50k}>
-            <img src={imgBadge50k} alt="50К" className={styles.badge50kImg} />
-          </div>
-          <div className={styles.textContent}>
-            <h3 className={styles.title}>Промт до 50 000 знаков</h3>
-            <p className={styles.description}>
-              прописывайте в промте все технические нюансы и спецификации, чтобы Агент отвечал на уровне эксперта
-            </p>
-          </div>
-        </div>
+    // Добавляем классы размера и layout
+    if (item.size === 'wide') {
+      blockClasses.push(styles.blockWide);
+    }
+    if (item.layout === 'image-left') {
+      blockClasses.push(styles.blockImageLeft);
+    }
+    if (item.layout === 'image-right') {
+      blockClasses.push(styles.blockImageRight);
+    }
+    if (item.imageType === 'icon') {
+      blockClasses.push(styles.blockIcon);
+    }
 
-        {/* Block 6: Мгновенная настройка (row 3, col 1) */}
-        <div className={`${styles.block} ${styles.block6}`}>
+    // Определяем тип изображения
+    const isIcon = item.imageType === 'icon';
+    const isBadge = item.imageType === 'badge';
+    const isWide = item.size === 'wide';
+    const isImageRight = item.layout === 'image-right';
+
+    // Рендер изображения
+    const renderImage = () => {
+      if (isIcon) {
+        return (
           <div className={styles.iconWrapper}>
-            <img src={imgSettings} alt="" className={styles.icon} />
+            <img src={item.image} alt="" className={styles.icon} />
           </div>
-          <div className={styles.textContent}>
-            <h3 className={styles.title}>Мгновенная настройка</h3>
-            <p className={styles.description}>
-              меняйте логику работы простыми промтами, Агент сразу применит изменения к выбранным товарам
-            </p>
-          </div>
-        </div>
+        );
+      }
 
-        {/* Block 7: Мультибрендовость (row 3, col 2-3) */}
-        <div className={`${styles.block} ${styles.block7}`}>
-          <div className={styles.textContent}>
-            <h3 className={styles.title}>Мультибрендовость</h3>
-            <p className={styles.description}>
-              работайте с несколькими брендами одновременно, Агент автоматически определяет бренд при коммуникации
-            </p>
+      if (isBadge) {
+        return (
+          <div className={styles.badge50k}>
+            <img src={item.image} alt="" className={styles.badge50kImg} />
           </div>
-          <div className={styles.illustrationMultibrand}>
-            <img src={imgMultibrand} alt="" className={styles.illustrationImg} />
-          </div>
+        );
+      }
+
+      // Определяем класс обёртки для изображения
+      let wrapperClass = styles.illustrationLarge;
+      if (!isWide && !isImageRight) {
+        wrapperClass = styles.illustrationControl;
+      } else if (isWide && isImageRight) {
+        wrapperClass = styles.illustrationMultibrand;
+      }
+
+      return (
+        <div className={wrapperClass}>
+          <img src={item.image} alt="" className={styles.illustrationImg} />
         </div>
+      );
+    };
+
+    return (
+      <div key={item.id} className={blockClasses.join(' ')}>
+        {renderImage()}
+        <div className={styles.textContent}>
+          <h3 className={styles.title}>{item.title}</h3>
+          <p className={styles.description}>{item.description}</p>
+        </div>
+      </div>
+    );
+  };
+
+  const gridClasses = [
+    styles.section,
+    variant === 'simple' ? styles.sectionSimple : '',
+    className,
+  ].filter(Boolean).join(' ');
+
+  return (
+    <section className={gridClasses}>
+      <div className={styles.grid} ref={gridRef}>
+        {items.map((item, index) => renderBlock(item, index))}
       </div>
     </section>
   );
 }
 
 BentoGrid.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string,
+      image: PropTypes.string,
+      imageType: PropTypes.oneOf(['icon', 'badge', 'image']),
+      type: PropTypes.oneOf(['center']),
+      size: PropTypes.oneOf(['wide']),
+      layout: PropTypes.oneOf(['image-left', 'image-right']),
+    })
+  ),
+  variant: PropTypes.oneOf(['default', 'simple']),
   className: PropTypes.string,
 };
 

@@ -10,6 +10,10 @@ import seoProScreenshot from '../../assets/products/seo-pro-screenshot.png';
 import agencyIcon from '../../assets/products/agency-icon.png';
 import agencyScreenshot from '../../assets/products/agency-screenshot.png';
 
+// MonitoringSection illustrations
+import illustrationCommunication from '../../assets/illustrations/communication.svg';
+import { AgentWorkflowDemo } from '../../components/Illustrations/AgentWorkflowDemo';
+
 // Pricing Agent images - FeatureSlider slides
 import dynamicBrakingImg from '../../assets/pricing-agent/dynamic-braking.png';
 import fboFbsStrategiesImg from '../../assets/pricing-agent/fbo-fbs-strategies.png';
@@ -49,12 +53,33 @@ import { HeroBlock } from '../../components/HeroBlock';
 import { MonitoringSection } from '../../components/MonitoringSection';
 import { FeatureSliderGroup } from '../../components/FeatureSliderGroup';
 import { ComparisonSlider } from '../../components/ComparisonSlider';
+import { BentoGrid } from '../../components/BentoGrid';
 import { AudienceSection } from '../../components/AudienceSection';
 import { LaunchSection } from '../../components/LaunchSection';
 import { ProductsSlider } from '../../components/ProductsSlider';
 import { FAQSection } from '../../components/FAQSection';
 import { Footer } from '../../components/Footer';
 import { Spacer } from '../../components/Spacer';
+
+// Обёртка для левой иллюстрации с градиентом
+const LeftIllustration = () => (
+  <div className={styles.illustrationWrapper}>
+    <div className={styles.dotsPattern} />
+    <img
+      src={illustrationCommunication}
+      alt="Приоритезация алертов"
+      className={styles.illustrationImg}
+    />
+  </div>
+);
+
+// Обёртка для правой иллюстрации с градиентом и интерактивным AgentWorkflowDemo
+const RightIllustration = () => (
+  <div className={styles.illustrationWrapperRight}>
+    <div className={styles.dotsPattern} />
+    <AgentWorkflowDemo />
+  </div>
+);
 
 // Компонент для изображения слайда
 const SlideImage = ({ src, alt }) => (
@@ -78,13 +103,13 @@ SlideImage.propTypes = {
 // Данные для MonitoringSection
 const monitoringCards = [
   {
-    image: <img src={stuckSkuSearchImg} alt="Приоритезация алертов" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
+    image: <LeftIllustration />,
     imageAlt: 'Приоритезация алертов',
     title: 'Приоритезация алертов',
     description: typograph('система распределяет найденные отклонения по уровням критичности — от рекомендованных до важных и критических — для фокусировки на задачах, требующих решения в первую очередь.'),
   },
   {
-    image: <img src={alertPriceImg} alt="Мгновенная автоматизация" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />,
+    image: <RightIllustration />,
     imageAlt: 'Мгновенная автоматизация',
     title: 'Мгновенная автоматизация',
     description: typograph('часть созданных задач в один клик передается в работу профильным Агентам для исполнения — от управления ценами до подготовки ответов на отзывы.'),
@@ -367,62 +392,6 @@ const bentoItems = [
   },
 ];
 
-// Компонент BentoGrid секции преимуществ
-const BentoSection = ({ items }) => (
-  <section className={styles.bentoSection}>
-    <div className={styles.bentoGrid}>
-      {items.map((item) => {
-        const cardClasses = [
-          styles.bentoCard,
-          item.size === 'wide' ? styles.bentoCardWide : '',
-          item.layout === 'image-left' ? styles.bentoCardImageLeft : '',
-          item.layout === 'image-right' ? styles.bentoCardImageRight : '',
-        ].filter(Boolean).join(' ');
-
-        return (
-          <div key={item.id} className={cardClasses}>
-            {item.imageType === 'icon' ? (
-              <>
-                <div className={styles.bentoIconWrapper}>
-                  <img src={item.image} alt="" className={styles.bentoIcon} />
-                </div>
-                <div className={styles.bentoText}>
-                  <h3 className={styles.bentoTitle}>{item.title}</h3>
-                  <p className={styles.bentoDescription}>{item.description}</p>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className={styles.bentoImageWrapper}>
-                  <img src={item.image} alt="" className={styles.bentoImage} />
-                </div>
-                <div className={styles.bentoText}>
-                  <h3 className={styles.bentoTitle}>{item.title}</h3>
-                  <p className={styles.bentoDescription}>{item.description}</p>
-                </div>
-              </>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  </section>
-);
-
-BentoSection.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      image: PropTypes.string,
-      imageType: PropTypes.string,
-      size: PropTypes.string,
-      layout: PropTypes.string,
-    })
-  ).isRequired,
-};
-
 // Данные для AudienceSection
 const audienceTabs = [
   {
@@ -431,8 +400,8 @@ const audienceTabs = [
     description: typograph('Избавляет от операционного хаоса и ручного контроля матрицы. Позволяет расти без найма людей, фокусируясь на точках прибыли, которые нашёл Агент.'),
     testimonial: {
       avatar: avatarSupplierMedium,
-      name: 'Средний поставщик',
-      text: typograph('Описание опыта среднего поставщика с системой ценообразования Дживио.'),
+      name: 'Алексей, владелец магазина (товары для дома)',
+      text: typograph('«Сначала не верил в автоматику — думал, сам лучше знаю свои цены. Но когда Агент за неделю поднял маржу на 4% без падения продаж, я просто перестал лезть руками. Теперь только смотрю отчёты»'),
     },
   },
   {
@@ -461,8 +430,8 @@ const audienceTabs = [
     description: typograph('Возвращает роль стратега при управлении тысячами SKU. Система сама находит проблемы в воронке и даёт инструменты для их мгновенного исправления.'),
     testimonial: {
       avatar: avatarEcomHead,
-      name: 'Руководитель e-com',
-      text: typograph('Описание опыта руководителя e-com с системой ценообразования Дживио.'),
+      name: 'Марина, руководитель e-com направления (электроника)',
+      text: typograph('«У нас 8 категорийщиков, и каждый тянул одеяло на себя — кто-то демпинговал, кто-то завышал. Агент дал единые правила игры. Конфликтов меньше, прибыль выше, а я наконец-то вижу картину целиком»'),
     },
   },
   {
@@ -615,7 +584,7 @@ export function PricingAgentPage({ className = '' }) {
         <Spacer size="xl" />
 
         {/* Преимущества Агента ценообразования - Bento Grid */}
-        <BentoSection items={bentoItems} />
+        <BentoGrid items={bentoItems} variant="simple" />
 
         <Spacer size="xl" />
 

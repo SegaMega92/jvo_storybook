@@ -41,7 +41,7 @@
 }
 
 /* ========================================
-   Позиционирование блоков в сетке
+   Позиционирование блоков в сетке (default variant)
    ======================================== */
 
 /* Block 1: row 1, col 1-2 */
@@ -106,6 +106,68 @@
   grid-column: 2 / span 2;
   grid-row: 3;
   align-items: center;
+}
+
+/* ========================================
+   Универсальные классы для блоков
+   ======================================== */
+
+.blockWide {
+  align-items: center;
+}
+
+.blockImageLeft {
+  flex-direction: row;
+  gap: 20px;
+}
+
+.blockImageRight {
+  flex-direction: row-reverse;
+  gap: 20px;
+}
+
+.blockIcon {
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* ========================================
+   Simple variant - позиционирование через nth-child
+   ======================================== */
+
+.sectionSimple .block:nth-child(1) {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+}
+
+.sectionSimple .block:nth-child(2) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.sectionSimple .block:nth-child(3) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.sectionSimple .block:nth-child(4) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.sectionSimple .block:nth-child(5) {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.sectionSimple .block:nth-child(6) {
+  grid-column: 1;
+  grid-row: 3;
+}
+
+.sectionSimple .block:nth-child(7) {
+  grid-column: 2 / span 2;
+  grid-row: 3;
 }
 
 /* ========================================
@@ -252,14 +314,15 @@
    Адаптив
    ======================================== */
 
-@media (max-width: 1024px) {
+@media (max-width: 1180px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(5, auto);
     max-width: 760px;
+    margin: 0 auto;
   }
 
-  /* Перестраиваем сетку на 2 колонки */
+  /* Перестраиваем сетку на 2 колонки (default variant) */
   .block1 {
     grid-column: 1 / span 2;
     grid-row: 1;
@@ -309,8 +372,59 @@
     height: 180px;
   }
 
+  /* Скрываем картинку в блоке "Два режима контроля" */
+  .illustrationControl {
+    display: none;
+  }
+
   .centerTitle {
-    font-size: 28px;
+    font-size: 24px;
+  }
+
+  /* Simple variant - 2 колонки */
+  .sectionSimple .block:nth-child(1) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  .sectionSimple .block:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .sectionSimple .block:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .sectionSimple .block:nth-child(3) .illustrationControl {
+    display: none;
+  }
+
+  .sectionSimple .block:nth-child(3) {
+    flex-direction: column;
+  }
+
+  .sectionSimple .block:nth-child(4) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .sectionSimple .block:nth-child(5) {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .sectionSimple .block:nth-child(6) {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .sectionSimple .block:nth-child(7) {
+    grid-column: 1 / span 2;
+    grid-row: 5;
   }
 }
 
@@ -331,7 +445,8 @@
   }
 
   /* Block 1 становится вертикальным */
-  .block1 {
+  .block1,
+  .blockWide.blockImageLeft {
     flex-direction: column;
   }
 
@@ -350,7 +465,8 @@
   }
 
   /* Block 7 становится вертикальным */
-  .block7 {
+  .block7,
+  .blockWide.blockImageRight {
     flex-direction: column-reverse;
   }
 
