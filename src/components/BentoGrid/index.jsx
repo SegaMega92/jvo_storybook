@@ -65,6 +65,17 @@ const defaultItems = [
   },
 ];
 
+// Маппинг индекса блока на CSS класс для default варианта
+const blockIndexToClass = {
+  0: 'block1',
+  1: 'block2',
+  2: 'block3',
+  // index 3 - center block, handled separately
+  4: 'block5',
+  5: 'block6',
+  6: 'block7',
+};
+
 /**
  * BentoGrid - универсальная сетка фич в стиле bento
  * 7 блоков в сетке 3x3 с различными span'ами
@@ -102,6 +113,11 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
   const renderBlock = (item, index) => {
     // Собираем классы для блока
     const blockClasses = [styles.block];
+
+    // Добавляем позиционный класс для default варианта
+    if (variant === 'default' && blockIndexToClass[index]) {
+      blockClasses.push(styles[blockIndexToClass[index]]);
+    }
 
     // Центральный блок со специальным оформлением
     if (item.type === 'center') {

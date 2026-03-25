@@ -378,7 +378,12 @@
   }
 
   .centerTitle {
-    font-size: 24px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .blockCenter {
+    padding: 24px 16px;
   }
 
   /* Simple variant - 2 колонки */
@@ -423,6 +428,73 @@
   }
 
   .sectionSimple .block:nth-child(7) {
+    grid-column: 1 / span 2;
+    grid-row: 5;
+  }
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-rows: repeat(5, auto);
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .illustrationLarge,
+  .illustrationMultibrand {
+    width: 220px;
+    height: 150px;
+  }
+
+  .centerTitle {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  /* Перестройка для default варианта на 1024px */
+  /* Block 1 остаётся во всю ширину row 1 */
+
+  .block2 {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .block3 {
+    grid-column: 2;
+    grid-row: 2;
+    flex-direction: column;
+  }
+
+  .block3 .illustrationControl {
+    display: none;
+  }
+
+  .blockCenter {
+    padding: 24px 20px;
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    min-height: auto;
+    flex-direction: row;
+    gap: 16px;
+  }
+
+  .block5 {
+    grid-column: 1;
+    grid-row: 4;
+  }
+
+  .block6 {
+    grid-column: 2;
+    grid-row: 4;
+  }
+
+  .block7 {
     grid-column: 1 / span 2;
     grid-row: 5;
   }
