@@ -284,41 +284,12 @@ function FeatureSliderGroupV2({
   const currentFeatures = currentSection.features || [];
   const currentFeaturesCount = currentFeatures.length;
 
-  // Общее количество "шагов" для ScrollTrigger
-  const totalSteps = sections.reduce((sum, section) => sum + (section.features?.length || 1), 0);
-
   // Синхронизация refs с state
   useEffect(() => {
     activeSectionRef.current = activeSectionIndex;
     activeFeatureRef.current = activeFeatureIndex;
   }, [activeSectionIndex, activeFeatureIndex]);
 
-  // Хелпер: преобразование глобального индекса в (sectionIndex, featureIndex)
-  const getIndicesFromGlobal = useCallback((globalIndex) => {
-    let remaining = globalIndex;
-    for (let sIdx = 0; sIdx < sections.length; sIdx++) {
-      const featuresInSection = sections[sIdx].features?.length || 1;
-      if (remaining < featuresInSection) {
-        return { sectionIndex: sIdx, featureIndex: remaining };
-      }
-      remaining -= featuresInSection;
-    }
-    // Fallback: последняя секция, последняя фича
-    const lastSection = sections.length - 1;
-    return {
-      sectionIndex: lastSection,
-      featureIndex: (sections[lastSection]?.features?.length || 1) - 1,
-    };
-  }, [sections]);
-
-  // Хелпер: преобразование (sectionIndex, featureIndex) в глобальный индекс
-  const getGlobalIndex = useCallback((sectionIndex, featureIndex) => {
-    let global = 0;
-    for (let i = 0; i < sectionIndex; i++) {
-      global += sections[i]?.features?.length || 1;
-    }
-    return global + featureIndex;
-  }, [sections]);
 
   // Проверка мобильного + debounced resize
   useEffect(() => {
@@ -346,9 +317,9 @@ function FeatureSliderGroupV2({
     };
   }, []);
 
-  // GSAP ScrollTrigger (только десктоп)
+  // GSAP ScrollTrigger (только десктоп) - переключает только секции
   useEffect(() => {
-    if (isMobile === null || isMobile || totalSteps <= 1 || !containerRef.current || !pinWrapperRef.current) {
+    if (isMobile === null || isMobile || sectionsCount <= 1 || !containerRef.current || !pinWrapperRef.current) {
       setIsInView(true);
       return;
     }
@@ -359,27 +330,26 @@ function FeatureSliderGroupV2({
         pin: pinWrapperRef.current,
         pinSpacing: true,
         start: 'top top',
-        end: `+=${(totalSteps - 1) * 100}%`,
+        end: `+=${(sectionsCount - 1) * 100}%`,
         scrub: 0.5,
         onUpdate: (self) => {
           // Игнорируем обновления во время программного скролла
           if (isScrollingRef.current) return;
 
           const progress = self.progress;
-          const globalIndex = Math.min(
-            Math.floor(progress * totalSteps),
-            totalSteps - 1
+          const sectionIndex = Math.min(
+            Math.floor(progress * sectionsCount),
+            sectionsCount - 1
           );
-          const { sectionIndex, featureIndex } = getIndicesFromGlobal(globalIndex);
 
-          // Проверяем изменения
-          if (sectionIndex !== activeSectionRef.current || featureIndex !== activeFeatureRef.current) {
+          // Проверяем изменение секции (фичи не трогаем!)
+          if (sectionIndex !== activeSectionRef.current) {
             setPrevSectionIndex(activeSectionRef.current);
             setPrevFeatureIndex(activeFeatureRef.current);
             setActiveSectionIndex(sectionIndex);
-            setActiveFeatureIndex(featureIndex);
+            setActiveFeatureIndex(0); // Сбрасываем на первую фичу при смене секции
             setAnimationKey((prev) => prev + 1);
-            setAutoplayPaused(true);
+            setAutoplayPaused(false); // Запускаем автоплей в новой секции
           }
         },
         onEnter: () => setIsInView(true),
@@ -401,7 +371,7 @@ function FeatureSliderGroupV2({
         if (img) gsap.killTweensOf(img);
       });
     };
-  }, [isMobile, totalSteps, getIndicesFromGlobal]);
+  }, [isMobile, sectionsCount]);
 
   // Инициализация картинок
   useLayoutEffect(() => {
@@ -473,7 +443,7 @@ function FeatureSliderGroupV2({
     };
   }, [activeFeatureIndex, activeSectionIndex, autoplayInterval, currentFeaturesCount, isInView, autoplayPaused, animationKey, isMobile]);
 
-  // Клик по фиче
+  // Клик по фиче — переключаем фичу, останавливаем автоплей
   const handleFeatureClick = useCallback((featureIndex) => {
     if (featureIndex === activeFeatureRef.current) return;
     setAutoplayPaused(true);
@@ -481,28 +451,12 @@ function FeatureSliderGroupV2({
     setPrevFeatureIndex(activeFeatureRef.current);
     setActiveFeatureIndex(featureIndex);
     setAnimationKey((prev) => prev + 1);
-
-    // Скролл к позиции
-    if (scrollTriggerRef.current && !isMobile) {
-      isScrollingRef.current = true;
-      const globalIndex = getGlobalIndex(activeSectionRef.current, featureIndex);
-      const trigger = scrollTriggerRef.current;
-      const targetProgress = globalIndex / (totalSteps - 1 || 1);
-      const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
-
-      gsap.to(window, {
-        scrollTo: targetScroll,
-        duration: 0.8,
-        ease: 'power2.inOut',
-        onComplete: () => { isScrollingRef.current = false; }
-      });
-    }
-  }, [isMobile, totalSteps, getGlobalIndex]);
+  }, []);
 
   // Клик по точке секции
   const handleSectionDotClick = useCallback((sectionIndex) => {
     if (sectionIndex === activeSectionRef.current) return;
-    setAutoplayPaused(true);
+    setAutoplayPaused(false); // Запускаем автоплей
     setPrevSectionIndex(activeSectionRef.current);
     setPrevFeatureIndex(activeFeatureRef.current);
     setActiveSectionIndex(sectionIndex);
@@ -512,9 +466,8 @@ function FeatureSliderGroupV2({
     // Скролл к началу секции
     if (scrollTriggerRef.current && !isMobile) {
       isScrollingRef.current = true;
-      const globalIndex = getGlobalIndex(sectionIndex, 0);
       const trigger = scrollTriggerRef.current;
-      const targetProgress = globalIndex / (totalSteps - 1 || 1);
+      const targetProgress = sectionIndex / (sectionsCount - 1 || 1);
       const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
 
       gsap.to(window, {
@@ -524,14 +477,8 @@ function FeatureSliderGroupV2({
         onComplete: () => { isScrollingRef.current = false; }
       });
     }
-  }, [isMobile, totalSteps, getGlobalIndex]);
+  }, [isMobile, sectionsCount]);
 
-  // Hover — пауза autoplay
-  const handleMouseEnter = useCallback(() => setAutoplayPaused(true), []);
-  const handleMouseLeave = useCallback(() => {
-    setAutoplayPaused(false);
-    setAnimationKey((prev) => prev + 1);
-  }, []);
 
   // Рендер контента
   const renderContent = () => (
@@ -570,7 +517,7 @@ function FeatureSliderGroupV2({
                 aria-expanded={isActive}
               >
                 <div className={styles.v2ProgressBar}>
-                  {isActive && !autoplayPaused && !isMobile && (
+                  {isActive && !isMobile && !autoplayPaused && (
                     <div
                       key={animationKey}
                       className={styles.v2ProgressFill}
@@ -685,8 +632,6 @@ function FeatureSliderGroupV2({
     <div
       ref={containerRef}
       className={styles.v2Container2}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
     >
       <section ref={pinWrapperRef} className={styles.v2Section}>
         {/* Точки секций слева — вне v2Container для позиционирования относительно viewport */}

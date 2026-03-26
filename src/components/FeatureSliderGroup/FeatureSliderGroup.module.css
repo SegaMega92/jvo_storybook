@@ -265,7 +265,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 660px;
+  min-height: clamp(400px, 75vh, 660px);
 }
 
 .v2Header {
@@ -336,7 +336,7 @@
 }
 
 .v2Feature:hover {
-  opacity: 0.85;
+  opacity: 1;
 }
 
 .v2FeatureActive {
@@ -410,8 +410,8 @@
 .v2FeatureTitle {
   font-family: 'Manrope', sans-serif;
   font-weight: 700;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 16px;
+  line-height: 22px;
   color: #ffffff;
   margin: 0;
 }
@@ -419,7 +419,7 @@
 .v2FeatureDescription {
   font-family: 'Manrope', sans-serif;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.6;
   color: #ffffff;
   margin: 0;
@@ -440,8 +440,8 @@
 /* Правая часть - изображение */
 .v2ImageWrapper {
   flex-shrink: 0;
-  width: 660px;
-  height: 660px;
+  width: clamp(400px, 75vh, 660px);
+  height: clamp(400px, 75vh, 660px);
   position: relative;
   border-radius: 16px;
   /* overflow: visible — картинка вылетает за границы */
@@ -451,8 +451,8 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  will-change: transform, opacity; /* GPU-ускорение */
-  /* opacity и y управляются через GSAP */
+  will-change: opacity; /* GPU-ускорение */
+  /* opacity управляется через GSAP */
 }
 
 /* Активное изображение видно по умолчанию (до инициализации GSAP) */
@@ -494,12 +494,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 40px;
 }
 
 .v2ImageImg {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 85%;
+  max-height: 85%;
   object-fit: contain;
   border-radius: 12px;
 }
@@ -514,12 +514,12 @@
   }
 
   .v2ImageWrapper {
-    width: 550px;
-    height: 550px;
+    width: clamp(380px, 70vh, 550px);
+    height: clamp(380px, 70vh, 550px);
   }
 
   .v2Content {
-    min-height: 550px;
+    min-height: clamp(380px, 70vh, 550px);
   }
 
   .v2SectionDots {
