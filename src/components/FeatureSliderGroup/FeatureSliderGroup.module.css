@@ -212,16 +212,51 @@
 
 /* Изображение в мобильной секции */
 .v2MobileImage {
+  position: relative;
   width: 100%;
   aspect-ratio: 1;
   border-radius: 16px;
   overflow: hidden;
 }
 
-.v2MobileImage img {
+.v2MobileImageBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.v2MobileImageBgImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+/* Паттерн с точками поверх градиента */
+.v2MobileImageBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--pattern-dots);
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.v2MobileImageSlide {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.v2MobileImageSlide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 /* Левая часть */
@@ -420,16 +455,53 @@
   /* opacity и y управляются через GSAP */
 }
 
-.v2Image:first-child {
-  position: relative;
-  opacity: 1; /* Первая картинка видна по умолчанию */
+/* Активное изображение видно по умолчанию (до инициализации GSAP) */
+.v2ImageActive {
+  opacity: 1;
 }
 
-.v2ImageImg {
+/* Фон слайда — градиент из SVG */
+.v2ImageBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.v2ImageBgImg {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 16px;
+}
+
+/* Паттерн с точками поверх градиента */
+.v2ImageBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--pattern-dots);
+  background-repeat: repeat;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Слайд с изображением */
+.v2ImageSlide {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.v2ImageImg {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 12px;
 }
 
 /* ========================================

@@ -39,6 +39,9 @@ import bentoAnalyticsIconImg from '../../assets/pricing-agent/bento-analytics-ic
 import bentoStockIconImg from '../../assets/pricing-agent/bento-stock-icon.png';
 import bentoEconomyIconImg from '../../assets/pricing-agent/bento-economy-icon.png';
 
+// Tag icon
+import tagIconPricingAgent from '../../assets/icons/tag-pricing-agent.png';
+
 // Avatar images for AudienceSection
 import avatarSupplierMedium from '../../assets/pricing-agent/avatars/avatar-supplier-medium.png';
 import avatarSupplierLarge from '../../assets/pricing-agent/avatars/avatar-supplier-large.png';
@@ -123,14 +126,101 @@ import gradientSoftEntry from '../../assets/pricing-agent/gradient-soft-entry.sv
 import gradientEffectivePrice from '../../assets/pricing-agent/gradient-effective-price.svg';
 import gradientMargin from '../../assets/pricing-agent/gradient-margin.svg';
 
-// Данные для FeatureSliderGroup — 5 секций
-const featureSliderSections = [
+// Иконки для v2 FeatureSliderGroup
+const IconShield = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconTrendingDown = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <polyline points="23 18 13.5 8.5 8.5 13.5 1 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <polyline points="17 18 23 18 23 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconLayers = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <polygon points="12 2 2 7 12 12 22 7 12 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <polyline points="2 17 12 22 22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <polyline points="2 12 12 17 22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconSearch = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" />
+    <path d="M21 21l-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconDollar = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <line x1="12" y1="1" x2="12" y2="23" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconBell = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M13.73 21a2 2 0 01-3.46 0" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconTarget = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    <circle cx="12" cy="12" r="6" stroke="currentColor" strokeWidth="2" />
+    <circle cx="12" cy="12" r="2" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+const IconZap = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconLock = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" strokeWidth="2" />
+    <path d="M7 11V7a5 5 0 0110 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconBarChart = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <line x1="12" y1="20" x2="12" y2="10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <line x1="18" y1="20" x2="18" y2="4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <line x1="6" y1="20" x2="6" y2="16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconTrendingUp = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <polyline points="17 6 23 6 23 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const IconPercent = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+    <line x1="19" y1="5" x2="5" y2="19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="6.5" cy="6.5" r="2.5" stroke="currentColor" strokeWidth="2" />
+    <circle cx="17.5" cy="17.5" r="2.5" stroke="currentColor" strokeWidth="2" />
+  </svg>
+);
+
+// Данные для FeatureSliderGroup v1 — 5 секций (старая версия с табами)
+const featureSliderSectionsV1 = [
   {
     tabTitle: 'Out-of-Stock',
     sectionTitle: typograph('Предотвращение Out-of-Stock'),
     sectionDescription: typograph('Защита карточки от выпадения из выдачи из-за обнуления остатков.'),
     buttonText: 'Оставить заявку',
-    buttonHref: '#demo',
+    buttonHref: '#form',
     panelBackground: gradientSoftEntry,
     slides: [
       {
@@ -158,7 +248,7 @@ const featureSliderSections = [
     sectionTitle: typograph('Раскачка неликвида'),
     sectionDescription: typograph('Высвобождение «замороженного» капитала и возврат денег в оборот.'),
     buttonText: 'Оставить заявку',
-    buttonHref: '#demo',
+    buttonHref: '#form',
     panelBackground: gradientStuckSku,
     slides: [
       {
@@ -186,7 +276,7 @@ const featureSliderSections = [
     sectionTitle: typograph('Вывод новинок'),
     sectionDescription: typograph('Безопасный старт продаж и поиск рыночной цены'),
     buttonText: 'Оставить заявку',
-    buttonHref: '#demo',
+    buttonHref: '#form',
     panelBackground: gradientEffectivePrice,
     slides: [
       {
@@ -208,7 +298,7 @@ const featureSliderSections = [
     sectionTitle: typograph('Участие в акциях'),
     sectionDescription: typograph('Автоматизация входа и выхода из распродаж'),
     buttonText: 'Оставить заявку',
-    buttonHref: '#demo',
+    buttonHref: '#form',
     panelBackground: gradientMinPrice,
     slides: [
       {
@@ -236,7 +326,7 @@ const featureSliderSections = [
     sectionTitle: typograph('Масштабирование продаж и контроль маржинальности'),
     sectionDescription: typograph('Системное управление выручкой и доходностью каждого SKU'),
     buttonText: 'Оставить заявку',
-    buttonHref: '#demo',
+    buttonHref: '#form',
     panelBackground: gradientMargin,
     slides: [
       {
@@ -255,6 +345,148 @@ const featureSliderSections = [
         title: typograph('Оптимизация прибыли'),
         description: typograph('находит соотношение цены и спроса, при котором увеличивается объем заказов с сохранением максимально возможной маржинальности.'),
         media: <SlideImage src={profitOptimizationImg} alt="Оптимизация прибыли" />,
+        background: gradientMargin,
+      },
+    ],
+  },
+];
+
+// Данные для FeatureSliderGroup v2 — 5 секций (новая версия с аккордеоном)
+const featureSliderSectionsV2 = [
+  {
+    title: typograph('Предотвращение\nOut-of-Stock'),
+    description: typograph('Защита карточки от выпадения из выдачи из-за обнуления остатков.'),
+    buttonText: 'Оставить заявку',
+    buttonHref: '#form',
+    features: [
+      {
+        icon: <IconLayers />,
+        title: typograph('Разделение стратегий FBO и FBS'),
+        description: typograph('позволяет настраивать разные сценарии управления ценой в зависимости от оборачиваемости или остатков'),
+        image: fboFbsStrategiesImg,
+        background: gradientSoftEntry,
+      },
+      {
+        icon: <IconTrendingDown />,
+        title: typograph('Динамическое торможение спроса'),
+        description: typograph('плавно поднимает цену при риске обнуления остатков, способствуя сохранению позиций в поиске.'),
+        image: dynamicBrakingImg,
+        background: gradientSoftEntry,
+      },
+      {
+        icon: <IconShield />,
+        title: typograph('Мягкий вход в OOS'),
+        description: typograph('фиксирует максимально высокую цену перед обнулением, чтобы избежать демпинга при возврате товара в наличие.'),
+        image: softOosEntryImg,
+        background: gradientSoftEntry,
+      },
+    ],
+  },
+  {
+    title: typograph('Раскачка\nнеликвида'),
+    description: typograph('Высвобождение «замороженного» капитала и возврат денег в оборот.'),
+    buttonText: 'Оставить заявку',
+    buttonHref: '#form',
+    features: [
+      {
+        icon: <IconSearch />,
+        title: typograph('Автоматический поиск зависших SKU'),
+        description: typograph('выявляет товары с низкой оборачиваемостью и помечает их как цели для распродажи.'),
+        image: stuckSkuSearchImg,
+        background: gradientStuckSku,
+      },
+      {
+        icon: <IconDollar />,
+        title: typograph('Поиск эффективной цены'),
+        description: typograph('система плавно снижает или повышает цену небольшими шагами до первого всплеска заказов, что позволяет быстро вывести позицию из простоя, не снижая цену больше, чем того требует рынок.'),
+        image: effectivePriceSearchImg,
+        background: gradientStuckSku,
+      },
+      {
+        icon: <IconBell />,
+        title: typograph('Режим «Алерт → Цена»'),
+        description: typograph('позволяет изменить цену и запустить распродажу неликвида в один клик прямо из уведомления.'),
+        image: alertPriceImg,
+        background: gradientStuckSku,
+      },
+    ],
+  },
+  {
+    title: typograph('Вывод\nновинок'),
+    description: typograph('Безопасный старт продаж и поиск рыночной цены'),
+    buttonText: 'Оставить заявку',
+    buttonHref: '#form',
+    features: [
+      {
+        icon: <IconTarget />,
+        title: typograph('Поиск эффективной цены'),
+        description: typograph('тестирование разных уровней скидки до появления первых заказов. Позволяет нащупать спрос за несколько дней, сохраняя максимум прибыли.'),
+        image: effectivePriceNewproductsImg,
+        background: gradientEffectivePrice,
+      },
+      {
+        icon: <IconPercent />,
+        title: typograph('Соблюдение порога маржинальности'),
+        description: typograph('установка минимальной цены, ниже которой Агент не опустится. Данные можно загружать массово для всей матрицы, гарантируя поиск точки спроса только в безопасном для бизнеса диапазоне'),
+        image: marginThresholdImg,
+        background: gradientEffectivePrice,
+      },
+    ],
+  },
+  {
+    title: typograph('Участие\nв акциях'),
+    description: typograph('Автоматизация входа и выхода из распродаж'),
+    buttonText: 'Оставить заявку',
+    buttonHref: '#form',
+    features: [
+      {
+        icon: <IconZap />,
+        title: typograph('Интеллектуальный вход'),
+        description: typograph('анализирует условия акций и рекомендует только те SKU, которые соответствуют целевой прибыли.'),
+        image: smartEntryImg,
+        background: gradientMinPrice,
+      },
+      {
+        icon: <IconTrendingUp />,
+        title: typograph('Мгновенный откат цен'),
+        description: typograph('автоматически возвращает базовую цену в момент завершения акции, исключая торговлю в минус.'),
+        image: instantPriceRollbackImg,
+        background: gradientMinPrice,
+      },
+      {
+        icon: <IconLock />,
+        title: typograph('Защита минимальной цены'),
+        description: typograph('блокирует любое снижение ниже установленного порога, даже при принудительных скидках маркетплейса.'),
+        image: minPriceProtectionImg,
+        background: gradientMinPrice,
+      },
+    ],
+  },
+  {
+    title: typograph('Масштабирование продаж'),
+    description: typograph('Системное управление выручкой и доходностью каждого SKU'),
+    buttonText: 'Оставить заявку',
+    buttonHref: '#form',
+    features: [
+      {
+        icon: <IconPercent />,
+        title: typograph('Соблюдение порога маржинальности'),
+        description: typograph('блокирует снижение цены ниже установленного лимита. Поддерживает массовую загрузку параметров минимальной доходности для всей матрицы, предотвращая продажи в убыток.'),
+        image: marginThresholdScaleImg,
+        background: gradientMargin,
+      },
+      {
+        icon: <IconBarChart />,
+        title: typograph('Восстановление трендов продаж'),
+        description: typograph('выявляет артикулы с падающей динамикой заказов и корректирует цену для возврата карточки в целевой объем продаж и сохранения позиций в выдаче.'),
+        image: salesTrendsRecoveryImg,
+        background: gradientMargin,
+      },
+      {
+        icon: <IconTrendingUp />,
+        title: typograph('Оптимизация прибыли'),
+        description: typograph('находит соотношение цены и спроса, при котором увеличивается объем заказов с сохранением максимально возможной маржинальности.'),
+        image: profitOptimizationImg,
         background: gradientMargin,
       },
     ],
@@ -530,107 +762,123 @@ const faqs = [
 
 /**
  * PricingAgentPage - лендинг "Агент ценообразования"
+ * @param {boolean} embedded - скрывает Header и Footer для встраивания в Tilda
+ * @param {string} section - "main" | "faq" | undefined (всё)
  */
-export function PricingAgentPage({ className = '' }) {
+export function PricingAgentPage({ className = '', embedded = false, section }) {
+  const showMain = !section || section === 'main';
+  const showFaq = !section || section === 'faq';
+
   return (
     <div className={`${styles.page} ${className}`}>
-      <Header />
+      {!embedded && <Header />}
 
       <main className={styles.main}>
-        {/* Hero: SectionHeader + HeroBlock */}
-        <SectionHeader
-          tag="Агент ценообразования"
-          title={typograph('Управление ценами на маркетплейсах на базе ИИ')}
-          subtitle={typograph('Автоматизируйте управление ценами на основе данных по воронке продаж, текущих остатков и динамике спроса')}
-        />
-        <div className={styles.heroBlockWrapper}>
-          <HeroBlock
-            variant="flat"
-            features={typographArray([
-              'Защита от Out-of-Stock, потери позиций в рейтинге и обнуления остатков',
-              'Управление оборачиваемостью: выявляет падение продаж и помогает реализовать неликвид',
-              'Контроль целевой маржи и продаж матрицы с заданной доходностью',
-              'Оплата за результат — от 1,5 руб. за действие.',
-            ])}
-            buttonText="Подключить Агента"
-            buttonHref="#demo"
-            videoSrc="https://kinescope.io/embed/fiCG9ns1ZgH9jMX5gGEvgm"
-          />
-        </div>
+        {showMain && (
+          <>
+            {/* Hero: SectionHeader + HeroBlock */}
+            <SectionHeader
+              tag="Агент ценообразования"
+              tagIcon={tagIconPricingAgent}
+              title={typograph('Управление ценами на маркетплейсах на базе ИИ')}
+              subtitle={typograph('Автоматизируйте управление ценами на основе данных по воронке продаж, текущих остатков и динамике спроса')}
+            />
+            <div className={styles.heroBlockWrapper}>
+              <HeroBlock
+                variant="flat"
+                features={typographArray([
+                  'Защита от Out-of-Stock, потери позиций в рейтинге и обнуления остатков',
+                  'Управление оборачиваемостью: выявляет падение продаж и помогает реализовать неликвид',
+                  'Контроль целевой маржи и продаж матрицы с заданной доходностью',
+                  'Оплата за результат — от 1,5 руб. за действие.',
+                ])}
+                buttonText="Подключить Агента"
+                buttonHref="#form"
+                videoSrc="https://kinescope.io/embed/fiCG9ns1ZgH9jMX5gGEvgm"
+              />
+            </div>
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* Мониторинг и аналитика */}
-        <MonitoringSection
-          title={typograph('Мониторинг и аналитика')}
-          subtitle={typograph('Центр управления и главный движок системы Дживио. Система ежедневно проводит аудит воронки продаж, выявляет отклонения и формирует готовые задачи для автоматизации через ИИ-Агентов.')}
-          cards={monitoringCards}
-        />
+            {/* Мониторинг и аналитика */}
+            <MonitoringSection
+              title={typograph('Мониторинг и аналитика')}
+              subtitle={typograph('Центр управления и главный движок системы Дживио. Система ежедневно проводит аудит воронки продаж, выявляет отклонения и формирует готовые задачи для автоматизации через ИИ-Агентов.')}
+              cards={monitoringCards}
+            />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* FeatureSliderGroup - 5 табов */}
-        <FeatureSliderGroup sections={featureSliderSections} />
+            {/* FeatureSliderGroup v2 - 5 секций с аккордеоном */}
+            <FeatureSliderGroup variant="v2" sections={featureSliderSectionsV2} autoplayInterval={8000} />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* Сравнение с конкурентами */}
-        <ComparisonSlider
-          title={typograph('Преимущества использования репрайсера цен Дживио')}
-          subtitle={typograph('Гибкая настройка стратегий под задачи бизнеса и без ограничений по тарифу')}
-          slides={comparisonSlides}
-        />
+            {/* Сравнение с конкурентами */}
+            <ComparisonSlider
+              title={typograph('Преимущества использования репрайсера цен Дживио')}
+              subtitle={typograph('Гибкая настройка стратегий под задачи бизнеса и без ограничений по тарифу')}
+              slides={comparisonSlides}
+            />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* Преимущества Агента ценообразования - Bento Grid */}
-        <BentoGrid items={bentoItems} variant="simple" />
+            {/* Преимущества Агента ценообразования - Bento Grid */}
+            <BentoGrid items={bentoItems} variant="simple" />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* Кому необходим */}
-        <AudienceSection
-          title={typograph('Кому необходим Агент ценообразования на маркетплейсах?')}
-          tagText={typograph('Системное управление и кратный рост без расширения штата')}
-          bottomText={typograph('Агент позволяет увеличить количество и скорость обрабатываемых артикулов на WB и Ozon без потери качества и необходимости найма новых сотрудников')}
-          tabs={audienceTabs}
-        />
+            {/* Кому необходим */}
+            <AudienceSection
+              title={typograph('Кому необходим Агент ценообразования на маркетплейсах?')}
+              tagText={typograph('Системное управление и кратный рост без расширения штата')}
+              bottomText={typograph('Агент позволяет увеличить количество и скорость обрабатываемых артикулов на WB и Ozon без потери качества и необходимости найма новых сотрудников')}
+              tabs={audienceTabs}
+            />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* Запуск и внедрение */}
-        <LaunchSection
-          title={typograph('Запуск и внедрение системы Дживио')}
-          subtitle={typograph('Все необходимые инструменты и поддержка для комфортного старта и эффективной работы команды')}
-        />
+            {/* Запуск и внедрение */}
+            <LaunchSection
+              title={typograph('Запуск и внедрение системы Дживио')}
+              subtitle={typograph('Все необходимые инструменты и поддержка для комфортного старта и эффективной работы команды')}
+            />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
 
-        {/* Другие продукты */}
-        <ProductsSlider
-          title="Другие решения системы Дживио"
-          subtitle={typograph('Используйте наши ИИ-продукты для автоматизации бизнеса на маркетплейсах')}
-          products={products}
-        />
+            {/* Другие продукты */}
+            <ProductsSlider
+              title="Другие решения системы Дживио"
+              subtitle={typograph('Используйте наши ИИ-продукты для автоматизации бизнеса на маркетплейсах')}
+              products={products}
+            />
 
-        <Spacer size="xl" />
+            <Spacer size="xl" />
+          </>
+        )}
 
-        <Spacer size="md" background="#15181f" />
+        {showFaq && (
+          <>
+            <Spacer size="md" background="#15181f" />
 
-        {/* FAQ */}
-        <FAQSection
-          title="Частые вопросы про Агента ценообразования"
-          faqs={faqs}
-        />
+            {/* FAQ */}
+            <FAQSection
+              title="Частые вопросы про Агента ценообразования"
+              faqs={faqs}
+            />
+          </>
+        )}
       </main>
 
-      <Footer />
+      {!embedded && <Footer />}
     </div>
   );
 }
 
 PricingAgentPage.propTypes = {
   className: PropTypes.string,
+  embedded: PropTypes.bool,
+  section: PropTypes.oneOf(['main', 'faq']),
 };
 
 export default PricingAgentPage;

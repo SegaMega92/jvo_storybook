@@ -420,7 +420,7 @@ function FeatureSliderGroupV2({
   });
 
   // Анимация картинок при переключении
-  // Вариант 3: Soft Slide — небольшое смещение + плавный easing
+  // Вариант 1: Crossfade (Apple-style) — только opacity
   useEffect(() => {
     if (prevSectionIndex === null && prevFeatureIndex === null) return;
 
@@ -432,25 +432,16 @@ function FeatureSliderGroupV2({
     const prevImage = imagesRef.current[prevKey];
     const activeImage = imagesRef.current[activeKey];
 
-    // Определяем направление
-    const prevGlobal = getGlobalIndex(prevSectionIndex ?? 0, prevFeatureIndex ?? 0);
-    const activeGlobal = getGlobalIndex(activeSectionIndex, activeFeatureIndex);
-    const direction = activeGlobal > prevGlobal ? 1 : -1;
-
     if (prevImage) {
       gsap.killTweensOf(prevImage);
-      gsap.to(prevImage, { opacity: 0, y: -30 * direction, duration: 1.8, ease: 'power3.out' });
+      gsap.to(prevImage, { opacity: 0, duration: 0.5, ease: 'power2.inOut' });
     }
 
     if (activeImage) {
       gsap.killTweensOf(activeImage);
-      gsap.fromTo(
-        activeImage,
-        { opacity: 0, y: 30 * direction },
-        { opacity: 1, y: 0, duration: 2, ease: 'power3.out' }
-      );
+      gsap.fromTo(activeImage, { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.inOut' });
     }
-  }, [activeSectionIndex, activeFeatureIndex, prevSectionIndex, prevFeatureIndex, getGlobalIndex]);
+  }, [activeSectionIndex, activeFeatureIndex, prevSectionIndex, prevFeatureIndex]);
 
   // Анимация левой части при смене секции
   useEffect(() => {
@@ -606,15 +597,27 @@ function FeatureSliderGroupV2({
       {/* Правая часть: изображения всех секций */}
       <div className={styles.v2ImageWrapper}>
         {sections.map((section, sIdx) =>
-          section.features?.map((feature, fIdx) => (
-            <div
-              key={`${sIdx}-${fIdx}`}
-              ref={(el) => (imagesRef.current[`${sIdx}-${fIdx}`] = el)}
-              className={styles.v2Image}
-            >
-              <img src={feature.image} alt={feature.title} className={styles.v2ImageImg} />
-            </div>
-          ))
+          section.features?.map((feature, fIdx) => {
+            const isActive = sIdx === activeSectionIndex && fIdx === activeFeatureIndex;
+            return (
+              <div
+                key={`${sIdx}-${fIdx}`}
+                ref={(el) => (imagesRef.current[`${sIdx}-${fIdx}`] = el)}
+                className={`${styles.v2Image} ${isActive ? styles.v2ImageActive : ''}`}
+              >
+                {/* Фоновый градиент */}
+                {feature.background && (
+                  <div className={styles.v2ImageBg}>
+                    <img src={feature.background} alt="" className={styles.v2ImageBgImg} />
+                  </div>
+                )}
+                {/* Скриншот поверх градиента */}
+                <div className={styles.v2ImageSlide}>
+                  <img src={feature.image} alt={feature.title} className={styles.v2ImageImg} />
+                </div>
+              </div>
+            );
+          })
         )}
       </div>
     </div>
@@ -625,15 +628,24 @@ function FeatureSliderGroupV2({
     return (
       <section className={styles.v2Section}>
         {sections.map((section, sIdx) => {
-          // Берём первую картинку из фич секции
-          const firstImage = section.features?.[0]?.image;
+          // Берём первую картинку и фон из фич секции
+          const firstFeature = section.features?.[0];
+          const firstImage = firstFeature?.image;
+          const firstBackground = firstFeature?.background;
 
           return (
             <div key={sIdx} className={styles.v2MobileSection}>
               {/* Изображение сверху на мобильных */}
               {firstImage && (
                 <div className={styles.v2MobileImage}>
-                  <img src={firstImage} alt={section.title || ''} />
+                  {firstBackground && (
+                    <div className={styles.v2MobileImageBg}>
+                      <img src={firstBackground} alt="" className={styles.v2MobileImageBgImg} />
+                    </div>
+                  )}
+                  <div className={styles.v2MobileImageSlide}>
+                    <img src={firstImage} alt={section.title || ''} />
+                  </div>
                 </div>
               )}
 
