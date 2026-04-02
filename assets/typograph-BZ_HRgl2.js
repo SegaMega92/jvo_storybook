@@ -1,0 +1,1 @@
+function a(r){return!r||typeof r!="string"?r:r.replace(/ (в|на|с|к|о|у|и|а|но|за|до|из|по|от|об|со|во|ко|же|ли|бы|не|ни|то) /gi," $1 ").replace(/ (—|–)/g," $1").replace(/(—|–) /g,"$1 ").replace(/(\d) (₽|руб|%|шт|мин|сек|ч|дн|г|кг|мг|л|мл|м|см|мм|км)/gi,"$1 $2").replace(/(\d) ([а-яё])/gi,"$1 $2")}function p(r){return Array.isArray(r)?r.map(a):r}export{p as a,a as t};
