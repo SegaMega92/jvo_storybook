@@ -1,0 +1,1012 @@
+/* HeroCommunications - Interactive illustration */
+/* Based on Figma design node 858:14804 */
+
+.illustration {
+  position: absolute;
+  inset: 0;
+}
+
+/* ==========================================
+   Steps - transition between step 1 and 2
+   ========================================== */
+
+.step {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.step1 {
+  /* Account for drag slider at bottom (48px height + 18px margin) */
+  padding-bottom: 66px;
+}
+
+.step2 {
+  padding: 0;
+}
+
+.stepActive {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.stepHidden {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
+/* ==========================================
+   Content row - flex container for cards
+   ========================================== */
+
+.contentRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* ==========================================
+   Counter card - "Неотвеченных отзывов"
+   ========================================== */
+
+.counterCard {
+  width: 120px;
+  height: 120px;
+  padding: 12px;
+  background: var(--color-base-white);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.counterLabel {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-base-black);
+}
+
+.counterValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.counterNumber {
+  font-family: var(--font-family-primary);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-base-black);
+}
+
+.counterArrow {
+  width: 12px;
+  height: 12px;
+}
+
+/* ==========================================
+   Review card with shadows
+   ========================================== */
+
+.reviewCardWrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.reviewCardShadow1,
+.reviewCardShadow2 {
+  position: absolute;
+  background: var(--color-base-white);
+  border: 1px solid #edd0f6;
+  border-radius: 12px;
+}
+
+.reviewCardShadow1 {
+  width: 284px;
+  height: 48px;
+  bottom: -6px;
+  left: 6px;
+}
+
+.reviewCardShadow2 {
+  width: 290px;
+  height: 48px;
+  bottom: -4px;
+  left: 3px;
+}
+
+.reviewCard {
+  position: relative;
+  width: 296px;
+  padding: 12px;
+  background: var(--color-base-white);
+  border: 1px solid #edd0f6;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Review header */
+.reviewHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 33px;
+}
+
+.reviewUser {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.reviewUserName {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-base-black);
+}
+
+.reviewAvatar {
+  width: 33px;
+  height: 33px;
+}
+
+/* Review meta - stars and date */
+.reviewMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  width: 13px;
+  height: 13px;
+}
+
+.reviewDate {
+  font-family: var(--font-family-primary);
+  font-size: 9px;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(21, 24, 31, 0.4);
+}
+
+/* Review content */
+.reviewContent {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.reviewBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reviewLabel {
+  font-family: 'Inter', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: rgba(21, 24, 31, 0.4);
+}
+
+.reviewText {
+  font-family: 'Inter', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-base-black);
+}
+
+/* ==========================================
+   Product photo
+   ========================================== */
+
+.productPhoto {
+  width: 118px;
+  height: 158px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.productPhoto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================
+   Drag slider
+   ========================================== */
+
+.dragSlider {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 296px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(219, 171, 239, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.dragSlider:active {
+  cursor: grabbing;
+}
+
+.dragHandle {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 36px;
+  height: 36px;
+  background: white;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 2;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.dragIcon {
+  width: 6px;
+  height: 13px;
+}
+
+.dragTextWrapper {
+  position: absolute;
+  top: 50%;
+  right: 27px;
+  transform: translateY(-50%);
+  transition: opacity 0.2s ease;
+}
+
+.dragText {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  background: linear-gradient(114deg, #c16ffb 1%, #e2bbff 45%, #734295 102%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  white-space: nowrap;
+}
+
+/* Shimmer overlay - sliding highlight across entire slider */
+.dragShimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    transparent 40%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 60%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% center;
+  }
+  35% {
+    background-position: -100% center;
+  }
+  100% {
+    background-position: -100% center;
+  }
+}
+
+/* ==========================================
+   Chat - Step 2
+   ========================================== */
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+  width: 364px;
+}
+
+.chatMessage {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.chatMessageVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.chatMessageUser {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.chatMessageAgent {
+  align-self: flex-end;
+  background: var(--color-violet-main, #c16ffb);
+}
+
+.chatMessageTextHidden {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.24px;
+  max-width: 280px;
+  visibility: hidden;
+}
+
+.chatMessageText {
+  position: absolute;
+  top: 6px;
+  left: 12px;
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.24px;
+  max-width: 280px;
+}
+
+.chatMessageUser .chatMessageText {
+  color: var(--color-violet-dark, #300247);
+}
+
+.chatMessageAgent .chatMessageText {
+  color: var(--color-base-white, white);
+}
+
+/* ==========================================
+   Scenario - Step 3
+   ========================================== */
+
+.scenarioContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  width: 364px;
+  overflow: visible;
+}
+
+.scenarioItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scenarioItemVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scenarioIconWrapper {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.scenarioNumber {
+  position: absolute;
+  inset: 0;
+  background: var(--color-base-white, white);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.scenarioNumberHidden {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.scenarioNumber span {
+  font-family: var(--font-family-primary);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.36px;
+  color: var(--color-violet-main, #c16ffb);
+}
+
+.scenarioCheckmark {
+  position: absolute;
+  inset: 0;
+  width: 48px;
+  height: 48px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.scenarioCheckmarkVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scenarioText {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+
+.scenarioText span {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.24px;
+  color: var(--color-violet-dark, #300247);
+}
+
+/* Play button */
+.playButton {
+  position: absolute;
+  left: 330px;
+  top: 260px;
+  width: 68px;
+  height: 68px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.playButtonVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.playButtonHiding {
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+}
+
+.playButton:hover .playButtonIcon {
+  transform: scale(1.05);
+}
+
+.playButtonProgress {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.playButtonIcon {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 64px;
+  height: 64px;
+  transition: transform 0.2s ease;
+}
+
+/* ==========================================
+   Final Step - Step 5
+   ========================================== */
+
+.finalContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Account for CTA button at bottom (36px height + 18px margin) */
+  padding-bottom: 54px;
+}
+
+.finalCards {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Agent card */
+.agentCard {
+  width: 296px;
+  padding: 12px;
+  background: var(--color-base-white, white);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.agentHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 33px;
+}
+
+.agentAvatar {
+  width: 33px;
+  height: 33px;
+}
+
+.agentName {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-base-black);
+}
+
+.agentContent {
+  position: relative;
+  min-height: 220px;
+}
+
+.agentResponse {
+  position: absolute;
+  inset: 0;
+  font-family: 'Inter', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-base-black);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.agentResponse p {
+  margin: 0;
+}
+
+.agentResponseActive {
+  opacity: 1;
+}
+
+/* Tone switcher */
+.toneSwitcher {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px;
+  background: var(--color-base-white, white);
+  border: 1px solid #fae8f8;
+  border-radius: 1000px;
+  width: 48px;
+}
+
+.toneButton {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  border: none;
+  background: white;
+  border-radius: 1000px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.toneButtonActive {
+  background: #fae8f8;
+}
+
+.toneButton:hover:not(.toneButtonActive) {
+  background: #fdf4fc;
+}
+
+.toneIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.toneTooltip {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: #555;
+  color: white;
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.12px;
+  padding: 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* CTA Button */
+.ctaButton {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 296px;
+  height: 36px;
+  padding: 12px 24px;
+  background: var(--color-violet-main, #c16ffb);
+  border-radius: 12px;
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.28px;
+  color: white;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.ctaButton:hover {
+  background: #a855f7;
+}
+
+/* Agent card wrapper (for mobile grouping) */
+.agentCardWrapper {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Mobile tabs (hidden on desktop) */
+.mobileTabs {
+  display: none;
+}
+
+.mobileTab {
+  padding: 8px 16px;
+  border: none;
+  background: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-violet-dark, #300247);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.mobileTab:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+.mobileTab:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.mobileTabActive {
+  background: var(--color-base-white, white);
+}
+
+/* ==========================================
+   Responsive: Tablet (< 960px)
+   ========================================== */
+
+@media (max-width: 960px) {
+  .contentRow {
+    gap: 10px;
+  }
+
+  .counterCard {
+    width: 100px;
+    height: 100px;
+  }
+
+  .counterNumber {
+    font-size: 28px;
+  }
+
+  .counterLabel {
+    font-size: 11px;
+  }
+
+  .productPhoto {
+    width: 100px;
+    height: 134px;
+  }
+
+  .reviewCard {
+    width: 240px;
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .reviewCardShadow1 {
+    width: 228px;
+  }
+
+  .reviewCardShadow2 {
+    width: 234px;
+  }
+
+  .dragSlider {
+    width: 260px;
+  }
+
+  /* Chat responsive */
+  .chatContainer {
+    width: 320px;
+  }
+
+  .chatMessageTextHidden,
+  .chatMessageText {
+    max-width: 240px;
+  }
+
+  /* Scenario responsive */
+  .scenarioContainer {
+    width: 320px;
+  }
+
+  .scenarioIconWrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scenarioCheckmark {
+    width: 40px;
+    height: 40px;
+  }
+
+  .scenarioText {
+    min-height: 40px;
+  }
+
+  .playButton {
+    left: 286px;
+    top: 220px;
+    width: 60px;
+    height: 60px;
+  }
+
+  .playButtonIcon {
+    width: 56px;
+    height: 56px;
+    top: 2px;
+    left: 2px;
+  }
+
+  /* Final step responsive */
+  .finalCards {
+    gap: 10px;
+  }
+
+  .agentCardWrapper {
+    gap: 10px;
+  }
+
+  .agentCard,
+  .finalReviewCard {
+    width: 240px;
+    padding: 10px;
+  }
+
+  .agentContent {
+    min-height: 260px;
+  }
+
+  .ctaButton {
+    width: 260px;
+  }
+}
+
+/* ==========================================
+   Responsive: Mobile (< 640px)
+   ========================================== */
+
+@media (max-width: 640px) {
+  .stepHidden {
+    display: none;
+  }
+
+  .step1 {
+    position: relative;
+    padding: 20px 16px;
+    min-height: 440px;
+  }
+
+  .step2 {
+    position: relative;
+    padding: 20px 16px;
+    min-height: 440px;
+  }
+
+  .contentRow {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .counterCard {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+  }
+
+  .counterValue {
+    flex-direction: row-reverse;
+  }
+
+  .reviewCardWrapper {
+    width: 100%;
+  }
+
+  .reviewCard {
+    width: 100%;
+  }
+
+  .reviewCardShadow1,
+  .reviewCardShadow2 {
+    display: none;
+  }
+
+  .productPhoto {
+    display: none;
+  }
+
+  .dragSlider {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    margin-top: 16px;
+  }
+
+  /* Chat responsive */
+  .chatContainer {
+    width: 100%;
+  }
+
+  .chatMessageTextHidden,
+  .chatMessageText {
+    max-width: 100%;
+  }
+
+  /* Scenario responsive */
+  .scenarioContainer {
+    width: 100%;
+  }
+
+  .scenarioIconWrapper {
+    width: 36px;
+    height: 36px;
+  }
+
+  .scenarioCheckmark {
+    width: 36px;
+    height: 36px;
+  }
+
+  .scenarioNumber span {
+    font-size: 14px;
+  }
+
+  .scenarioText {
+    min-height: 36px;
+  }
+
+  .playButton {
+    position: relative;
+    left: auto;
+    top: auto;
+    align-self: center;
+    margin-top: 16px;
+  }
+
+  /* Final step responsive */
+  .finalContainer {
+    gap: 16px;
+  }
+
+  .mobileTabs {
+    display: flex;
+    margin-bottom: 8px;
+  }
+
+  .finalCards {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .finalReviewCard {
+    display: none;
+  }
+
+  .agentCardWrapper {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .mobileCardActive {
+    display: flex;
+  }
+
+  .agentCard {
+    width: 100%;
+  }
+
+  .toneSwitcher {
+    flex-direction: row;
+    width: auto;
+    align-self: center;
+    margin-top: 12px;
+  }
+
+  .agentContent {
+    min-height: 200px;
+  }
+
+  .ctaButton {
+    width: calc(100% - 32px);
+    left: 16px;
+    transform: none;
+  }
+}
