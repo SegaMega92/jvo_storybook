@@ -11,11 +11,11 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 12px;
 }
 
 /* ==========================================
-   Header: Title + Description
+   Header: Title + Tabs + Description
    ========================================== */
 
 .header {
@@ -24,6 +24,13 @@
   justify-content: space-between;
   gap: 40px;
   padding: 0 100px;
+}
+
+.headerLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  flex-shrink: 0;
 }
 
 .title {
@@ -35,7 +42,6 @@
   color: var(--color-base-black);
   margin: 0;
   max-width: 600px;
-  flex-shrink: 0;
 }
 
 .description {
@@ -54,16 +60,12 @@
 
 .showcase {
   width: 100%;
-  height: 584px;
-  border-radius: 36px;
+  border-radius: 24px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .showcaseInner {
-  width: 960px;
+  width: 100%;
   height: 520px;
   border-radius: 24px;
   background: linear-gradient(195deg, #ffffff 3%, #fcdaf9 45%, #e2bbff 83%);
@@ -84,20 +86,8 @@
 }
 
 /* ==========================================
-   Tabs navigation
+   Tabs navigation (now in header)
    ========================================== */
-
-.tabsWrapper {
-  position: absolute;
-  top: 18px;
-  left: 18px;
-  right: 18px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 24px;
-  z-index: 5;
-}
 
 .tabs {
   display: flex;
@@ -107,6 +97,7 @@
   border: 1px solid rgba(219, 171, 239, 0.5);
   border-radius: 12px;
   padding: 0;
+  width: fit-content;
 }
 
 .tab {
@@ -122,16 +113,20 @@
 }
 
 .tab:hover {
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(193, 111, 251, 0.5);
 }
 
 .tabActive {
-  background: var(--color-base-white);
+  background: var(--color-violet-main, #c16ffb);
   border-color: #dbabef;
 }
 
+.tabActive .tabLabel {
+  color: var(--color-base-white, white);
+}
+
 .tabActive:hover {
-  background: var(--color-base-white);
+  background: var(--color-violet-main, #c16ffb);
 }
 
 .tabIcon {
@@ -151,29 +146,13 @@
   padding-bottom: 2px;
 }
 
-/* Tab description - right side */
-.tabDescription {
-  font-family: var(--font-family-primary);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.5;
-  color: var(--color-violet-dark);
-  opacity: 0.8;
-  text-align: right;
-  max-width: 294px;
-  margin: 0;
-}
-
 /* ==========================================
    Content area
    ========================================== */
 
 .contentArea {
   position: absolute;
-  top: 54px; /* Space for tabs and description */
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   z-index: 2;
   overflow: hidden;
 }
@@ -256,22 +235,8 @@
     height: 520px;
   }
 
-  .tabsWrapper {
-    flex-direction: column;
-    gap: 12px;
-  }
-
   .tabs {
     flex-wrap: wrap;
-  }
-
-  .tabDescription {
-    text-align: left;
-    max-width: 100%;
-  }
-
-  .contentArea {
-    top: 90px; /* More space for stacked tabs + description on tablet */
   }
 }
 
@@ -313,12 +278,8 @@
     padding-bottom: 20px;
   }
 
-  .tabsWrapper {
-    position: relative;
-    top: auto;
-    left: auto;
-    right: auto;
-    padding: 12px;
+  .headerLeft {
+    gap: 20px;
   }
 
   .tabs {
@@ -347,11 +308,6 @@
   /* Show labels only on active tab on mobile */
   .tabActive .tabLabel {
     display: block;
-  }
-
-  .tabDescription {
-    font-size: 11px;
-    padding: 0 4px;
   }
 
   .contentArea {
@@ -393,10 +349,6 @@
 
   .tabLabel {
     font-size: 11px;
-  }
-
-  .tabDescription {
-    font-size: 10px;
   }
 
   .contentArea {

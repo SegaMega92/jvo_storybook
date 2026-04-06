@@ -103,26 +103,61 @@
   flex-shrink: 0;
 }
 
-.reviewCardShadow1,
-.reviewCardShadow2 {
+/* Stacked cards behind the main review card */
+.reviewCardShadow {
   position: absolute;
+  left: 0;
+  width: 296px; /* Same width as .reviewCard */
+  height: 48px;
   background: var(--color-base-white);
   border: 1px solid #edd0f6;
   border-radius: 12px;
 }
 
-.reviewCardShadow1 {
-  width: 284px;
-  height: 48px;
-  bottom: -6px;
-  left: 6px;
+/* Conveyor animation: top card exits (fades out, moves up under main card) */
+.cardExiting {
+  animation: cardExit 0.5s ease forwards;
 }
 
-.reviewCardShadow2 {
-  width: 290px;
-  height: 48px;
-  bottom: -4px;
-  left: 3px;
+@keyframes cardExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px); /* Negative = moves UP under the main card */
+  }
+}
+
+/* Conveyor animation: middle cards shift up */
+.cardShifting {
+  animation: cardShift 0.5s ease forwards;
+}
+
+@keyframes cardShift {
+  0% {
+    transform: translateY(6px); /* Start one position lower */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Conveyor animation: new card enters from bottom */
+.cardEntering {
+  animation: cardEnter 0.5s ease forwards;
+}
+
+@keyframes cardEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(6px); /* Start below */
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .reviewCard {
@@ -205,7 +240,7 @@
 
 .reviewLabel {
   font-family: 'Inter', var(--font-family-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
   color: rgba(21, 24, 31, 0.4);
@@ -213,7 +248,7 @@
 
 .reviewText {
   font-family: 'Inter', var(--font-family-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.4;
   color: var(--color-base-black);
@@ -224,6 +259,7 @@
    ========================================== */
 
 .productPhoto {
+  position: relative;
   width: 118px;
   height: 158px;
   border-radius: 12px;
@@ -235,6 +271,55 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.productRating {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--color-base-white, white);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.productRatingStar {
+  font-size: 12px;
+  color: #facc15;
+  transition: color 0.3s ease;
+}
+
+.productRatingText {
+  font-family: var(--font-family-primary);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-base-black);
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+/* Flash effect when rating drops */
+.productRatingFlash {
+  animation: ratingShake 0.4s ease;
+}
+
+.productRatingTextFlash {
+  color: #ef4444 !important;
+}
+
+@keyframes ratingShake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  75% {
+    transform: translateX(2px);
+  }
 }
 
 /* ==========================================
@@ -344,7 +429,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: flex-end;
-  width: 364px;
+  width: 420px;
 }
 
 .chatMessage {
@@ -354,13 +439,37 @@
   padding: 6px 12px;
   border-radius: 12px;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(20px) scale(0.95);
 }
 
 .chatMessageVisible {
-  opacity: 1;
-  transform: translateY(0);
+  animation: messageAppear 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes messageAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.chatMessageExiting {
+  animation: messageExit 0.5s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+@keyframes messageExit {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-15px) scale(0.95);
+  }
 }
 
 .chatMessageUser {
@@ -375,11 +484,11 @@
 
 .chatMessageTextHidden {
   font-family: var(--font-family-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.24px;
-  max-width: 280px;
+  letter-spacing: 0.28px;
+  max-width: 300px;
   visibility: hidden;
 }
 
@@ -388,11 +497,11 @@
   top: 6px;
   left: 12px;
   font-family: var(--font-family-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.24px;
-  max-width: 280px;
+  letter-spacing: 0.28px;
+  max-width: 300px;
 }
 
 .chatMessageUser .chatMessageText {
@@ -413,7 +522,7 @@
   flex-direction: column;
   gap: 12px;
   align-items: flex-start;
-  width: 364px;
+  width: 404px;
   overflow: visible;
 }
 
@@ -432,30 +541,19 @@
   transform: translateY(0);
 }
 
-.scenarioIconWrapper {
-  position: relative;
+.scenarioIcon {
   width: 48px;
   height: 48px;
   flex-shrink: 0;
-}
-
-.scenarioNumber {
-  position: absolute;
-  inset: 0;
   background: var(--color-base-white, white);
   border-radius: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.scenarioNumberHidden {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-.scenarioNumber span {
+.scenarioIcon span {
   font-family: var(--font-family-primary);
   font-size: 18px;
   font-weight: 700;
@@ -464,19 +562,21 @@
   color: var(--color-violet-main, #c16ffb);
 }
 
-.scenarioCheckmark {
-  position: absolute;
-  inset: 0;
-  width: 48px;
-  height: 48px;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+.scenarioIconChecked {
+  background: var(--color-violet-main, #c16ffb);
+  animation: iconPop 0.3s ease;
 }
 
-.scenarioCheckmarkVisible {
-  opacity: 1;
-  transform: translateY(0);
+@keyframes iconPop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .scenarioText {
@@ -491,83 +591,93 @@
 
 .scenarioText span {
   font-family: var(--font-family-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.24px;
+  letter-spacing: 0.28px;
   color: var(--color-violet-dark, #300247);
-}
-
-/* Play button */
-.playButton {
-  position: absolute;
-  left: 330px;
-  top: 260px;
-  width: 68px;
-  height: 68px;
-  border: none;
-  background: none;
-  padding: 0;
-  cursor: pointer;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.playButtonVisible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.playButtonHiding {
-  opacity: 0;
-  transform: scale(0.9);
-  pointer-events: none;
-}
-
-.playButton:hover .playButtonIcon {
-  transform: scale(1.05);
-}
-
-.playButtonProgress {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.playButtonIcon {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 64px;
-  height: 64px;
-  transition: transform 0.2s ease;
 }
 
 /* ==========================================
    Final Step - Step 5
    ========================================== */
 
-.finalContainer {
+.step5 {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* Account for CTA button at bottom (36px height + 18px margin) */
-  padding-bottom: 54px;
 }
 
-.finalCards {
+/* Counter card */
+.finalCounterCard {
+  width: 144px;
+  height: 144px;
+  padding: 12px;
+  background: var(--color-base-white, white);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.finalCounterLabel {
+  font-family: var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-base-black);
+}
+
+.finalCounterValue {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.finalCounterNumber {
+  font-family: var(--font-family-primary);
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-base-black);
+}
+
+.finalCounterArrow {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+.finalCounterTotal {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  color: #3f3f46;
+}
+
+/* Main row - vertically centered (accounting for button at bottom), items aligned to top */
+.finalCardsRow {
+  position: absolute;
+  top: calc(50% - 27px);
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   gap: 12px;
   align-items: flex-start;
+  padding-right: 104px;
 }
 
-/* Agent card */
-.agentCard {
+/* Stacked cards container */
+.finalCardsStack {
+  display: grid;
+  width: 296px;
+}
+
+/* Back card - Review (partially visible behind) */
+.finalReviewCard {
+  grid-area: 1 / 1;
+  align-self: start;
   width: 296px;
   padding: 12px;
   background: var(--color-base-white, white);
@@ -575,6 +685,21 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+/* Front card - Agent response with shadow */
+.agentCard {
+  grid-area: 1 / 1;
+  align-self: start;
+  margin-top: 20px;
+  width: 296px;
+  padding: 12px;
+  background: var(--color-base-white, white);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0px 4px 60px 0px #edc8fd;
 }
 
 .agentHeader {
@@ -598,20 +723,19 @@
 }
 
 .agentContent {
-  position: relative;
-  min-height: 220px;
+  display: grid;
 }
 
 .agentResponse {
-  position: absolute;
-  inset: 0;
+  grid-area: 1 / 1;
   font-family: 'Inter', var(--font-family-primary);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.4;
+  line-height: normal;
   color: var(--color-base-black);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .agentResponse p {
@@ -620,6 +744,7 @@
 
 .agentResponseActive {
   opacity: 1;
+  visibility: visible;
 }
 
 /* Tone switcher */
@@ -632,6 +757,7 @@
   border: 1px solid #fae8f8;
   border-radius: 1000px;
   width: 48px;
+  flex-shrink: 0;
 }
 
 .toneButton {
@@ -705,13 +831,6 @@
   background: #a855f7;
 }
 
-/* Agent card wrapper (for mobile grouping) */
-.agentCardWrapper {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-
 /* Mobile tabs (hidden on desktop) */
 .mobileTabs {
   display: none;
@@ -774,12 +893,8 @@
     gap: 12px;
   }
 
-  .reviewCardShadow1 {
-    width: 228px;
-  }
-
-  .reviewCardShadow2 {
-    width: 234px;
+  .reviewCardShadow {
+    width: 240px;
   }
 
   .dragSlider {
@@ -801,41 +916,23 @@
     width: 320px;
   }
 
-  .scenarioIconWrapper {
+  .scenarioIcon {
     width: 40px;
     height: 40px;
-  }
-
-  .scenarioCheckmark {
-    width: 40px;
-    height: 40px;
-  }
-
-  .scenarioText {
-    min-height: 40px;
-  }
-
-  .playButton {
-    left: 286px;
-    top: 220px;
-    width: 60px;
-    height: 60px;
-  }
-
-  .playButtonIcon {
-    width: 56px;
-    height: 56px;
-    top: 2px;
-    left: 2px;
   }
 
   /* Final step responsive */
-  .finalCards {
-    gap: 10px;
+  .finalCardsRow {
+    padding-right: 72px;
   }
 
-  .agentCardWrapper {
-    gap: 10px;
+  .finalCounterCard {
+    width: 120px;
+    height: 120px;
+  }
+
+  .finalCounterNumber {
+    font-size: 28px;
   }
 
   .agentCard,
@@ -844,12 +941,8 @@
     padding: 10px;
   }
 
-  .agentContent {
-    min-height: 260px;
-  }
-
   .ctaButton {
-    width: 260px;
+    width: 240px;
   }
 }
 
@@ -901,8 +994,7 @@
     width: 100%;
   }
 
-  .reviewCardShadow1,
-  .reviewCardShadow2 {
+  .reviewCardShadow {
     display: none;
   }
 
@@ -934,35 +1026,37 @@
     width: 100%;
   }
 
-  .scenarioIconWrapper {
+  .scenarioIcon {
     width: 36px;
     height: 36px;
   }
 
-  .scenarioCheckmark {
-    width: 36px;
-    height: 36px;
-  }
-
-  .scenarioNumber span {
+  .scenarioIcon span {
     font-size: 14px;
   }
 
-  .scenarioText {
-    min-height: 36px;
-  }
-
-  .playButton {
-    position: relative;
-    left: auto;
-    top: auto;
-    align-self: center;
-    margin-top: 16px;
-  }
-
   /* Final step responsive */
-  .finalContainer {
+  .step5 {
+    position: relative;
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 16px;
+    min-height: 440px;
+  }
+
+  .finalCounterCard {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    display: none;
+  }
+
+  .mobileCardActive.finalCounterCard {
+    display: flex;
   }
 
   .mobileTabs {
@@ -970,27 +1064,39 @@
     margin-bottom: 8px;
   }
 
-  .finalCards {
+  .finalCardsRow {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
     flex-direction: column;
+    width: 100%;
+    padding-right: 0;
+    display: none;
+  }
+
+  .mobileCardActive .finalCardsRow,
+  .finalCardsRow:has(.mobileCardActive) {
+    display: flex;
+  }
+
+  .finalCardsStack {
+    padding-bottom: 0;
     width: 100%;
   }
 
   .finalReviewCard {
     display: none;
-  }
-
-  .agentCardWrapper {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .mobileCardActive {
-    display: flex;
+    margin-bottom: 0;
   }
 
   .agentCard {
     width: 100%;
+    box-shadow: none;
+  }
+
+  .agentCard.mobileCardActive {
+    display: flex;
   }
 
   .toneSwitcher {
@@ -1000,8 +1106,12 @@
     margin-top: 12px;
   }
 
-  .agentContent {
-    min-height: 200px;
+  .ctaButton {
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
   }
 
   .ctaButton {

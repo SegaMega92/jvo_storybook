@@ -9,8 +9,6 @@ import starFilled from '../../../assets/illustrations/hero-communications/star-f
 import starEmpty from '../../../assets/illustrations/hero-communications/star-empty.svg';
 import arrowUp from '../../../assets/illustrations/hero-communications/arrow-up.svg';
 import chevronRight from '../../../assets/illustrations/hero-communications/chevron-right.svg';
-import playButton from '../../../assets/illustrations/hero-communications/play-button.svg';
-import checkmarkCircle from '../../../assets/illustrations/hero-communications/checkmark-circle.svg';
 import agentAvatar from '../../../assets/illustrations/hero-communications/agent-avatar.svg';
 import toneAttentive from '../../../assets/illustrations/hero-communications/tone-attentive.svg';
 import toneExpert from '../../../assets/illustrations/hero-communications/tone-expert.svg';
@@ -23,6 +21,8 @@ const chatMessages = [
   { type: 'user', text: 'По\u00A0всем' },
   { type: 'agent', text: 'Выберите Tone of\u00A0Voice для ответов: Экспертный, Дружелюбный или Внимательный?' },
   { type: 'user', text: 'Отвечай с\u00A0вниманием к\u00A0деталям' },
+  { type: 'agent', text: 'Хотите проверять ответы перед публикацией, или я\u00A0могу публиковать их без подтверждения?' },
+  { type: 'user', text: 'Без подтверждения' },
   { type: 'agent', text: 'Отлично, создаю сценарий.' },
 ];
 
@@ -66,22 +66,26 @@ export function HeroCommunications({ onComplete }) {
   const [isDragging, setIsDragging] = useState(false);
   const [dragProgress, setDragProgress] = useState(0);
   const [reviewCount, setReviewCount] = useState(724);
+  const [cardCycle, setCardCycle] = useState(0); // Triggers card animation cycle
+  const [isCardAnimating, setIsCardAnimating] = useState(false); // Controls when animation plays
+  const [currentRating, setCurrentRating] = useState(4.9); // Product rating
+  const [ratingFlash, setRatingFlash] = useState(false); // Flash effect for rating
   const [step, setStep] = useState(1);
   const [visibleMessages, setVisibleMessages] = useState(0);
+  const [exitingMessageIndex, setExitingMessageIndex] = useState(null); // Message currently fading out
   const [typingIndex, setTypingIndex] = useState(0); // Characters typed in current agent message
   const [isTyping, setIsTyping] = useState(false);
   const [visibleScenarioItems, setVisibleScenarioItems] = useState(0);
-  const [showPlayButton, setShowPlayButton] = useState(false);
-  const [playProgress, setPlayProgress] = useState(0);
   const [checkedItems, setCheckedItems] = useState(0); // Number of items with checkmarks
   const [showFinalStep, setShowFinalStep] = useState(false);
   const [activeTone, setActiveTone] = useState('attentive');
   const [hoveredTone, setHoveredTone] = useState(null);
   const [mobileTab, setMobileTab] = useState('response'); // 'review' or 'response'
+  const [answeredCount, setAnsweredCount] = useState(0); // Counter for final step
+  const totalReviews = 998; // Total reviews to answer
   const [sliderWidth, setSliderWidth] = useState(250); // Default width for slider
   const sliderRef = useRef(null);
   const startXRef = useRef(0);
-  const playTimerRef = useRef(null);
 
   // Measure slider width on mount and resize
   useEffect(() => {
@@ -102,6 +106,24 @@ export function HeroCommunications({ onComplete }) {
       setReviewCount((prev) => {
         const increment = Math.floor(Math.random() * (28 - 9 + 1)) + 9; // 9-28
         return Math.min(prev + increment, 999);
+      });
+
+      // Trigger card conveyor animation
+      setIsCardAnimating(true);
+      // After animation completes, reset state and update cycle
+      setTimeout(() => {
+        setCardCycle((prev) => prev + 1);
+        setIsCardAnimating(false);
+      }, 500);
+
+      // Flash the rating red and decrease by 0.1 (only if above 4.0)
+      setCurrentRating((prev) => {
+        if (prev > 4.0) {
+          setRatingFlash(true);
+          setTimeout(() => setRatingFlash(false), 600);
+          return Math.max(prev - 0.1, 4.0);
+        }
+        return prev;
       });
     }, 8000);
 
@@ -164,6 +186,19 @@ export function HeroCommunications({ onComplete }) {
     }
   }, [isTyping, typingIndex, visibleMessages]);
 
+  // Handle message window (max 5 visible) - fade out first when 6th appears
+  useEffect(() => {
+    if (visibleMessages > 5) {
+      const exitIndex = visibleMessages - 6; // Index of message to fade out
+      setExitingMessageIndex(exitIndex);
+      // Clear exiting state after animation (600ms)
+      const timer = setTimeout(() => {
+        setExitingMessageIndex(null);
+      }, 600);
+      return () => clearTimeout(timer);
+    }
+  }, [visibleMessages]);
+
   // Transition from step 2 to step 3 after all messages
   useEffect(() => {
     if (step !== 2) return;
@@ -187,59 +222,23 @@ export function HeroCommunications({ onComplete }) {
         setVisibleScenarioItems((prev) => prev + 1);
       }, 300);
       return () => clearTimeout(timer);
-    } else if (!showPlayButton) {
-      // All items shown, show play button after small delay
-      const timer = setTimeout(() => {
-        setShowPlayButton(true);
-      }, 300);
-      return () => clearTimeout(timer);
     }
-  }, [step, visibleScenarioItems, showPlayButton]);
+  }, [step, visibleScenarioItems]);
 
-  // Play button loading animation (10 seconds)
+  // Start checkmark animation after all items are shown (with delay)
   useEffect(() => {
-    if (!showPlayButton) return;
-    if (playProgress >= 100) return;
-
-    playTimerRef.current = setInterval(() => {
-      setPlayProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(playTimerRef.current);
-          // TODO: Trigger next step when ready
-          return 100;
-        }
-        return prev + 0.4; // 0.4% per 40ms = 100% in 10 seconds
-      });
-    }, 40);
-
-    return () => {
-      if (playTimerRef.current) {
-        clearInterval(playTimerRef.current);
-      }
-    };
-  }, [showPlayButton]);
-
-  const handlePlayClick = () => {
-    if (playTimerRef.current) {
-      clearInterval(playTimerRef.current);
-    }
-    setPlayProgress(100);
-  };
-
-  // Start checkmark animation when play completes
-  useEffect(() => {
-    if (playProgress < 100) return;
+    if (step !== 3) return;
+    if (visibleScenarioItems < scenarioSteps.length) return;
     if (checkedItems >= scenarioSteps.length) return;
 
-    // Hide play button and start replacing numbers with checkmarks
-    setShowPlayButton(false);
-
+    // Delay before starting execution, then replace numbers with checkmarks
+    const delay = checkedItems === 0 ? 800 : 400; // Longer initial delay
     const timer = setTimeout(() => {
       setCheckedItems((prev) => prev + 1);
-    }, 300); // 300ms interval between replacements
+    }, delay);
 
     return () => clearTimeout(timer);
-  }, [playProgress, checkedItems]);
+  }, [step, visibleScenarioItems, checkedItems]);
 
   // Show final step (step 5) after all checkmarks
   useEffect(() => {
@@ -252,6 +251,20 @@ export function HeroCommunications({ onComplete }) {
 
     return () => clearTimeout(timer);
   }, [checkedItems, showFinalStep]);
+
+  // Fast counting animation for final step
+  useEffect(() => {
+    if (!showFinalStep) return;
+    if (answeredCount >= totalReviews) return;
+
+    // Fast counting: increment quickly to reach total
+    const increment = Math.ceil((totalReviews - answeredCount) / 20); // Dynamic step size
+    const timer = setTimeout(() => {
+      setAnsweredCount((prev) => Math.min(prev + increment, totalReviews));
+    }, 30); // 30ms interval for fast counting
+
+    return () => clearTimeout(timer);
+  }, [showFinalStep, answeredCount]);
 
   const handleDragStart = (e) => {
     setIsDragging(true);
@@ -319,10 +332,26 @@ export function HeroCommunications({ onComplete }) {
             </div>
           </div>
 
-          {/* Review card with shadow cards behind */}
+          {/* Review card with stacked cards behind */}
           <div className={styles.reviewCardWrapper}>
-            <div className={styles.reviewCardShadow1} />
-            <div className={styles.reviewCardShadow2} />
+            {/* Fixed 3 stacked cards with conveyor animation */}
+            {[0, 1, 2].map((i) => {
+              // Apply animation classes only during animation
+              const animationClass = isCardAnimating
+                ? (i === 0 ? styles.cardExiting : i === 2 ? styles.cardEntering : styles.cardShifting)
+                : '';
+
+              return (
+                <div
+                  key={`${cardCycle}-${i}`}
+                  className={`${styles.reviewCardShadow} ${animationClass}`}
+                  style={{
+                    bottom: `${-6 * (i + 1)}px`,
+                    zIndex: -1 - i, // i=0: -1, i=1: -2, i=2: -3 (top shadow card above others)
+                  }}
+                />
+              );
+            })}
             <div className={styles.reviewCard}>
               {/* Header */}
               <div className={styles.reviewHeader}>
@@ -355,6 +384,11 @@ export function HeroCommunications({ onComplete }) {
           {/* Product photo */}
           <div className={styles.productPhoto}>
             <img src={productPhoto} alt="Товар" />
+            <div className={`${styles.productRating} ${ratingFlash ? styles.productRatingFlash : ''}`}>
+              <span className={`${styles.productRatingText} ${ratingFlash ? styles.productRatingTextFlash : ''}`}>
+                Рейтинг {currentRating.toFixed(1)}
+              </span>
+            </div>
           </div>
         </div>
 
@@ -393,9 +427,18 @@ export function HeroCommunications({ onComplete }) {
       <div className={`${styles.step} ${styles.step2} ${step === 2 ? styles.stepActive : styles.stepHidden}`}>
         <div className={styles.chatContainer}>
           {chatMessages.map((message, index) => {
-            // Determine visibility and text to show
-            const isVisible = index < visibleMessages || (index === visibleMessages && isTyping);
+            // Calculate visible window (max 5 messages)
+            const windowStart = Math.max(0, visibleMessages - 5);
+            const isInWindow = index >= windowStart && index < visibleMessages;
             const isCurrentlyTyping = index === visibleMessages && isTyping && message.type === 'agent';
+            const isVisible = isInWindow || isCurrentlyTyping;
+
+            // Check if this message is exiting (fading out)
+            const isExiting = index === exitingMessageIndex;
+
+            // Don't render messages outside the window (unless exiting or typing)
+            if (!isVisible && !isExiting) return null;
+
             const displayText = isCurrentlyTyping ? message.text.slice(0, typingIndex) : message.text;
 
             return (
@@ -404,7 +447,8 @@ export function HeroCommunications({ onComplete }) {
                 className={`
                   ${styles.chatMessage}
                   ${message.type === 'user' ? styles.chatMessageUser : styles.chatMessageAgent}
-                  ${isVisible ? styles.chatMessageVisible : ''}
+                  ${isVisible && !isExiting ? styles.chatMessageVisible : ''}
+                  ${isExiting ? styles.chatMessageExiting : ''}
                 `}
               >
                 {/* Hidden full text to reserve height */}
@@ -428,17 +472,14 @@ export function HeroCommunications({ onComplete }) {
                 key={index}
                 className={`${styles.scenarioItem} ${index < visibleScenarioItems ? styles.scenarioItemVisible : ''}`}
               >
-                <div className={styles.scenarioIconWrapper}>
-                  {/* Number */}
-                  <div className={`${styles.scenarioNumber} ${isChecked ? styles.scenarioNumberHidden : ''}`}>
+                <div className={`${styles.scenarioIcon} ${isChecked ? styles.scenarioIconChecked : ''}`}>
+                  {isChecked ? (
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M4 10.5L8 14.5L16 6.5" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  ) : (
                     <span>{index + 1}</span>
-                  </div>
-                  {/* Checkmark */}
-                  <img
-                    src={checkmarkCircle}
-                    alt=""
-                    className={`${styles.scenarioCheckmark} ${isChecked ? styles.scenarioCheckmarkVisible : ''}`}
-                  />
+                  )}
                 </div>
                 <div className={styles.scenarioText}>
                   <span>{text}</span>
@@ -446,63 +487,29 @@ export function HeroCommunications({ onComplete }) {
               </div>
             );
           })}
-          <button
-            type="button"
-            className={`${styles.playButton} ${showPlayButton ? styles.playButtonVisible : ''} ${playProgress >= 100 ? styles.playButtonHiding : ''}`}
-            onClick={handlePlayClick}
-            aria-label="Запустить"
-          >
-            <svg className={styles.playButtonProgress} viewBox="0 0 68 68">
-              <circle
-                cx="34"
-                cy="34"
-                r="32"
-                fill="none"
-                stroke="rgba(255, 255, 255, 0.3)"
-                strokeWidth="5"
-              />
-              <circle
-                cx="34"
-                cy="34"
-                r="32"
-                fill="none"
-                stroke="white"
-                strokeWidth="5"
-                strokeLinecap="round"
-                strokeDasharray={`${2 * Math.PI * 32}`}
-                strokeDashoffset={`${2 * Math.PI * 32 * (1 - playProgress / 100)}`}
-                transform="rotate(-90 34 34)"
-              />
-            </svg>
-            <img src={playButton} alt="" className={styles.playButtonIcon} />
-          </button>
         </div>
       </div>
 
       {/* Step 5: Final - Review and Agent Response */}
       <div className={`${styles.step} ${styles.step5} ${showFinalStep ? styles.stepActive : styles.stepHidden}`}>
-        <div className={styles.finalContainer}>
-          {/* Mobile tabs */}
-          <div className={styles.mobileTabs}>
-            <button
-              type="button"
-              className={`${styles.mobileTab} ${mobileTab === 'review' ? styles.mobileTabActive : ''}`}
-              onClick={() => setMobileTab('review')}
-            >
-              Отзыв
-            </button>
-            <button
-              type="button"
-              className={`${styles.mobileTab} ${mobileTab === 'response' ? styles.mobileTabActive : ''}`}
-              onClick={() => setMobileTab('response')}
-            >
-              Ответ
-            </button>
+        {/* Main row: Counter + Cards stack + Tone switcher */}
+        <div className={styles.finalCardsRow}>
+          {/* Counter card */}
+          <div className={`${styles.finalCounterCard} ${mobileTab === 'review' ? styles.mobileCardActive : ''}`}>
+            <span className={styles.finalCounterLabel}>Отвечено отзывов</span>
+            <div className={styles.finalCounterValue}>
+              <span className={styles.finalCounterNumber}>{answeredCount}</span>
+              <svg className={styles.finalCounterArrow} width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M6 2L6 10M6 2L2 6M6 2L10 6" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </div>
+            <span className={styles.finalCounterTotal}>из {totalReviews}</span>
           </div>
 
-          <div className={styles.finalCards}>
-            {/* Review card (same as step 1) */}
-            <div className={`${styles.reviewCard} ${styles.finalReviewCard} ${mobileTab === 'review' ? styles.mobileCardActive : ''}`}>
+          {/* Stacked cards container */}
+          <div className={styles.finalCardsStack}>
+            {/* Back card - Review (partially visible) */}
+            <div className={styles.finalReviewCard}>
               <div className={styles.reviewHeader}>
                 <div className={styles.reviewUser}>
                   <img src={avatarImg} alt="" className={styles.reviewAvatar} />
@@ -527,9 +534,8 @@ export function HeroCommunications({ onComplete }) {
               </div>
             </div>
 
-            {/* Agent response card */}
-            <div className={`${styles.agentCardWrapper} ${mobileTab === 'response' ? styles.mobileCardActive : ''}`}>
-            <div className={styles.agentCard}>
+            {/* Front card - Agent response with shadow */}
+            <div className={`${styles.agentCard} ${mobileTab === 'response' ? styles.mobileCardActive : ''}`}>
               <div className={styles.agentHeader}>
                 <img src={agentAvatar} alt="" className={styles.agentAvatar} />
                 <span className={styles.agentName}>Агент</span>
@@ -547,36 +553,53 @@ export function HeroCommunications({ onComplete }) {
                 ))}
               </div>
             </div>
-
-            {/* Tone switcher */}
-            <div className={styles.toneSwitcher}>
-              {toneOptions.map((tone) => (
-                <button
-                  key={tone.id}
-                  type="button"
-                  className={`${styles.toneButton} ${activeTone === tone.id ? styles.toneButtonActive : ''}`}
-                  onClick={() => setActiveTone(tone.id)}
-                  onMouseEnter={() => setHoveredTone(tone.id)}
-                  onMouseLeave={() => setHoveredTone(null)}
-                  aria-label={tone.label}
-                >
-                  <img src={tone.icon} alt="" className={styles.toneIcon} />
-                  {hoveredTone === tone.id && (
-                    <div className={styles.toneTooltip}>
-                      {tone.label}
-                    </div>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
           </div>
 
-          {/* CTA Button */}
-          <a href="#form" className={styles.ctaButton}>
-            Оставить заявку
-          </a>
+          {/* Tone switcher */}
+          <div className={styles.toneSwitcher}>
+            {toneOptions.map((tone) => (
+              <button
+                key={tone.id}
+                type="button"
+                className={`${styles.toneButton} ${activeTone === tone.id ? styles.toneButtonActive : ''}`}
+                onClick={() => setActiveTone(tone.id)}
+                onMouseEnter={() => setHoveredTone(tone.id)}
+                onMouseLeave={() => setHoveredTone(null)}
+                aria-label={tone.label}
+              >
+                <img src={tone.icon} alt="" className={styles.toneIcon} />
+                {hoveredTone === tone.id && (
+                  <div className={styles.toneTooltip}>
+                    {tone.label}
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
         </div>
+
+        {/* Mobile tabs */}
+        <div className={styles.mobileTabs}>
+          <button
+            type="button"
+            className={`${styles.mobileTab} ${mobileTab === 'review' ? styles.mobileTabActive : ''}`}
+            onClick={() => setMobileTab('review')}
+          >
+            Статистика
+          </button>
+          <button
+            type="button"
+            className={`${styles.mobileTab} ${mobileTab === 'response' ? styles.mobileTabActive : ''}`}
+            onClick={() => setMobileTab('response')}
+          >
+            Ответ
+          </button>
+        </div>
+
+        {/* CTA Button */}
+        <a href="#form" className={styles.ctaButton}>
+          Оставить заявку
+        </a>
       </div>
     </div>
   );
