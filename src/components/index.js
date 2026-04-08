@@ -4,6 +4,7 @@ export { Card } from './Card';
 export { Header } from './Header';
 export { Footer } from './Footer';
 export { LogoMarquee } from './LogoMarquee';
+export { LogoMarqueeV2 } from './LogoMarqueeV2';
 export { IconButton } from './IconButton';
 export { FeatureCard } from './FeatureCard';
 export { SectionHeader } from './SectionHeader';
@@ -31,6 +32,10 @@ export { AudienceSection } from './AudienceSection';
 export { LaunchSection } from './LaunchSection';
 export { ProductsSlider } from './ProductsSlider';
 export { FAQSection } from './FAQSection';
+export { CasesSection } from './CasesSection';
+export { ReviewsSection } from './ReviewsSection';
+export { MainHero } from './MainHero';
 
 // Illustrations
 export { AgentChatDemo } from './Illustrations/AgentChatDemo';
+export { HeroCommunications } from './Illustrations/HeroCommunications';

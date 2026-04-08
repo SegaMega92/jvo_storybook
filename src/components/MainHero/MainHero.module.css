@@ -23,7 +23,6 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
-  padding: 0 100px;
 }
 
 .headerLeft {
@@ -92,7 +91,7 @@
 .tabs {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(219, 171, 239, 0.5);
   border-radius: 12px;

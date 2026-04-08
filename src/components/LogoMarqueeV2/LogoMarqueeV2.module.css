@@ -1,0 +1,210 @@
+/* LogoMarqueeV2 - Infinite scrolling logos with title section */
+
+.container {
+  display: flex;
+  align-items: center;
+  background: var(--color-base-white, #fff);
+  padding: 20px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Variant: fixed width (960px) */
+.container--fixed {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+/* Variant: fluid (full width) */
+.container--fluid {
+  width: 100%;
+}
+
+/* ==========================================
+   Left Section: Title + Divider
+   ========================================== */
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  background: var(--color-base-white, #fff);
+  padding-right: 0;
+}
+
+.titleWrapper {
+  background: var(--color-base-white, #fff);
+  border-radius: 34px;
+  padding: 10px;
+}
+
+.title {
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-base-black, #000);
+  white-space: nowrap;
+}
+
+.divider {
+  width: 1px;
+  height: 44px;
+  background: #E9EBF0;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   Track: Scrolling logos
+   ========================================== */
+
+.trackWrapper {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  min-width: 0;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: max-content;
+  animation: scroll var(--marquee-speed, 20s) linear infinite;
+  will-change: transform;
+}
+
+.track--paused {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.logoItem {
+  flex-shrink: 0;
+  width: 138px;
+  height: 69px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.logo {
+  max-width: 90px;
+  max-height: 24px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.logoItem:hover .logo {
+  filter: grayscale(0%);
+  opacity: 1;
+}
+
+/* ==========================================
+   Gradient fade on the right
+   ========================================== */
+
+.gradientRight {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  width: 96px;
+  height: 109px;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), #fff);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px 0;
+  }
+
+  .leftSection {
+    gap: 16px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+
+  .divider {
+    height: 36px;
+  }
+
+  .logoItem {
+    width: 110px;
+    height: 55px;
+  }
+
+  .logo {
+    max-width: 70px;
+    max-height: 20px;
+  }
+
+  .gradientRight {
+    width: 60px;
+    height: 80px;
+  }
+}
+
+/* Mobile: hide title, show only logos (20% larger) */
+@media (max-width: 640px) {
+  .leftSection {
+    display: none;
+  }
+
+  .logoItem {
+    width: 132px;
+    height: 66px;
+  }
+
+  .logo {
+    max-width: 84px;
+    max-height: 24px;
+  }
+
+  .gradientRight {
+    width: 48px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logoItem {
+    width: 108px;
+    height: 54px;
+  }
+
+  .logo {
+    max-width: 72px;
+    max-height: 20px;
+  }
+
+  .gradientRight {
+    width: 40px;
+    height: 60px;
+  }
+}
