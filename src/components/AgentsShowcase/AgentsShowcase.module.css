@@ -1,0 +1,410 @@
+/* AgentsShowcase - Scroll-driven showcase */
+
+.wrapper {
+  position: relative;
+}
+
+.section {
+  background: var(--color-base-white, #fff);
+  padding: 40px 20px 80px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+}
+
+/* ==========================================
+   Title
+   ========================================== */
+
+.title {
+  font-family: var(--font-family-heading, 'RF Dewi Extended', sans-serif);
+  font-size: 36px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -1.08px;
+  color: var(--color-base-black, #15181F);
+  text-align: center;
+  margin: 0;
+  max-width: 488px;
+}
+
+/* ==========================================
+   Tabs
+   ========================================== */
+
+.tabs {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--color-base-white, #fff);
+  border: 1px solid var(--color-base-gray, #E9EBF0);
+  border-radius: 38px;
+  padding: 5px;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 14px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+
+.tab:hover {
+  background: rgba(246, 246, 249, 0.8);
+}
+
+.tabActive {
+  background: #F6F6F9;
+}
+
+.tabIconWrapper {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.tabIcon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.tabIconWrapper[style*="background: #15181F"] .tabIcon,
+.tabIconWrapper[style*="background:#15181F"] .tabIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.tabLabel {
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.16px;
+  color: var(--color-base-black, #15181F);
+  white-space: nowrap;
+}
+
+/* Divider between tabs */
+.tab:not(:last-child)::after {
+  content: '';
+  width: 1px;
+  height: 36px;
+  background: var(--color-base-gray, #E9EBF0);
+  margin-left: 10px;
+}
+
+.tabActive::after {
+  display: none;
+}
+
+.tab:has(+ .tabActive)::after {
+  display: none;
+}
+
+/* ==========================================
+   Slides
+   ========================================== */
+
+.slidesWrapper {
+  position: relative;
+  width: 100%;
+  height: 575px;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 0 20px;
+  pointer-events: none;
+}
+
+.slide[style*="opacity: 1"] {
+  pointer-events: auto;
+}
+
+.slideIllustration {
+  width: 575px;
+  height: 575px;
+  flex-shrink: 0;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.slideInfo {
+  width: 460px;
+  height: 575px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 0;
+}
+
+.slideBottom {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  height: 150px;
+  justify-content: flex-end;
+}
+
+/* ==========================================
+   Tag
+   ========================================== */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 15px;
+  border-radius: 16px;
+  backdrop-filter: blur(50px);
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* ==========================================
+   Icon
+   ========================================== */
+
+.iconWrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.icon {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+/* ==========================================
+   Description
+   ========================================== */
+
+.description {
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--color-base-black, #15181F);
+  text-align: center;
+  margin: 0;
+  max-width: 352px;
+}
+
+/* ==========================================
+   Button
+   ========================================== */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 14px 22px;
+  background: var(--color-base-black, #15181F);
+  color: var(--color-base-white, #fff);
+  border-radius: 12px;
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.16px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background: #2d3142;
+  transform: translateY(-1px);
+}
+
+.button:active {
+  transform: translateY(0);
+}
+
+/* ==========================================
+   Mobile Layout
+   ========================================== */
+
+.mobileCards {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+}
+
+.mobileCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 24px;
+  background: var(--color-base-white, #fff);
+  border-radius: 24px;
+  border: 1px solid var(--color-base-gray, #E9EBF0);
+}
+
+.mobileIllustration {
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 1;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mobileInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+/* ==========================================
+   Responsive: Tablet
+   ========================================== */
+
+@media (max-width: 1280px) {
+  .slidesWrapper {
+    height: 480px;
+  }
+
+  .slideIllustration {
+    width: 460px;
+    height: 460px;
+  }
+
+  .slideInfo {
+    width: 400px;
+    height: 460px;
+    padding: 60px 0;
+  }
+
+  .description {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 1080px) {
+  .slidesWrapper {
+    height: 420px;
+  }
+
+  .slideIllustration {
+    width: 400px;
+    height: 400px;
+  }
+
+  .slideInfo {
+    width: 360px;
+    height: 400px;
+    padding: 50px 0;
+  }
+
+  .description {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 960px) {
+  .section {
+    min-height: auto;
+    padding: 40px 16px 60px;
+  }
+
+  .container {
+    gap: 40px;
+  }
+
+  .title {
+    font-size: 28px;
+    letter-spacing: -0.84px;
+  }
+}
+
+/* ==========================================
+   Responsive: Mobile
+   ========================================== */
+
+@media (max-width: 640px) {
+  .section {
+    padding: 32px 12px 48px;
+  }
+
+  .container {
+    gap: 32px;
+  }
+
+  .title {
+    font-size: 24px;
+    letter-spacing: -0.72px;
+  }
+
+  .mobileCard {
+    padding: 16px;
+    gap: 24px;
+  }
+
+  .tag {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .iconWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .button {
+    font-size: 14px;
+    height: 40px;
+    padding: 12px 18px;
+  }
+}
