@@ -1,14 +1,10 @@
 import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import styles from './FeatureSliderGroup.module.css';
 import { FeatureSlider } from '../FeatureSlider';
 import { Button } from '../Button';
 
-// Регистрируем плагины
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+// GSAP загружается динамически для оптимизации initial bundle
 
 /**
  * FeatureSliderGroup - обёртка для нескольких FeatureSlider секций
@@ -17,6 +13,23 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
  * - v1 (default): GSAP ScrollTrigger с "прикреплением" и табами-точками
  * - v2: Аккордеон с фичами слева и изображением справа
  */
+// Кэш для GSAP модулей (загружается один раз)
+let gsapCache = null;
+
+async function loadGsap() {
+  if (gsapCache) return gsapCache;
+
+  const [{ gsap }, { ScrollTrigger }, { ScrollToPlugin }] = await Promise.all([
+    import('gsap'),
+    import('gsap/ScrollTrigger'),
+    import('gsap/ScrollToPlugin'),
+  ]);
+
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  gsapCache = { gsap, ScrollTrigger, ScrollToPlugin };
+  return gsapCache;
+}
+
 export function FeatureSliderGroup({
   sections = [],
   autoplayInterval = 4000,
@@ -51,15 +64,27 @@ export function FeatureSliderGroup({
   }
   const [activeIndex, setActiveIndex] = useState(0);
   const [isReady, setIsReady] = useState(false);
+  const [gsapLoaded, setGsapLoaded] = useState(false);
   const containerRef = useRef(null);
   const pinWrapperRef = useRef(null);
   const scrollTriggerRef = useRef(null);
+  const gsapRef = useRef(null);
 
   const sectionsCount = sections.length;
 
+  // Загрузка GSAP
+  useEffect(() => {
+    loadGsap().then((modules) => {
+      gsapRef.current = modules;
+      setGsapLoaded(true);
+    });
+  }, []);
+
   // Инициализация GSAP ScrollTrigger (только для десктопа)
   useEffect(() => {
-    if (sectionsCount <= 1 || !containerRef.current || !pinWrapperRef.current) return;
+    if (!gsapLoaded || sectionsCount <= 1 || !containerRef.current || !pinWrapperRef.current) return;
+
+    const { gsap, ScrollTrigger } = gsapRef.current;
 
     // На планшетах и мобильных (< 1180px) не используем пининг
     const isMobile = window.matchMedia('(max-width: 1180px)').matches;
@@ -101,10 +126,13 @@ export function FeatureSliderGroup({
         scrollTriggerRef.current.kill();
       }
     };
-  }, [sectionsCount]);
+  }, [sectionsCount, gsapLoaded]);
 
   // Обновляем ScrollTrigger при изменении размеров окна
   useEffect(() => {
+    if (!gsapLoaded) return;
+
+    const { ScrollTrigger } = gsapRef.current;
     let resizeTimeout;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
@@ -127,11 +155,12 @@ export function FeatureSliderGroup({
       clearTimeout(resizeTimeout);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [gsapLoaded]);
 
   // Клик по табу — скролл к соответствующей позиции
   const handleTabClick = useCallback((index) => {
-    if (!scrollTriggerRef.current) return;
+    if (!scrollTriggerRef.current || !gsapRef.current) return;
+    const { gsap } = gsapRef.current;
 
     const trigger = scrollTriggerRef.current;
     const targetProgress = index / (sectionsCount - 1 || 1);
@@ -265,6 +294,38 @@ function FeatureSliderGroupV2({
   const [autoplayPaused, setAutoplayPaused] = useState(false);
   const [isMobile, setIsMobile] = useState(null);
   const [isInView, setIsInView] = useState(false);
+  const [gsapLoaded, setGsapLoaded] = useState(false);
+  const [imagesPreloaded, setImagesPreloaded] = useState(false);
+  // Для мобильной версии: активная фича в каждой секции { sectionIdx: featureIdx }
+  const [mobileActiveFeatures, setMobileActiveFeatures] = useState({});
+
+  // Предзагрузка всех картинок при монтировании
+  useEffect(() => {
+    const imageUrls = [];
+    sections.forEach((section) => {
+      section.features?.forEach((feature) => {
+        if (feature.image) imageUrls.push(feature.image);
+        if (feature.background) imageUrls.push(feature.background);
+      });
+    });
+
+    if (imageUrls.length === 0) {
+      setImagesPreloaded(true);
+      return;
+    }
+
+    let loadedCount = 0;
+    imageUrls.forEach((url) => {
+      const img = new Image();
+      img.onload = img.onerror = () => {
+        loadedCount++;
+        if (loadedCount === imageUrls.length) {
+          setImagesPreloaded(true);
+        }
+      };
+      img.src = url;
+    });
+  }, [sections]);
 
   // Refs
   const containerRef = useRef(null);
@@ -277,6 +338,16 @@ function FeatureSliderGroupV2({
   const activeFeatureRef = useRef(activeFeatureIndex);
   const isInitializedRef = useRef(false);
   const isScrollingRef = useRef(false); // Блокирует ScrollTrigger во время программного скролла
+  const gsapRef = useRef(null);
+  const lastScrollUpdateRef = useRef(0); // Для throttle ScrollTrigger
+
+  // Загрузка GSAP
+  useEffect(() => {
+    loadGsap().then((modules) => {
+      gsapRef.current = modules;
+      setGsapLoaded(true);
+    });
+  }, []);
 
   // Вычисляемые значения
   const sectionsCount = sections.length;
@@ -302,8 +373,8 @@ function FeatureSliderGroupV2({
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {
         checkMobile();
-        if (scrollTriggerRef.current) {
-          ScrollTrigger.refresh();
+        if (scrollTriggerRef.current && gsapRef.current) {
+          gsapRef.current.ScrollTrigger.refresh();
         }
       }, 150);
     };
@@ -319,11 +390,35 @@ function FeatureSliderGroupV2({
 
   // GSAP ScrollTrigger (только десктоп) - переключает только секции
   useEffect(() => {
-    if (isMobile === null || isMobile || sectionsCount <= 1 || !containerRef.current || !pinWrapperRef.current) {
+    // Дополнительная проверка ширины окна (на случай проблем с matchMedia)
+    const windowWidth = window.innerWidth;
+    const shouldBeMobile = isMobile || windowWidth <= 1100;
+
+    // Если мобильный или недостаточно секций — убиваем ScrollTrigger и выходим
+    if (isMobile === null || shouldBeMobile || sectionsCount <= 1 || !containerRef.current || !pinWrapperRef.current) {
+      // Убиваем наш ScrollTrigger
+      if (scrollTriggerRef.current) {
+        scrollTriggerRef.current.kill();
+        scrollTriggerRef.current = null;
+      }
+      // Убираем inline-стили, которые мог оставить GSAP пининг
+      if (gsapRef.current) {
+        const { gsap } = gsapRef.current;
+        if (pinWrapperRef.current) {
+          gsap.set(pinWrapperRef.current, { clearProps: 'all' });
+        }
+        if (containerRef.current) {
+          gsap.set(containerRef.current, { clearProps: 'all' });
+        }
+      }
       setIsInView(true);
       return;
     }
 
+    // Ждём загрузки GSAP
+    if (!gsapLoaded) return;
+
+    const { ScrollTrigger } = gsapRef.current;
     const timer = setTimeout(() => {
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: containerRef.current,
@@ -335,6 +430,11 @@ function FeatureSliderGroupV2({
         onUpdate: (self) => {
           // Игнорируем обновления во время программного скролла
           if (isScrollingRef.current) return;
+
+          // Throttle: не чаще чем раз в 50ms
+          const now = Date.now();
+          if (now - lastScrollUpdateRef.current < 50) return;
+          lastScrollUpdateRef.current = now;
 
           const progress = self.progress;
           const sectionIndex = Math.min(
@@ -365,18 +465,23 @@ function FeatureSliderGroupV2({
       clearTimeout(timer);
       if (scrollTriggerRef.current) {
         scrollTriggerRef.current.kill();
+        scrollTriggerRef.current = null;
       }
       // Очищаем GSAP анимации
-      Object.values(imagesRef.current).forEach((img) => {
-        if (img) gsap.killTweensOf(img);
-      });
+      if (gsapRef.current) {
+        const { gsap } = gsapRef.current;
+        Object.values(imagesRef.current).forEach((img) => {
+          if (img) gsap.killTweensOf(img);
+        });
+      }
     };
-  }, [isMobile, sectionsCount]);
+  }, [isMobile, sectionsCount, gsapLoaded]);
 
   // Инициализация картинок
   useLayoutEffect(() => {
-    if (isInitializedRef.current) return;
+    if (isInitializedRef.current || !gsapRef.current) return;
 
+    const { gsap } = gsapRef.current;
     const refs = Object.entries(imagesRef.current);
     if (refs.length === 0) return;
 
@@ -393,7 +498,9 @@ function FeatureSliderGroupV2({
   // Вариант 1: Crossfade (Apple-style) — только opacity
   useEffect(() => {
     if (prevSectionIndex === null && prevFeatureIndex === null) return;
+    if (!gsapRef.current) return;
 
+    const { gsap } = gsapRef.current;
     const prevKey = `${prevSectionIndex}-${prevFeatureIndex}`;
     const activeKey = `${activeSectionIndex}-${activeFeatureIndex}`;
 
@@ -416,8 +523,9 @@ function FeatureSliderGroupV2({
   // Анимация левой части при смене секции
   useEffect(() => {
     if (prevSectionIndex === null || prevSectionIndex === activeSectionIndex) return;
-    if (!leftContentRef.current) return;
+    if (!leftContentRef.current || !gsapRef.current) return;
 
+    const { gsap } = gsapRef.current;
     gsap.fromTo(
       leftContentRef.current,
       { opacity: 0 },
@@ -425,9 +533,9 @@ function FeatureSliderGroupV2({
     );
   }, [activeSectionIndex, prevSectionIndex]);
 
-  // Автоплей (только внутри секции)
+  // Автоплей (внутри секции, работает и на мобильном)
   useEffect(() => {
-    if (currentFeaturesCount <= 1 || !isInView || autoplayPaused || isMobile) return;
+    if (currentFeaturesCount <= 1 || !isInView || autoplayPaused) return;
 
     timerRef.current = setTimeout(() => {
       // Переключаем только внутри текущей секции
@@ -441,7 +549,7 @@ function FeatureSliderGroupV2({
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [activeFeatureIndex, activeSectionIndex, autoplayInterval, currentFeaturesCount, isInView, autoplayPaused, animationKey, isMobile]);
+  }, [activeFeatureIndex, activeSectionIndex, autoplayInterval, currentFeaturesCount, isInView, autoplayPaused, animationKey]);
 
   // Клик по фиче — переключаем фичу, останавливаем автоплей
   const handleFeatureClick = useCallback((featureIndex) => {
@@ -452,6 +560,41 @@ function FeatureSliderGroupV2({
     setActiveFeatureIndex(featureIndex);
     setAnimationKey((prev) => prev + 1);
   }, []);
+
+  // Клик по фиче на мобильном — переключает картинку и останавливает автоплей
+  const handleMobileFeatureClick = useCallback((sectionIndex, featureIndex) => {
+    setAutoplayPaused(true);
+    setMobileActiveFeatures((prev) => ({
+      ...prev,
+      [sectionIndex]: featureIndex,
+    }));
+    setAnimationKey((prev) => prev + 1);
+  }, []);
+
+  // Автоплей для мобильной версии — переключает фичи во всех секциях синхронно
+  useEffect(() => {
+    if (!isMobile || autoplayPaused) return;
+
+    const maxFeatures = Math.max(...sections.map(s => s.features?.length || 0));
+    if (maxFeatures <= 1) return;
+
+    const timer = setTimeout(() => {
+      setMobileActiveFeatures((prev) => {
+        const newState = {};
+        sections.forEach((section, sIdx) => {
+          const featuresCount = section.features?.length || 0;
+          if (featuresCount > 1) {
+            const currentIdx = prev[sIdx] ?? 0;
+            newState[sIdx] = (currentIdx + 1) % featuresCount;
+          }
+        });
+        return { ...prev, ...newState };
+      });
+      setAnimationKey((prev) => prev + 1);
+    }, autoplayInterval);
+
+    return () => clearTimeout(timer);
+  }, [isMobile, autoplayPaused, autoplayInterval, sections, animationKey]);
 
   // Клик по точке секции
   const handleSectionDotClick = useCallback((sectionIndex) => {
@@ -464,8 +607,9 @@ function FeatureSliderGroupV2({
     setAnimationKey((prev) => prev + 1);
 
     // Скролл к началу секции
-    if (scrollTriggerRef.current && !isMobile) {
+    if (scrollTriggerRef.current && !isMobile && gsapRef.current) {
       isScrollingRef.current = true;
+      const { gsap } = gsapRef.current;
       const trigger = scrollTriggerRef.current;
       const targetProgress = sectionIndex / (sectionsCount - 1 || 1);
       const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
@@ -555,12 +699,12 @@ function FeatureSliderGroupV2({
                 {/* Фоновый градиент */}
                 {feature.background && (
                   <div className={styles.v2ImageBg}>
-                    <img src={feature.background} alt="" className={styles.v2ImageBgImg} />
+                    <img src={feature.background} alt="" className={styles.v2ImageBgImg} loading="eager" />
                   </div>
                 )}
                 {/* Скриншот поверх градиента */}
                 <div className={styles.v2ImageSlide}>
-                  <img src={feature.image} alt={feature.title} className={styles.v2ImageImg} />
+                  <img src={feature.image} alt={feature.title} className={styles.v2ImageImg} loading="eager" />
                 </div>
               </div>
             );
@@ -570,55 +714,98 @@ function FeatureSliderGroupV2({
     </div>
   );
 
-  // SSR или мобильная версия
-  if (isMobile === null || isMobile) {
+  // SSR — показываем заглушку
+  if (isMobile === null) {
+    return null;
+  }
+
+  // Дополнительная проверка ширины (на случай проблем с matchMedia в iframe)
+  const isActuallyMobile = isMobile || (typeof window !== 'undefined' && window.innerWidth <= 1100);
+
+  // Мобильная версия
+  if (isActuallyMobile) {
     return (
       <section className={styles.v2Section}>
         {sections.map((section, sIdx) => {
-          // Берём первую картинку и фон из фич секции
-          const firstFeature = section.features?.[0];
-          const firstImage = firstFeature?.image;
-          const firstBackground = firstFeature?.background;
+          // Активная фича в этой секции (по умолчанию 0)
+          const activeIdx = mobileActiveFeatures[sIdx] ?? 0;
+          const activeFeature = section.features?.[activeIdx] || section.features?.[0];
+          const activeImage = activeFeature?.image;
+          const activeBackground = activeFeature?.background;
 
           return (
             <div key={sIdx} className={styles.v2MobileSection}>
-              {/* Изображение сверху на мобильных */}
-              {firstImage && (
-                <div className={styles.v2MobileImage}>
-                  {firstBackground && (
-                    <div className={styles.v2MobileImageBg}>
-                      <img src={firstBackground} alt="" className={styles.v2MobileImageBgImg} />
-                    </div>
-                  )}
-                  <div className={styles.v2MobileImageSlide}>
-                    <img src={firstImage} alt={section.title || ''} />
-                  </div>
-                </div>
-              )}
-
-              <div className={styles.v2Header}>
-                <div className={styles.v2TextBlock}>
-                  <h2 className={styles.v2Title}>{section.title}</h2>
+              {/* 1. Заголовок секции сверху */}
+              <div className={styles.v2MobileHeader}>
+                <h2 className={styles.v2Title}>{section.title}</h2>
+                {section.description && (
                   <p className={styles.v2Description}>{section.description}</p>
+                )}
+              </div>
+
+              {/* 2. Картинка + список фич */}
+              <div className={styles.v2MobileContent}>
+                {/* Картинка активной фичи */}
+                {activeImage && (
+                  <div key={`${sIdx}-${activeIdx}`} className={styles.v2MobileImage}>
+                    {activeBackground && (
+                      <div className={styles.v2MobileImageBg}>
+                        <img src={activeBackground} alt="" className={styles.v2MobileImageBgImg} loading="eager" />
+                      </div>
+                    )}
+                    <div className={styles.v2MobileImageSlide}>
+                      <img src={activeImage} alt={activeFeature?.title || ''} loading="eager" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Список фич */}
+                <div className={styles.v2Features}>
+                  {section.features?.map((feature, fIdx) => {
+                    const isActive = fIdx === activeIdx;
+                    return (
+                      <div
+                        key={fIdx}
+                        className={`${styles.v2Feature} ${isActive ? styles.v2FeatureActive : ''}`}
+                        onClick={() => handleMobileFeatureClick(sIdx, fIdx)}
+                        role="button"
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            handleMobileFeatureClick(sIdx, fIdx);
+                          }
+                        }}
+                      >
+                        <div className={styles.v2ProgressBar}>
+                          {isActive && !autoplayPaused && (
+                            <div
+                              key={animationKey}
+                              className={styles.v2ProgressFill}
+                              style={{ '--duration': `${autoplayInterval}ms` }}
+                            />
+                          )}
+                        </div>
+                        <div className={styles.v2FeatureHeader}>
+                          {feature.icon && <span className={styles.v2FeatureIcon}>{feature.icon}</span>}
+                          <div className={styles.v2FeatureContent}>
+                            <p className={styles.v2FeatureTitle}>{feature.title}</p>
+                            {isActive && feature.description && (
+                              <p className={styles.v2FeatureDescription}>{feature.description}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
+              </div>
+
+              {/* 3. Кнопка снизу */}
+              <div className={styles.v2MobileButton}>
                 <Button href={section.buttonHref || '#form'} variant="primary" size="medium">
                   {section.buttonText || 'Оставить заявку'}
                 </Button>
-              </div>
-
-              <div className={styles.v2Features}>
-                {section.features?.map((feature, fIdx) => (
-                  <div key={fIdx} className={`${styles.v2Feature} ${styles.v2FeatureActive}`}>
-                    <div className={styles.v2ProgressBar} />
-                    <div className={styles.v2FeatureHeader}>
-                      {feature.icon && <span className={styles.v2FeatureIcon}>{feature.icon}</span>}
-                      <div className={styles.v2FeatureContent}>
-                        <p className={styles.v2FeatureTitle}>{feature.title}</p>
-                        {feature.description && <p className={styles.v2FeatureDescription}>{feature.description}</p>}
-                      </div>
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
           );

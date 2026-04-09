@@ -79,7 +79,7 @@
   width: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
+  /* Убрали CSS transitions — GSAP управляет анимациями */
   pointer-events: none;
 }
 
@@ -88,11 +88,12 @@
   position: relative;
 }
 
-/* Активная секция */
+/* Активная секция — мгновенное переключение */
 .sectionActive {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
+  transition: none;
 }
 
 /* ========================================
@@ -139,6 +140,13 @@
   position: relative;
   background: #300247;
   overflow: hidden; /* Обрезаем вылетающие картинки */
+}
+
+/* Скрываем десктопный контейнер на мобильных как fallback */
+@media (max-width: 1100px) {
+  .v2Container2 {
+    display: none !important;
+  }
 }
 
 .v2Section {
@@ -208,6 +216,27 @@
 
 .v2MobileSection:last-child {
   margin-bottom: 0;
+}
+
+/* Заголовок мобильной секции */
+.v2MobileHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: center;
+}
+
+/* Контент: картинка + фичи */
+.v2MobileContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Кнопка снизу */
+.v2MobileButton {
+  display: flex;
+  justify-content: center;
 }
 
 /* Изображение в мобильной секции */
@@ -451,8 +480,9 @@
   position: absolute;
   inset: 0;
   opacity: 0;
-  will-change: opacity; /* GPU-ускорение */
-  /* opacity управляется через GSAP */
+  will-change: opacity;
+  /* Без CSS transitions — opacity управляется только через GSAP */
+  transition: none !important;
 }
 
 /* Активное изображение видно по умолчанию (до инициализации GSAP) */
@@ -523,9 +553,10 @@
   }
 
   .v2SectionDots {
-    left: 16px;
+    display: none;
   }
 }
+
 
 @media (max-width: 1100px) {
   /* На планшетах отключаем пининг — вертикальный layout */
@@ -567,14 +598,14 @@
     display: none;
   }
 
-  /* Все фичи развернуты на мобильных */
+  /* Фичи кликабельны на мобильных */
   .v2MobileSection .v2Feature {
-    opacity: 1;
-    cursor: default;
+    opacity: 0.5;
+    cursor: pointer;
   }
 
-  .v2MobileSection .v2ProgressBar {
-    display: none;
+  .v2MobileSection .v2Feature.v2FeatureActive {
+    opacity: 1;
   }
 }
 
