@@ -167,6 +167,8 @@
   border-radius: 24px;
   overflow: hidden;
   position: relative;
+  /* Placeholder пока видео загружается */
+  background-color: #e5e7eb;
 }
 
 .flatVideo {

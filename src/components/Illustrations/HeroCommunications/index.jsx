@@ -500,7 +500,8 @@ export function HeroCommunications({ onComplete }) {
             <div className={styles.finalCounterValue}>
               <span className={styles.finalCounterNumber}>{answeredCount}</span>
               <svg className={styles.finalCounterArrow} width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M6 2L6 10M6 2L2 6M6 2L10 6" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <rect width="12" height="12" rx="6" fill="#22c55e" fillOpacity="0.3"/>
+                <path d="M6.35355 1.64645C6.15829 1.45118 5.84171 1.45118 5.64645 1.64645L2.46447 4.82843C2.2692 5.02369 2.2692 5.34027 2.46447 5.53553C2.65973 5.7308 2.97631 5.7308 3.17157 5.53553L6 2.70711L8.82843 5.53553C9.02369 5.7308 9.34027 5.7308 9.53553 5.53553C9.7308 5.34027 9.7308 5.02369 9.53553 4.82843L6.35355 1.64645ZM6 10L6.5 10L6.5 2L6 2L5.5 2L5.5 10L6 10Z" fill="#22c55e"/>
               </svg>
             </div>
             <span className={styles.finalCounterTotal}>из {totalReviews}</span>

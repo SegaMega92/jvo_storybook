@@ -35,6 +35,7 @@ export { FAQSection } from './FAQSection';
 export { CasesSection } from './CasesSection';
 export { ReviewsSection } from './ReviewsSection';
 export { MainHero } from './MainHero';
+export { AgentsShowcase } from './AgentsShowcase';
 
 // Illustrations
 export { AgentChatDemo } from './Illustrations/AgentChatDemo';

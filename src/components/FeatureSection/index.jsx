@@ -64,7 +64,7 @@ export function FeatureSection({
           </div>
         </div>
 
-        {/* Media: Video or Image */}
+        {/* Media: Video, Image, or Placeholder */}
         {video ? (
           <div className={styles.section__mediaWrapper}>
             <iframe
@@ -85,7 +85,13 @@ export function FeatureSection({
               loading="lazy"
             />
           </div>
-        ) : null}
+        ) : (
+          <div className={styles.section__mediaWrapper}>
+            <div className={styles.section__placeholder}>
+              <span className={styles.section__placeholderLabel}>Иллюстрация</span>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

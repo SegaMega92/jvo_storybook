@@ -1,21 +1,21 @@
-/* MainHero - Hero section with tabs */
-/* Based on Figma design node 858:6640 */
+/* MainHero - Hero section with tabs inside gradient card */
+/* Based on Figma node 925:33156 */
 
 .section {
-  background: var(--color-base-white);
+  background: var(--color-base-white, #ffffff);
   padding: 0 20px;
 }
 
 .container {
-  max-width: 1160px;
+  max-width: 1180px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 36px;
 }
 
 /* ==========================================
-   Header: Title + Tabs + Description
+   Header: Title left + Description right
    ========================================== */
 
 .header {
@@ -23,22 +23,16 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 40px;
-}
-
-.headerLeft {
-  display: flex;
-  flex-direction: column;
-  gap: 36px;
-  flex-shrink: 0;
+  padding: 0;
 }
 
 .title {
   font-family: var(--font-family-heading);
-  font-size: 48px;
+  font-size: 60px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: -1.92px;
-  color: var(--color-base-black);
+  color: var(--color-base-black, #15181f);
   margin: 0;
   max-width: 600px;
 }
@@ -48,9 +42,10 @@
   font-size: 16px;
   font-weight: 500;
   line-height: 1.5;
-  color: var(--color-base-black);
+  color: var(--color-base-black, #15181f);
   margin: 0;
   max-width: 360px;
+  flex-shrink: 0;
 }
 
 /* ==========================================
@@ -59,8 +54,8 @@
 
 .showcase {
   width: 100%;
-  border-radius: 24px;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
 }
 
 .showcaseInner {
@@ -72,31 +67,21 @@
   overflow: hidden;
 }
 
-/* Dot pattern overlay */
-.showcaseInner::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: var(--pattern-dots-dark);
-  background-repeat: repeat;
-  pointer-events: none;
-  z-index: 1;
-  border-radius: inherit;
-}
-
 /* ==========================================
-   Tabs navigation (now in header)
+   Tabs navigation (inside showcase card)
    ========================================== */
 
 .tabs {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 3;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   background: rgba(255, 255, 255, 0.6);
   border: 1px solid rgba(219, 171, 239, 0.5);
   border-radius: 12px;
-  padding: 0;
-  width: fit-content;
 }
 
 .tab {
@@ -109,23 +94,20 @@
   background: transparent;
   cursor: pointer;
   transition: all 0.25s ease;
+  font-family: inherit;
 }
 
 .tab:hover {
-  background: rgba(193, 111, 251, 0.5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .tabActive {
-  background: var(--color-violet-main, #c16ffb);
+  background: var(--color-base-white, #ffffff);
   border-color: #dbabef;
 }
 
-.tabActive .tabLabel {
-  color: var(--color-base-white, white);
-}
-
 .tabActive:hover {
-  background: var(--color-violet-main, #c16ffb);
+  background: var(--color-base-white, #ffffff);
 }
 
 .tabIcon {
@@ -140,7 +122,7 @@
   font-weight: 600;
   line-height: 1.2;
   letter-spacing: 0.14px;
-  color: var(--color-base-black);
+  color: var(--color-base-black, #15181f);
   white-space: nowrap;
   padding-bottom: 2px;
 }
@@ -162,6 +144,9 @@
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.35s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contentPaneActive {
@@ -189,15 +174,8 @@
     max-width: 320px;
   }
 
-  .showcase {
-    height: auto;
-    border-radius: 24px;
-  }
-
   .showcaseInner {
-    width: 100%;
     height: 480px;
-    border-radius: 20px;
   }
 }
 
@@ -228,10 +206,6 @@
 
   .description {
     max-width: 100%;
-  }
-
-  .showcaseInner {
-    height: 520px;
   }
 
   .tabs {
@@ -266,23 +240,18 @@
     font-size: 14px;
   }
 
-  .showcase {
-    border-radius: 20px;
-  }
-
   .showcaseInner {
-    min-height: auto;
     height: auto;
+    min-height: 360px;
     border-radius: 16px;
-    padding-bottom: 20px;
-  }
-
-  .headerLeft {
-    gap: 20px;
   }
 
   .tabs {
-    width: 100%;
+    position: relative;
+    top: auto;
+    left: auto;
+    width: calc(100% - 24px);
+    margin: 12px;
     gap: 4px;
     padding: 4px;
   }
@@ -304,21 +273,19 @@
     display: none;
   }
 
-  /* Show labels only on active tab on mobile */
   .tabActive .tabLabel {
     display: block;
   }
 
   .contentArea {
     position: relative;
-    top: auto;
-    min-height: 440px;
+    min-height: 300px;
   }
 
   .contentPane {
     display: none;
     position: relative;
-    min-height: 440px;
+    min-height: 300px;
   }
 
   .contentPaneActive {
@@ -348,9 +315,5 @@
 
   .tabLabel {
     font-size: 11px;
-  }
-
-  .contentArea {
-    min-height: 440px;
   }
 }

@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import styles from './Header.module.css';
 import PropTypes from 'prop-types';
-
-// JVO Logo SVG inline (black for light header)
-const Logo = () => (
-  <svg width="80" height="24" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M60.0453 24H59.5658C52.9523 24 47.5787 18.6283 47.5787 12.0171C47.5787 5.40582 52.9523 0.0341682 59.5658 0.0341682H60.0453C66.6588 0.0341682 72.0324 5.40582 72.0324 12.0171C72.0158 18.6283 66.6423 24 60.0453 24ZM59.5658 6.79418C56.6724 6.79418 54.3246 9.14118 54.3246 12.0336C54.3246 14.926 56.6724 17.273 59.5658 17.273H60.0288C62.9222 17.273 65.27 14.926 65.27 12.0336C65.27 9.14118 62.9222 6.79418 60.0288 6.79418H59.5658Z" fill="#101010"/>
-    <path d="M79.3165 0H72.4219V6.89224H79.3165V0Z" fill="#101010"/>
-    <path d="M13.409 0H0V6.89224H13.409V0Z" fill="#101010"/>
-    <path d="M13.4261 6.89273V13.8346C13.4261 15.7353 11.8719 17.2889 9.97049 17.2889C8.0691 17.2889 6.51491 15.7353 6.51491 13.8346H0.0170898C0.0170898 19.3219 4.48124 23.801 9.98703 23.801C15.4763 23.801 19.957 19.3384 19.957 13.8346V6.89273H13.4261Z" fill="#101010"/>
-    <path d="M41.9442 0.0158024L34.3882 16.7588L26.8322 0.0158024H22.3185V6.87499L29.9902 23.8494H38.7862L46.458 6.87499V0.0158024H41.9442Z" fill="#101010"/>
-  </svg>
-);
+const jvoLogo = 'https://storage.yandexcloud.net/jvo-files/jvo-site/logos/jvo_logo_white.svg';
 
 const ChevronDown = () => (
   <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -22,36 +12,49 @@ const ChevronDown = () => (
 // Default navigation structure from jvo.ru
 const defaultNavItems = [
   {
-    label: 'Решения',
+    label: 'Инструменты',
     href: '#',
     dropdown: [
       { label: 'Агент', href: 'https://jvo.ru/agent' },
+      { label: 'Агент коммуникаций', href: 'https://jvo.ru/agent-communication' },
       { label: 'Дашборд', href: 'https://jvo.ru/dashboard' },
       { label: 'SEO Pro', href: 'https://jvo.ru/seopro' },
       { label: 'Логистика', href: 'https://jvo.ru/logistics' },
       { label: 'Аналитика Ozon', href: 'https://jvo.ru/ozon' },
-      { label: 'Финансы', href: 'https://jvo.ru/finance' },
-    ],
-  },
-  {
-    label: 'Реферальная программа',
-    href: 'https://jvo.ru/referral',
-  },
-  {
-    label: 'Журнал',
-    href: '#',
-    dropdown: [
       { label: 'События', href: 'https://jvo.ru/events' },
       { label: 'Рейтинг', href: 'https://jvo.ru/rating' },
+      { label: 'Финансы', href: 'https://jvo.ru/finance' },
+      { label: 'Аналитика товарной матрицы', href: 'https://jvo.ru/matrix' },
     ],
   },
   {
     label: 'Компания',
     href: '#',
     dropdown: [
-      { label: 'О нас', href: 'https://jvo.ru/about' },
+      { label: 'Вакансии', href: 'https://jvo.ru/career' },
+      { label: 'О компании', href: 'https://jvo.ru/about' },
       { label: 'Контакты', href: 'https://jvo.ru/contacts' },
+      { label: 'FAQ', href: 'https://jvo.ru/faq' },
+      { label: 'Рассылки', href: 'https://jvo.ru/subscription-page' },
     ],
+  },
+  {
+    label: 'Журнал',
+    href: '#',
+    dropdown: [
+      { label: 'Кейсы', href: 'https://jvo.ru/cases' },
+      { label: 'События', href: 'https://jvo.ru/education' },
+      { label: 'Материалы о e-com', href: 'https://jvo.ru/blog' },
+      { label: 'База знаний', href: 'https://jvo.ru/help' },
+    ],
+  },
+  {
+    label: 'Экспресс-доставка',
+    href: 'https://jvo.ru/express',
+  },
+  {
+    label: 'Услуги продвижения',
+    href: 'https://jvo.ru/studio',
   },
 ];
 
@@ -63,7 +66,7 @@ export function Header({
   navItems = defaultNavItems,
   phone = '+7 499 322-09-33',
   email = 'hi@jvo.ru',
-  ctaText = 'Подключить',
+  ctaText = 'Запросить демо',
   ctaHref = 'https://jvo.ru/requestdemo',
   loginText = 'Войти',
   loginHref = 'https://lk.jvo.ru/',
@@ -85,7 +88,7 @@ export function Header({
         {/* Left: Logo + Navigation */}
         <div className={styles.header__left}>
           <a href="https://jvo.ru/" className={styles.header__logo} aria-label="JVO - На главную">
-            <Logo />
+            <img src={jvoLogo} alt="JVO" className={styles.header__logoImg} />
           </a>
 
           {/* Desktop Navigation */}
@@ -142,7 +145,7 @@ export function Header({
           aria-expanded={mobileMenuOpen}
           onClick={toggleMobileMenu}
         >
-          <span className={styles.header__menuIcon} />
+          <span className={`${styles.header__menuIcon} ${mobileMenuOpen ? styles['header__menuIcon--open'] : ''}`} />
         </button>
       </div>
 
@@ -162,19 +165,17 @@ export function Header({
                       <ChevronDown />
                     </span>
                   </button>
-                  {openDropdown === index && (
-                    <div className={styles.header__mobileDropdown}>
-                      {item.dropdown.map((subItem, subIndex) => (
-                        <a
-                          key={subIndex}
-                          href={subItem.href}
-                          className={styles.header__mobileDropdownLink}
-                        >
-                          {subItem.label}
-                        </a>
-                      ))}
-                    </div>
-                  )}
+                  <div className={`${styles.header__mobileDropdown} ${openDropdown === index ? styles['header__mobileDropdown--open'] : ''}`}>
+                    {item.dropdown.map((subItem, subIndex) => (
+                      <a
+                        key={subIndex}
+                        href={subItem.href}
+                        className={styles.header__mobileDropdownLink}
+                      >
+                        {subItem.label}
+                      </a>
+                    ))}
+                  </div>
                 </>
               ) : (
                 <a href={item.href} className={styles.header__mobileNavLink}>

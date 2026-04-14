@@ -630,7 +630,7 @@
 
 .finalCounterValue {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 4px;
 }
 
@@ -646,6 +646,7 @@
   width: 12px;
   height: 12px;
   flex-shrink: 0;
+  margin-bottom: 2px;
 }
 
 .finalCounterTotal {
@@ -654,6 +655,7 @@
   font-weight: 700;
   line-height: 1;
   color: #3f3f46;
+  margin-top: 2px;
 }
 
 /* Main row - vertically centered (accounting for button at bottom), items aligned to top */

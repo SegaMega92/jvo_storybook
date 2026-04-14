@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import styles from './AudienceSection.module.css';
 
 // Фото для отзывов
-import avatarAnna from '../../assets/avatars/female-1.png';
-import avatarElena from '../../assets/avatars/female-2.png';
-import avatarNatalya from '../../assets/avatars/female-3.png';
-import avatarDmitriy from '../../assets/avatars/male-1.png';
-import avatarAleksandr from '../../assets/avatars/male-2.png';
-import avatarMikhail from '../../assets/avatars/male-3.png';
+import avatarAnna from '../../assets/avatars/female-1.webp';
+import avatarElena from '../../assets/avatars/female-2.webp';
+import avatarNatalya from '../../assets/avatars/female-3.webp';
+import avatarDmitriy from '../../assets/avatars/male-1.webp';
+import avatarAleksandr from '../../assets/avatars/male-2.webp';
+import avatarMikhail from '../../assets/avatars/male-3.webp';
 
 // Данные табов (контент для каждой аудитории)
 const defaultTabs = [
@@ -19,7 +19,7 @@ const defaultTabs = [
     testimonial: {
       avatar: avatarDmitriy,
       name: 'Дмитрий, владелец магазина товаров для дома',
-      text: '«Раньше отвечал на отзывы сам по вечерам — это съедало всё свободное время. Теперь Агент обрабатывает 90% обращений автоматически, а кросс-продажи в ответах реально приносят дополнительные заказы. Вырос в 2 раза за год без единого нового сотрудника»',
+      text: '«Раньше отвечал на отзывы сам по вечерам. Теперь Агент обрабатывает 90% обращений, а кросс-продажи приносят дополнительные заказы. Вырос в 2 раза за год без нового сотрудника»',
     },
   },
   {
@@ -39,7 +39,7 @@ const defaultTabs = [
     testimonial: {
       avatar: avatarMikhail,
       name: 'Михаил, владелец бренда сложной бытовой техники',
-      text: '«У нас специфический товар, требующий экспертных знаний. Мы загрузили в сценарии Дживио все технические регламенты и нюансы совместимости — теперь Агент консультирует покупателей по вольтажу и характеристикам на уровне профильных специалистов. Это полноценный инструмент поддержки, а не просто автоответчик»',
+      text: '«У нас специфический товар. Загрузили в сценарии все технические регламенты — теперь Агент консультирует покупателей по характеристикам на уровне специалистов. Полноценный инструмент поддержки»',
     },
   },
   {
@@ -69,7 +69,7 @@ const defaultTabs = [
     testimonial: {
       avatar: avatarAleksandr,
       name: 'Александр, операционный директор (бренд косметики)',
-      text: '«Ценю систему за глубокую аналитику. Раз в неделю получаем отчёт, где, например, может быть подсвечена проблема падения процента выкупа из-за плохой упаковки и какие свойства продукта вызывают вопросы. Это позволяет нам оперативно вносить правки в производство и логистику, опираясь на реальную обратную связь»',
+      text: '«Ценю систему за аналитику. Раз в неделю получаем отчёт с проблемами — падение выкупа, вопросы к продукту. Оперативно вносим правки в производство, опираясь на реальную обратную связь»',
     },
   },
 ];
@@ -238,6 +238,7 @@ export function AudienceSection({
               src={currentTab.testimonial.avatar}
               alt=""
               className={styles.testimonialAvatar}
+              loading="lazy"
             />
             <div className={styles.testimonialText}>
               <p className={styles.testimonialName}>{currentTab.testimonial.name}</p>

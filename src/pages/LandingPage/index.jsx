@@ -20,22 +20,20 @@ import { AgentWorkflowDemo } from '../../components/Illustrations/AgentWorkflowD
 import illustrationCommunication from '../../assets/illustrations/communication.svg';
 
 // Assets for HeroBlock
-import heroIllustration from '../../assets/hero/illustration-agent.png';
-import heroGradient from '../../assets/hero/gradient.png';
 import tagIconAgent from '../../assets/icons/tag-agent.svg';
 
 // Assets for FeatureSlider slides
-import slideAutoresponse1 from '../../assets/slides/tonality-1.png';
-import slideAutoresponse2 from '../../assets/slides/tonality-2.png';
-import slideAutoresponse3 from '../../assets/slides/tonality-3.png';
-import slideAutoresponse4 from '../../assets/slides/tonality-4.png';
-import slideCrossSell1 from '../../assets/slides/cross-sales-1.png';
-import slideCrossSell2 from '../../assets/slides/cross-sales-2.png';
-import slideCrossSell3 from '../../assets/slides/cross-sales-3.png';
-import slideAnalytics1 from '../../assets/slides/analytics-1.png';
-import slideAnalytics2 from '../../assets/slides/analytics-2.png';
-import slideAnalytics3 from '../../assets/slides/analytics-3.png';
-import slideAnalytics4 from '../../assets/slides/analytics-4.png';
+import slideAutoresponse1 from '../../assets/slides/tonality-1.webp';
+import slideAutoresponse2 from '../../assets/slides/tonality-2.webp';
+import slideAutoresponse3 from '../../assets/slides/tonality-3.webp';
+import slideAutoresponse4 from '../../assets/slides/tonality-4.webp';
+import slideCrossSell1 from '../../assets/slides/cross-sales-1.webp';
+import slideCrossSell2 from '../../assets/slides/cross-sales-2.webp';
+import slideCrossSell3 from '../../assets/slides/cross-sales-3.webp';
+import slideAnalytics1 from '../../assets/slides/analytics-1.webp';
+import slideAnalytics2 from '../../assets/slides/analytics-2.webp';
+import slideAnalytics3 from '../../assets/slides/analytics-3.webp';
+import slideAnalytics4 from '../../assets/slides/analytics-4.webp';
 import gradientViolet from '../../assets/slides/gradient-violet.svg';
 import gradientPink from '../../assets/slides/gradient-pink.svg';
 import gradientMagenta from '../../assets/slides/gradient-magenta.svg';

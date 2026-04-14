@@ -5,14 +5,14 @@ import chevronLeft from '../../assets/icons/chevron-left.svg';
 import chevronRight from '../../assets/icons/chevron-right.svg';
 
 // Product images
-import pricingAgentIcon from '../../assets/products/pricing-agent-icon.png';
-import pricingAgentScreenshot from '../../assets/products/pricing-agent-screenshot.png';
-import supplyPlannerIcon from '../../assets/products/supply-planner-icon.png';
-import supplyPlannerScreenshot from '../../assets/products/supply-planner-screenshot.png';
-import seoProIcon from '../../assets/products/seo-pro-icon.png';
-import seoProScreenshot from '../../assets/products/seo-pro-screenshot.png';
-import agencyIcon from '../../assets/products/agency-icon.png';
-import agencyScreenshot from '../../assets/products/agency-screenshot.png';
+import pricingAgentIcon from '../../assets/products/pricing-agent-icon.webp';
+import pricingAgentScreenshot from '../../assets/products/pricing-agent-screenshot.webp';
+import supplyPlannerIcon from '../../assets/products/supply-planner-icon.webp';
+import supplyPlannerScreenshot from '../../assets/products/supply-planner-screenshot.webp';
+import seoProIcon from '../../assets/products/seo-pro-icon.webp';
+import seoProScreenshot from '../../assets/products/seo-pro-screenshot.webp';
+import agencyIcon from '../../assets/products/agency-icon.webp';
+import agencyScreenshot from '../../assets/products/agency-screenshot.webp';
 
 // Данные продуктов по умолчанию
 const defaultProducts = [
@@ -23,6 +23,7 @@ const defaultProducts = [
     color: 'green',
     icon: pricingAgentIcon,
     image: pricingAgentScreenshot,
+    href: 'https://jvo.ru/agent-prices',
   },
   {
     id: 'supply-planner',
@@ -31,6 +32,7 @@ const defaultProducts = [
     color: 'red',
     icon: supplyPlannerIcon,
     image: supplyPlannerScreenshot,
+    href: 'https://jvo.ru/logistics',
   },
   {
     id: 'seo-pro',
@@ -39,6 +41,7 @@ const defaultProducts = [
     color: 'yellow',
     icon: seoProIcon,
     image: seoProScreenshot,
+    href: 'https://jvo.ru/seopro',
   },
   {
     id: 'agency',
@@ -47,6 +50,7 @@ const defaultProducts = [
     color: 'pink',
     icon: agencyIcon,
     image: agencyScreenshot,
+    href: 'https://jvo.ru/studio',
   },
 ];
 
@@ -56,8 +60,9 @@ const defaultProducts = [
  */
 export function ProductsSlider({
   title = 'Другие решения системы Дживио',
-  subtitle = 'Для автоматизации бизнеса на маркетплейсах используйте наши ИИ-продукты:',
+  subtitle = 'Используйте наши ИИ-продукты для автоматизации бизнеса на маркетплейсах',
   products = defaultProducts,
+  showNavigation = true,
   className = '',
 }) {
   const trackRef = useRef(null);
@@ -118,11 +123,17 @@ export function ProductsSlider({
       <div className={`${styles.sliderWrapper} ${styles.animateIn}`}>
         <div ref={trackRef} className={styles.track}>
           {products.map((product) => (
-            <div key={product.id} className={styles.card}>
+            <a
+              key={product.id}
+              href={product.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.card}
+            >
               <div className={styles.cardContent}>
                 <div className={styles.tag}>
                   <div className={styles.tagIcon}>
-                    {product.icon && <img src={product.icon} alt="" className={styles.tagIconImg} />}
+                    {product.icon && <img src={product.icon} alt="" className={styles.tagIconImg} loading="lazy" />}
                   </div>
                   <span className={styles.tagText}>
                     {product.name}
@@ -131,30 +142,32 @@ export function ProductsSlider({
                 <p className={styles.cardDescription}>{product.description}</p>
               </div>
               <div className={`${styles.cardImage} ${styles[`cardImage${product.color?.charAt(0).toUpperCase()}${product.color?.slice(1)}`] || styles.cardImageGray}`}>
-                {product.image && <img src={product.image} alt="" className={styles.cardImg} />}
+                {product.image && <img src={product.image} alt="" className={styles.cardImg} loading="lazy" />}
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
 
       {/* Навигация */}
-      <div className={styles.navigation}>
-        <button
-          className={styles.navButton}
-          onClick={goPrev}
-          aria-label="Предыдущий"
-        >
-          <img src={chevronLeft} alt="" className={styles.arrowIcon} />
-        </button>
-        <button
-          className={styles.navButton}
-          onClick={goNext}
-          aria-label="Следующий"
-        >
-          <img src={chevronRight} alt="" className={styles.arrowIcon} />
-        </button>
-      </div>
+      {showNavigation && (
+        <div className={styles.navigation}>
+          <button
+            className={styles.navButton}
+            onClick={goPrev}
+            aria-label="Предыдущий"
+          >
+            <img src={chevronLeft} alt="" className={styles.arrowIcon} />
+          </button>
+          <button
+            className={styles.navButton}
+            onClick={goNext}
+            aria-label="Следующий"
+          >
+            <img src={chevronRight} alt="" className={styles.arrowIcon} />
+          </button>
+        </div>
+      )}
     </section>
   );
 }
@@ -162,6 +175,7 @@ export function ProductsSlider({
 ProductsSlider.propTypes = {
   title: PropTypes.string,
   subtitle: PropTypes.string,
+  showNavigation: PropTypes.bool,
   products: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -170,6 +184,7 @@ ProductsSlider.propTypes = {
       color: PropTypes.oneOf(['violet', 'gray', 'green', 'red', 'yellow', 'pink']),
       icon: PropTypes.string,
       image: PropTypes.string,
+      href: PropTypes.string,
     })
   ),
   className: PropTypes.string,

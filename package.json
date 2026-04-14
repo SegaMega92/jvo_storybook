@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:landing": "vite build --config vite.landing.config.js",
+    "build:pricing-agent": "vite build --config vite.pricing-agent.config.js",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
@@ -41,6 +43,7 @@
     "prop-types": "^15.8.1",
     "storybook": "^10.2.9",
     "vite": "^7.3.1",
+    "vite-plugin-svgo": "^2.0.0",
     "vitest": "^4.0.18"
   }
 }

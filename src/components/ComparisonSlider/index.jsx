@@ -4,15 +4,15 @@ import styles from './ComparisonSlider.module.css';
 import { SectionHeader } from '../SectionHeader';
 import chevronLeft from '../../assets/icons/chevron-left.svg';
 import chevronRight from '../../assets/icons/chevron-right.svg';
-import checkmarkIcon from '../../assets/misc/checkmark.png';
-import crossIcon from '../../assets/misc/cross.png';
+import checkmarkIcon from '../../assets/misc/checkmark.webp';
+import crossIcon from '../../assets/misc/cross.webp';
 
 // Данные слайдов (9 штук из Figma)
 const defaultSlides = [
   {
     title: 'Оценка тональности',
     agent: {
-      text: 'Оценивает не только звёзды, но и эмоциональный фон: система понимает истинный смысл сообщения и подбирает реакцию на основе контекста.',
+      text: 'Оценивает не только звёзды, но и эмоциональный тон: система понимает истинный смысл сообщения и подбирает реакцию на основе контекста.',
     },
     competitor: {
       text: 'Ориентируются только на количество звёзд',
@@ -21,19 +21,19 @@ const defaultSlides = [
   {
     title: 'Корректировка рейтинга',
     agent: {
-      text: 'Мягко просит клиента исправить ошибочную оценку через ответ на отзыв',
+      text: 'Аккуратно просит клиента исправить ошибочную оценку через ответ на отзыв',
     },
     competitor: {
-      text: '–',
+      text: 'Нет аналогичного функционала',
     },
   },
   {
     title: 'Работа со сложными нишами',
     agent: {
-      text: 'Возможность задавать подробные инструкции объёмом до 50 000: полные регламенты, составы, инструкции',
+      text: 'Возможность прописывать промпты до 50 000 знаков: инструкции, регламенты, составы',
     },
     competitor: {
-      text: 'Ограниченные лимиты: обычно до 2-5 тыс. знаков',
+      text: 'Ограниченные лимиты — 2000-5000 знаков',
     },
   },
   {
@@ -84,7 +84,7 @@ const defaultSlides = [
   {
     title: 'Масштабируемость',
     agent: {
-      text: 'Автоопределение бренда и копирование сценариев между МП в 1 клик',
+      text: 'Автоопределение бренда и копирование сценариев между маркетплейсами в 1 клик',
     },
     competitor: {
       text: 'Требуется ручная настройка для каждого кабинета',
@@ -107,6 +107,8 @@ export function ComparisonSlider({
   const startX = useRef(0);
   const currentX = useRef(0);
   const containerRef = useRef(null);
+  const wheelAccumulator = useRef(0);
+  const wheelTimeout = useRef(null);
 
   const totalSlides = slides.length;
 
@@ -183,6 +185,25 @@ export function ComparisonSlider({
   const handleMouseLeave = () => {
     if (isDragging) handleDragEnd();
   };
+
+  // Wheel событие (тачпад)
+  const handleWheel = useCallback((e) => {
+    // Используем deltaX для горизонтального свайпа
+    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
+    if (delta === 0 || isTransitioning) return;
+
+    e.preventDefault();
+    wheelAccumulator.current += delta;
+
+    clearTimeout(wheelTimeout.current);
+    wheelTimeout.current = setTimeout(() => {
+      if (Math.abs(wheelAccumulator.current) > 50) {
+        if (wheelAccumulator.current > 0) goToNext();
+        else goToPrev();
+      }
+      wheelAccumulator.current = 0;
+    }, 100);
+  }, [goToNext, goToPrev, isTransitioning]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -292,6 +313,7 @@ export function ComparisonSlider({
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeave}
+        onWheel={handleWheel}
         tabIndex={0}
         role="region"
         aria-label="Карусель сравнения"

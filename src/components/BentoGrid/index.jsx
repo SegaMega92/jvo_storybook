@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import styles from './BentoGrid.module.css';
 
 // Default images (for backwards compatibility)
-import imgScenarios from '../../assets/bento/scenarios.png';
-import imgStrategies from '../../assets/bento/strategies.png';
-import imgControl from '../../assets/bento/control.png';
-import imgBadge50k from '../../assets/bento/badge-50k.png';
-import imgSettings from '../../assets/bento/settings.png';
-import imgMultibrand from '../../assets/bento/multibrand.png';
-import imgCenterIcon from '../../assets/bento/center-icon.png';
+import imgScenarios from '../../assets/bento/scenarios.webp';
+import imgStrategies from '../../assets/bento/strategies.webp';
+import imgControl from '../../assets/bento/control.webp';
+import imgBadge50k from '../../assets/bento/badge-50k.webp';
+import imgSettings from '../../assets/bento/settings.webp';
+import imgMultibrand from '../../assets/bento/multibrand.webp';
+import imgCenterIcon from '../../assets/bento/center-icon.webp';
 
 // Default items for Agent Communication landing
 const defaultItems = [
@@ -126,7 +126,7 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
       return (
         <div key={item.id} className={blockClasses.join(' ')}>
           <div className={styles.centerIconWrapper}>
-            <img src={item.image} alt="" className={styles.centerIcon} />
+            <img src={item.image} alt="" className={styles.centerIcon} loading="lazy" />
           </div>
           <h2 className={styles.centerTitle}>
             {item.title.split('\n').map((line, i) => (
@@ -162,7 +162,7 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
       if (isIcon) {
         return (
           <div className={styles.iconWrapper}>
-            <img src={item.image} alt="" className={styles.icon} />
+            <img src={item.image} alt="" className={styles.icon} loading="lazy" />
           </div>
         );
       }
@@ -170,7 +170,7 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
       if (isBadge) {
         return (
           <div className={styles.badge50k}>
-            <img src={item.image} alt="" className={styles.badge50kImg} />
+            <img src={item.image} alt="" className={styles.badge50kImg} loading="lazy" />
           </div>
         );
       }
@@ -185,7 +185,7 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
 
       return (
         <div className={wrapperClass}>
-          <img src={item.image} alt="" className={styles.illustrationImg} />
+          <img src={item.image} alt="" className={styles.illustrationImg} loading="lazy" />
         </div>
       );
     };

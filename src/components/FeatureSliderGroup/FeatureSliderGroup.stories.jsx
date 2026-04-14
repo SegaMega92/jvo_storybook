@@ -220,31 +220,42 @@ const IconSettings = () => (
   </svg>
 );
 
-// Изображение кросс-продаж
+// Изображения для разных фич
 import crossSellImage from '../../assets/pricing-agent/cross-sell-card.png';
+import marginThresholdImage from '../../assets/pricing-agent/margin-threshold.png';
+import smartEntryImage from '../../assets/pricing-agent/smart-entry.png';
+import alertPriceImage from '../../assets/pricing-agent/alert-price.png';
+import profitOptImage from '../../assets/pricing-agent/profit-optimization.png';
 
-// Placeholder изображение для примера
-const PLACEHOLDER_IMAGE = 'https://storage.yandexcloud.net/jvo-files/jvo-site/gradient_violet_1.svg';
+// Градиентные фоны
+import gradientEffectivePrice from '../../assets/pricing-agent/gradient-effective-price.svg';
+import gradientMargin from '../../assets/pricing-agent/gradient-margin.svg';
+import gradientMinPrice from '../../assets/pricing-agent/gradient-min-price.svg';
+import gradientSoftEntry from '../../assets/pricing-agent/gradient-soft-entry.svg';
+import gradientStuckSku from '../../assets/pricing-agent/gradient-stuck-sku.svg';
 
-// Фичи для v2 примера
+// Фичи для v2 примера — каждая со своей картинкой и фоном
 const v2Features = [
   {
     icon: <IconCharts />,
     title: 'Рекомендация до 5 артикулов',
     description: 'Агент анализирует покупку, контекст отзыва и предлагает дополняющие товары, которые действительно интересны покупателю.',
-    image: crossSellImage,
+    image: alertPriceImage,
+    background: gradientEffectivePrice,
   },
   {
     icon: <IconSearch />,
     title: 'Проверка остатков',
     description: 'Автоматическая проверка наличия товара на складе перед рекомендацией. Не предлагаем то, чего нет в наличии.',
-    image: crossSellImage,
+    image: marginThresholdImage,
+    background: gradientMargin,
   },
   {
     icon: <IconSettings />,
     title: 'Настройка сценариев',
     description: 'Гибкая настройка правил кросс-продаж: категории, ценовые диапазоны, исключения и приоритеты.',
-    image: crossSellImage,
+    image: smartEntryImage,
+    background: gradientSoftEntry,
   },
 ];
 
@@ -312,7 +323,7 @@ const IconShield = () => (
   </svg>
 );
 
-// Секции для примера с несколькими секциями
+// Секции для примера с несколькими секциями — разные картинки и фоны
 const v2MultipleSections = [
   {
     title: 'Умные\nкросс-продажи',
@@ -324,19 +335,22 @@ const v2MultipleSections = [
         icon: <IconCharts />,
         title: 'Рекомендация до 5 артикулов',
         description: 'Агент анализирует покупку и предлагает дополняющие товары.',
-        image: crossSellImage,
+        image: alertPriceImage,
+        background: gradientEffectivePrice,
       },
       {
         icon: <IconSearch />,
         title: 'Проверка остатков',
         description: 'Автоматическая проверка наличия товара на складе.',
-        image: crossSellImage,
+        image: marginThresholdImage,
+        background: gradientMargin,
       },
       {
         icon: <IconSettings />,
         title: 'Настройка сценариев',
         description: 'Гибкая настройка правил кросс-продаж.',
-        image: crossSellImage,
+        image: smartEntryImage,
+        background: gradientSoftEntry,
       },
     ],
   },
@@ -350,13 +364,15 @@ const v2MultipleSections = [
         icon: <IconMessage />,
         title: 'Анализ тональности',
         description: 'Определяем настроение отзыва и подбираем правильный тон ответа.',
-        image: crossSellImage,
+        image: alertPriceImage,
+        background: gradientMinPrice,
       },
       {
         icon: <IconStar />,
         title: 'Работа с негативом',
         description: 'Превращаем негативные отзывы в возможность улучшить репутацию.',
-        image: crossSellImage,
+        image: profitOptImage,
+        background: gradientStuckSku,
       },
     ],
   },
@@ -370,13 +386,15 @@ const v2MultipleSections = [
         icon: <IconShield />,
         title: 'ML-алгоритмы',
         description: 'Машинное обучение выявляет паттерны мошенничества.',
-        image: crossSellImage,
+        image: smartEntryImage,
+        background: gradientSoftEntry,
       },
       {
         icon: <IconSearch />,
         title: 'Проверка покупателей',
         description: 'Автоматическая проверка истории покупателя.',
-        image: crossSellImage,
+        image: marginThresholdImage,
+        background: gradientMargin,
       },
     ],
   },

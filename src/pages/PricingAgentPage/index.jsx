@@ -3,51 +3,51 @@ import styles from './PricingAgentPage.module.css';
 import { typograph, typographArray } from '../../utils/typograph';
 
 // Product images
-import supplyPlannerIcon from '../../assets/products/supply-planner-icon.png';
-import supplyPlannerScreenshot from '../../assets/products/supply-planner-screenshot.png';
-import seoProIcon from '../../assets/products/seo-pro-icon.png';
-import seoProScreenshot from '../../assets/products/seo-pro-screenshot.png';
-import agencyIcon from '../../assets/products/agency-icon.png';
-import agencyScreenshot from '../../assets/products/agency-screenshot.png';
+import supplyPlannerIcon from '../../assets/products/supply-planner-icon.webp';
+import supplyPlannerScreenshot from '../../assets/products/supply-planner-screenshot.webp';
+import seoProIcon from '../../assets/products/seo-pro-icon.webp';
+import seoProScreenshot from '../../assets/products/seo-pro-screenshot.webp';
+import agencyIcon from '../../assets/products/agency-icon.webp';
+import agencyScreenshot from '../../assets/products/agency-screenshot.webp';
 
 // MonitoringSection illustrations
-import illustrationAlerts from '../../assets/pricing-agent/illustration-alerts.png';
+import illustrationAlerts from '../../assets/pricing-agent/illustration-alerts.webp';
 import { PricingWorkflowDemo } from '../../components/Illustrations/PricingWorkflowDemo';
 
 // Pricing Agent images - FeatureSlider slides
-import dynamicBrakingImg from '../../assets/pricing-agent/dynamic-braking.png';
-import fboFbsStrategiesImg from '../../assets/pricing-agent/fbo-fbs-strategies.png';
-import softOosEntryImg from '../../assets/pricing-agent/soft-oos-entry.png';
-import stuckSkuSearchImg from '../../assets/pricing-agent/stuck-sku-search.png';
-import effectivePriceSearchImg from '../../assets/pricing-agent/effective-price-search.png';
-import alertPriceImg from '../../assets/pricing-agent/alert-price.png';
-import effectivePriceNewproductsImg from '../../assets/pricing-agent/effective-price-search-newproducts.png';
-import marginThresholdImg from '../../assets/pricing-agent/margin-threshold.png';
-import smartEntryImg from '../../assets/pricing-agent/smart-entry.png';
-import instantPriceRollbackImg from '../../assets/pricing-agent/instant-price-rollback.png';
-import minPriceProtectionImg from '../../assets/pricing-agent/min-price-protection.png';
-import marginThresholdScaleImg from '../../assets/pricing-agent/margin-threshold-scale.png';
-import salesTrendsRecoveryImg from '../../assets/pricing-agent/sales-trends-recovery.png';
-import profitOptimizationImg from '../../assets/pricing-agent/profit-optimization.png';
+import dynamicBrakingImg from '../../assets/pricing-agent/dynamic-braking.webp';
+import fboFbsStrategiesImg from '../../assets/pricing-agent/fbo-fbs-strategies.webp';
+import softOosEntryImg from '../../assets/pricing-agent/soft-oos-entry.webp';
+import stuckSkuSearchImg from '../../assets/pricing-agent/stuck-sku-search.webp';
+import effectivePriceSearchImg from '../../assets/pricing-agent/effective-price-search.webp';
+import alertPriceImg from '../../assets/pricing-agent/alert-price.webp';
+import effectivePriceNewproductsImg from '../../assets/pricing-agent/effective-price-search-newproducts.webp';
+import marginThresholdImg from '../../assets/pricing-agent/margin-threshold.webp';
+import smartEntryImg from '../../assets/pricing-agent/smart-entry.webp';
+import instantPriceRollbackImg from '../../assets/pricing-agent/instant-price-rollback.webp';
+import minPriceProtectionImg from '../../assets/pricing-agent/min-price-protection.webp';
+import marginThresholdScaleImg from '../../assets/pricing-agent/margin-threshold-scale.webp';
+import salesTrendsRecoveryImg from '../../assets/pricing-agent/sales-trends-recovery.webp';
+import profitOptimizationImg from '../../assets/pricing-agent/profit-optimization.webp';
 
 // Pricing Agent images - Bento section
-import bentoLibraryImg from '../../assets/pricing-agent/bento-library.png';
-import bentoTwoModesImg from '../../assets/pricing-agent/bento-two-modes.png';
-import bentoNewproductsIconImg from '../../assets/pricing-agent/bento-newproducts-icon.png';
-import bentoMultistrategiesImg from '../../assets/pricing-agent/bento-multistrategies.png';
-import bentoAnalyticsIconImg from '../../assets/pricing-agent/bento-analytics-icon.png';
-import bentoStockIconImg from '../../assets/pricing-agent/bento-stock-icon.png';
-import bentoEconomyIconImg from '../../assets/pricing-agent/bento-economy-icon.png';
+import bentoLibraryImg from '../../assets/pricing-agent/bento-library.webp';
+import bentoTwoModesImg from '../../assets/pricing-agent/bento-two-modes.webp';
+import bentoNewproductsIconImg from '../../assets/pricing-agent/bento-newproducts-icon.webp';
+import bentoMultistrategiesImg from '../../assets/pricing-agent/bento-multistrategies.webp';
+import bentoAnalyticsIconImg from '../../assets/pricing-agent/bento-analytics-icon.webp';
+import bentoStockIconImg from '../../assets/pricing-agent/bento-stock-icon.webp';
+import bentoEconomyIconImg from '../../assets/pricing-agent/bento-economy-icon.webp';
 
 // Tag icon
-import tagIconPricingAgent from '../../assets/icons/tag-pricing-agent.png';
+import tagIconPricingAgent from '../../assets/icons/tag-pricing-agent.webp';
 
 // Avatar images for AudienceSection
-import avatarSupplierMedium from '../../assets/pricing-agent/avatars/avatar-supplier-medium.png';
-import avatarSupplierLarge from '../../assets/pricing-agent/avatars/avatar-supplier-large.png';
-import avatarManager from '../../assets/pricing-agent/avatars/avatar-manager.png';
-import avatarMonobrand from '../../assets/pricing-agent/avatars/avatar-monobrand.png';
-import avatarEcomHead from '../../assets/pricing-agent/avatars/avatar-ecom-head.png';
+import avatarSupplierMedium from '../../assets/pricing-agent/avatars/avatar-supplier-medium.webp';
+import avatarSupplierLarge from '../../assets/pricing-agent/avatars/avatar-supplier-large.webp';
+import avatarManager from '../../assets/pricing-agent/avatars/avatar-manager.webp';
+import avatarMonobrand from '../../assets/pricing-agent/avatars/avatar-monobrand.webp';
+import avatarEcomHead from '../../assets/pricing-agent/avatars/avatar-ecom-head.webp';
 
 // Import all sections
 import { Header } from '../../components/Header';
@@ -83,25 +83,6 @@ const RightIllustration = () => (
     <PricingWorkflowDemo />
   </div>
 );
-
-// Компонент для изображения слайда
-const SlideImage = ({ src, alt }) => (
-  <img
-    src={src}
-    alt={alt}
-    style={{
-      width: '100%',
-      height: '100%',
-      objectFit: 'contain',
-      borderRadius: '12px',
-    }}
-  />
-);
-
-SlideImage.propTypes = {
-  src: PropTypes.string.isRequired,
-  alt: PropTypes.string,
-};
 
 // Данные для MonitoringSection
 const monitoringCards = [
@@ -213,145 +194,7 @@ const IconPercent = () => (
   </svg>
 );
 
-// Данные для FeatureSliderGroup v1 — 5 секций (старая версия с табами)
-const featureSliderSectionsV1 = [
-  {
-    tabTitle: 'Out-of-Stock',
-    sectionTitle: typograph('Предотвращение Out-of-Stock'),
-    sectionDescription: typograph('Защита карточки от выпадения из выдачи из-за обнуления остатков.'),
-    buttonText: 'Оставить заявку',
-    buttonHref: '#form',
-    panelBackground: gradientSoftEntry,
-    slides: [
-      {
-        title: typograph('Разделение стратегий FBO и FBS'),
-        description: typograph('позволяет настраивать разные сценарии управления ценой в зависимости от оборачиваемости или остатков'),
-        media: <SlideImage src={fboFbsStrategiesImg} alt="Разделение стратегий FBO и FBS" />,
-        background: gradientSoftEntry,
-      },
-      {
-        title: typograph('Динамическое торможение спроса'),
-        description: typograph('плавно поднимает цену при риске обнуления остатков, способствуя сохранению позиций в поиске.'),
-        media: <SlideImage src={dynamicBrakingImg} alt="Динамическое торможение спроса" />,
-        background: gradientSoftEntry,
-      },
-      {
-        title: typograph('Мягкий вход в OOS'),
-        description: typograph('фиксирует максимально высокую цену перед обнулением, чтобы избежать демпинга при возврате товара в наличие.'),
-        media: <SlideImage src={softOosEntryImg} alt="Мягкий вход в OOS" />,
-        background: gradientSoftEntry,
-      },
-    ],
-  },
-  {
-    tabTitle: 'Неликвид',
-    sectionTitle: typograph('Раскачка неликвида'),
-    sectionDescription: typograph('Высвобождение «замороженного» капитала и возврат денег в оборот.'),
-    buttonText: 'Оставить заявку',
-    buttonHref: '#form',
-    panelBackground: gradientStuckSku,
-    slides: [
-      {
-        title: typograph('Автоматический поиск зависших SKU'),
-        description: typograph('выявляет товары с низкой оборачиваемостью и помечает их как цели для распродажи.'),
-        media: <SlideImage src={stuckSkuSearchImg} alt="Автоматический поиск зависших SKU" />,
-        background: gradientStuckSku,
-      },
-      {
-        title: typograph('Поиск эффективной цены'),
-        description: typograph('система плавно снижает или повышает цену небольшими шагами до первого всплеска заказов, что позволяет быстро вывести позицию из простоя, не снижая цену больше, чем того требует рынок.'),
-        media: <SlideImage src={effectivePriceSearchImg} alt="Поиск эффективной цены" />,
-        background: gradientStuckSku,
-      },
-      {
-        title: typograph('Режим «Алерт → Цена»'),
-        description: typograph('позволяет изменить цену и запустить распродажу неликвида в один клик прямо из уведомления.'),
-        media: <SlideImage src={alertPriceImg} alt="Режим Алерт-Цена" />,
-        background: gradientStuckSku,
-      },
-    ],
-  },
-  {
-    tabTitle: 'Новинки',
-    sectionTitle: typograph('Вывод новинок'),
-    sectionDescription: typograph('Безопасный старт продаж и поиск рыночной цены'),
-    buttonText: 'Оставить заявку',
-    buttonHref: '#form',
-    panelBackground: gradientEffectivePrice,
-    slides: [
-      {
-        title: typograph('Поиск эффективной цены'),
-        description: typograph('тестирование разных уровней скидки до появления первых заказов. Позволяет нащупать спрос за несколько дней, сохраняя максимум прибыли.'),
-        media: <SlideImage src={effectivePriceNewproductsImg} alt="Поиск эффективной цены" />,
-        background: gradientEffectivePrice,
-      },
-      {
-        title: typograph('Соблюдение порога маржинальности'),
-        description: typograph('установка минимальной цены, ниже которой Агент не опустится. Данные можно загружать массово для всей матрицы, гарантируя поиск точки спроса только в безопасном для бизнеса диапазоне'),
-        media: <SlideImage src={marginThresholdImg} alt="Соблюдение порога маржинальности" />,
-        background: gradientEffectivePrice,
-      },
-    ],
-  },
-  {
-    tabTitle: 'Акции',
-    sectionTitle: typograph('Участие в акциях'),
-    sectionDescription: typograph('Автоматизация входа и выхода из распродаж'),
-    buttonText: 'Оставить заявку',
-    buttonHref: '#form',
-    panelBackground: gradientMinPrice,
-    slides: [
-      {
-        title: typograph('Интеллектуальный вход'),
-        description: typograph('анализирует условия акций и рекомендует только те SKU, которые соответствуют целевой прибыли.'),
-        media: <SlideImage src={smartEntryImg} alt="Интеллектуальный вход" />,
-        background: gradientMinPrice,
-      },
-      {
-        title: typograph('Мгновенный откат цен'),
-        description: typograph('автоматически возвращает базовую цену в момент завершения акции, исключая торговлю в минус.'),
-        media: <SlideImage src={instantPriceRollbackImg} alt="Мгновенный откат цен" />,
-        background: gradientMinPrice,
-      },
-      {
-        title: typograph('Защита минимальной цены'),
-        description: typograph('блокирует любое снижение ниже установленного порога, даже при принудительных скидках маркетплейса.'),
-        media: <SlideImage src={minPriceProtectionImg} alt="Защита минимальной цены" />,
-        background: gradientMinPrice,
-      },
-    ],
-  },
-  {
-    tabTitle: 'Масштабирование',
-    sectionTitle: typograph('Масштабирование продаж и контроль маржинальности'),
-    sectionDescription: typograph('Системное управление выручкой и доходностью каждого SKU'),
-    buttonText: 'Оставить заявку',
-    buttonHref: '#form',
-    panelBackground: gradientMargin,
-    slides: [
-      {
-        title: typograph('Соблюдение порога маржинальности'),
-        description: typograph('блокирует снижение цены ниже установленного лимита. Поддерживает массовую загрузку параметров минимальной доходности для всей матрицы, предотвращая продажи в убыток.'),
-        media: <SlideImage src={marginThresholdScaleImg} alt="Соблюдение порога маржинальности" />,
-        background: gradientMargin,
-      },
-      {
-        title: typograph('Восстановление трендов продаж'),
-        description: typograph('выявляет артикулы с падающей динамикой заказов и корректирует цену для возврата карточки в целевой объем продаж и сохранения позиций в выдаче.'),
-        media: <SlideImage src={salesTrendsRecoveryImg} alt="Восстановление трендов продаж" />,
-        background: gradientMargin,
-      },
-      {
-        title: typograph('Оптимизация прибыли'),
-        description: typograph('находит соотношение цены и спроса, при котором увеличивается объем заказов с сохранением максимально возможной маржинальности.'),
-        media: <SlideImage src={profitOptimizationImg} alt="Оптимизация прибыли" />,
-        background: gradientMargin,
-      },
-    ],
-  },
-];
-
-// Данные для FeatureSliderGroup v2 — 5 секций (новая версия с аккордеоном)
+// Данные для FeatureSliderGroup v2 — 5 секций
 const featureSliderSectionsV2 = [
   {
     title: typograph('Предотвращение\nOut-of-Stock'),
@@ -687,6 +530,7 @@ const products = [
     color: 'red',
     icon: supplyPlannerIcon,
     image: supplyPlannerScreenshot,
+    href: 'https://jvo.ru/logistics',
   },
   {
     id: 'seo-pro',
@@ -695,6 +539,7 @@ const products = [
     color: 'yellow',
     icon: seoProIcon,
     image: seoProScreenshot,
+    href: 'https://jvo.ru/seopro',
   },
   {
     id: 'agency',
@@ -703,6 +548,7 @@ const products = [
     color: 'pink',
     icon: agencyIcon,
     image: agencyScreenshot,
+    href: 'https://jvo.ru/studio',
   },
 ];
 

@@ -44,33 +44,48 @@ const preview = {
 
     viewport: {
       viewports: {
-        mobile: {
-          name: 'Mobile',
-          styles: {
-            width: '375px',
-            height: '667px',
-          },
+        // Мобильные
+        mobileS: {
+          name: '360px - Mobile S',
+          styles: { width: '360px', height: '640px' },
+        },
+        mobileM: {
+          name: '375px - Mobile M',
+          styles: { width: '375px', height: '667px' },
+        },
+        mobileL: {
+          name: '480px - Mobile L',
+          styles: { width: '480px', height: '800px' },
+        },
+        // Планшеты
+        tabletS: {
+          name: '640px - Tablet S',
+          styles: { width: '640px', height: '900px' },
         },
         tablet: {
-          name: 'Tablet',
-          styles: {
-            width: '768px',
-            height: '1024px',
-          },
+          name: '768px - Tablet',
+          styles: { width: '768px', height: '1024px' },
+        },
+        tabletL: {
+          name: '900px - Tablet L',
+          styles: { width: '900px', height: '1200px' },
+        },
+        // Десктоп
+        laptop: {
+          name: '1024px - Laptop',
+          styles: { width: '1024px', height: '768px' },
+        },
+        laptopL: {
+          name: '1180px - Laptop L',
+          styles: { width: '1180px', height: '800px' },
         },
         desktop: {
-          name: 'Desktop',
-          styles: {
-            width: '1280px',
-            height: '800px',
-          },
+          name: '1280px - Desktop',
+          styles: { width: '1280px', height: '800px' },
         },
         wide: {
-          name: 'Wide',
-          styles: {
-            width: '1440px',
-            height: '900px',
-          },
+          name: '1440px - Wide',
+          styles: { width: '1440px', height: '900px' },
         },
       },
     },

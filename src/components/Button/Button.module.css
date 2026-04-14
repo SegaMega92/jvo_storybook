@@ -28,38 +28,38 @@
 
 /* Primary - Pink button (FeatureSection style) */
 .button--primary {
-  background: #ff8fda;
-  color: #101010;
+  background: #ff8fda !important;
+  color: #101010 !important;
   border-radius: 8px;
   font-size: 13px;
   letter-spacing: 0.26px;
 }
 
 .button--primary:hover:not(:disabled) {
-  background: #ff7ad0;
+  background: #ff7ad0 !important;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(255, 143, 218, 0.4);
 }
 
 /* Secondary - Dark button (Hero style) */
 .button--secondary {
-  background: #292538;
-  color: #ffffff;
+  background: #292538 !important;
+  color: #ffffff !important;
   border-radius: 12px;
   font-size: 16px;
   letter-spacing: 0.32px;
 }
 
 .button--secondary:hover:not(:disabled) {
-  background: #363347;
+  background: #363347 !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(41, 37, 56, 0.3);
 }
 
 /* Outline - White button (Header style) */
 .button--outline {
-  background: #ffffff;
-  color: #15181f;
+  background: #ffffff !important;
+  color: #15181f !important;
   border: none;
   border-radius: 8px;
   font-size: 13px;
@@ -67,7 +67,7 @@
 }
 
 .button--outline:hover:not(:disabled) {
-  background: #f5f5f7;
+  background: #f5f5f7 !important;
   transform: translateY(-1px);
 }
 

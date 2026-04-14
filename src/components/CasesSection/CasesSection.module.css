@@ -1,0 +1,573 @@
+/* CasesSection - секция "Результаты в кейсах" */
+
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 48px;
+  padding: 80px 20px;
+  background: #ffffff;
+}
+
+/* ========================================
+   Заголовок
+   ======================================== */
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+  max-width: 811px;
+}
+
+.icon {
+  width: 72px;
+  height: 72px;
+}
+
+.icon img,
+.icon svg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.title {
+  font-family: var(--font-family-heading);
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: -1.2px;
+  color: var(--color-heading);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.32px;
+  color: var(--color-text-dark-primary);
+  margin: 0;
+  max-width: 460px;
+}
+
+/* ========================================
+   Карточки
+   ======================================== */
+
+.cardsWrapper {
+  width: 100%;
+  max-width: 1120px;
+}
+
+.cards {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  position: relative;
+  width: 360px;
+  height: 422px;
+  background: #f6f6f9;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Фото
+   ======================================== */
+
+.cardImage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 250ms ease;
+}
+
+.cardImagePlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #e9ebf0 0%, #f6f6f9 100%);
+}
+
+/* Ховер: зум фото */
+.card:hover .cardImage img {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   Плашка (панель снизу)
+   ======================================== */
+
+.cardPanel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 24px;
+  transition: background 250ms ease;
+}
+
+/* Ховер: плашка чуть плотнее */
+.card:hover .cardPanel {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* ========================================
+   Логотип бренда
+   ======================================== */
+
+.brandLogo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brandLogo img,
+.brandLogo svg {
+  display: block;
+  height: 18px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   Бейджи (сумма + категория)
+   ======================================== */
+
+.badges {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Бейдж суммы */
+.amountBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 6px 14px 6px 6px;
+  background: linear-gradient(241deg, #ddfde5 6%, #ecfdca 100%);
+  border-radius: 12px;
+}
+
+.amountIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.amountText {
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 600;
+  color: #052415;
+  white-space: nowrap;
+}
+
+/* Бейдж категории */
+.categoryBadge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  padding: 12px 14px;
+  background: #172104;
+  border-radius: 12px;
+  font-family: var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 600;
+  color: #d8f995;
+  white-space: nowrap;
+}
+
+/* ========================================
+   Расширяемый контент (описание + кнопка)
+   ======================================== */
+
+.expandedContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 250ms ease, opacity 250ms ease;
+}
+
+/* Ховер: показываем контент */
+.card:hover .expandedContent {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.description {
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.32px;
+  color: var(--color-heading);
+  text-align: center;
+  margin: 0;
+}
+
+.caseButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 14px 22px;
+  background: #15181f;
+  border-radius: 12px;
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 200ms ease, transform 200ms ease;
+}
+
+.caseButton:hover {
+  background: #2a2d35;
+  transform: scale(1.02);
+}
+
+/* ========================================
+   Адаптив (от большего к меньшему)
+   ======================================== */
+
+/* Большие десктопы → средние */
+@media (max-width: 1140px) {
+  .cards {
+    gap: 16px;
+  }
+
+  .card {
+    width: 320px;
+    height: 400px;
+  }
+}
+
+/* Средние десктопы */
+@media (max-width: 1040px) {
+  .card {
+    width: 300px;
+    height: 380px;
+  }
+}
+
+/* Маленькие десктопы */
+@media (max-width: 980px) {
+  .title {
+    font-size: 32px;
+    letter-spacing: -0.96px;
+  }
+
+  .card {
+    width: 280px;
+    height: 360px;
+  }
+}
+
+/* ========================================
+   Навигация (скрыта на десктопе)
+   ======================================== */
+
+.navigation {
+  display: none;
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #e9ebf0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.navButton:hover {
+  background: #dcdfe5;
+  transform: scale(1.05);
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+.navIcon {
+  width: 6px;
+  height: 10px;
+}
+
+/* ========================================
+   Планшет и мобильный: горизонтальный скролл
+   ======================================== */
+@media (max-width: 920px) {
+  .section {
+    padding: 60px 0;
+    gap: 32px;
+  }
+
+  .header {
+    padding: 0 20px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+
+  .cardsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .cards {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 12px;
+    /* Отступы чтобы было видно края соседних карточек */
+    padding: 0 calc((100vw - 280px) / 2);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .cards::-webkit-scrollbar {
+    display: none;
+  }
+
+  .card {
+    /* Карточка ~80% ширины экрана, чтобы выглядывали соседние */
+    width: 280px;
+    min-width: 280px;
+    height: 380px;
+    scroll-snap-align: center;
+    flex-shrink: 0;
+  }
+
+  /* Показываем навигацию */
+  .navigation {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  /* На тач-устройствах отключаем hover-эффекты */
+  .card:hover .cardImage img {
+    transform: none;
+  }
+
+  .card:hover .expandedContent {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  .card:hover .cardPanel {
+    background: rgba(255, 255, 255, 0.7);
+  }
+
+  /* Раскрытая карточка по тапу */
+  .card.cardExpanded .cardImage img {
+    transform: scale(1.05);
+  }
+
+  .card.cardExpanded .expandedContent {
+    max-height: 200px;
+    opacity: 1;
+  }
+
+  .card.cardExpanded .cardPanel {
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .cardPanel {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  .caseButton {
+    height: 40px;
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Мобильные */
+@media (max-width: 640px) {
+  .title {
+    font-size: 28px;
+    letter-spacing: -0.84px;
+  }
+}
+
+/* Маленькие мобильные */
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 0;
+  }
+
+  .header {
+    gap: 16px;
+  }
+
+  .cards {
+    padding: 0 calc((100vw - 260px) / 2);
+  }
+
+  .card {
+    width: 260px;
+    height: 360px;
+  }
+
+  .badges {
+    gap: 4px;
+  }
+
+  .amountBadge,
+  .categoryBadge {
+    height: 32px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+
+  .amountBadge {
+    padding: 4px 10px 4px 4px;
+    gap: 6px;
+  }
+
+  .amountIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .navButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .navIcon {
+    width: 5px;
+    height: 8px;
+  }
+}
+
+/* Очень узкие экраны */
+@media (max-width: 320px) {
+  .header {
+    padding: 0 12px;
+  }
+
+  .title {
+    font-size: 24px;
+    letter-spacing: -0.72px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .cards {
+    padding: 0 calc((100vw - 240px) / 2);
+    gap: 8px;
+  }
+
+  .card {
+    width: 240px;
+    min-width: 200px;
+    height: 320px;
+  }
+
+  .cardPanel {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .badges {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .amountBadge,
+  .categoryBadge {
+    height: 28px;
+    font-size: 10px;
+    padding: 6px 10px;
+  }
+
+  .amountBadge {
+    padding: 4px 8px 4px 4px;
+    gap: 4px;
+  }
+
+  .amountIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .description {
+    font-size: 12px;
+  }
+
+  .caseButton {
+    height: 36px;
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+
+  .navButton {
+    width: 28px;
+    height: 28px;
+  }
+}

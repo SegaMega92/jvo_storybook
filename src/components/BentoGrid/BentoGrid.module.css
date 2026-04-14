@@ -525,10 +525,13 @@
   .illustrationLarge {
     width: 100%;
     height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   .illustrationLarge .illustrationImg {
     object-fit: contain;
+    border-radius: 12px;
   }
 
   /* Block 3: скрываем картинку на мобильном */
@@ -545,10 +548,13 @@
   .illustrationMultibrand {
     width: 100%;
     height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
   }
 
   .illustrationMultibrand .illustrationImg {
     object-fit: contain;
+    border-radius: 12px;
   }
 
   .centerTitle {

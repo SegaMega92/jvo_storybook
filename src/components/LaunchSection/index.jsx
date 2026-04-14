@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import styles from './LaunchSection.module.css';
 
 // Изображения карточек
-import card1Img from '../../assets/launch/step-1.png';
-import card2Img from '../../assets/launch/step-2.png';
-import card3Img from '../../assets/launch/step-3.png';
-import card4Img from '../../assets/launch/step-4.png';
+import card1Img from '../../assets/launch/step-1.webp';
+import card2Img from '../../assets/launch/step-2.webp';
+import card3Img from '../../assets/launch/step-3.webp';
+import card4Img from '../../assets/launch/step-4.webp';
 
 // Градиенты для фона карточек
 import gradient1 from '../../assets/launch/gradient-1.svg';
@@ -96,10 +96,10 @@ export function LaunchSection({
           <div key={card.id} className={`${styles.card} ${styles.animateIn}`}>
             <div className={styles.cardImage}>
               {card.gradient && (
-                <img src={card.gradient} alt="" className={styles.cardGradient} />
+                <img src={card.gradient} alt="" className={styles.cardGradient} loading="lazy" />
               )}
               {card.image && (
-                <img src={card.image} alt="" className={styles.cardImg} />
+                <img src={card.image} alt="" className={styles.cardImg} loading="lazy" />
               )}
             </div>
             <div className={styles.cardText}>

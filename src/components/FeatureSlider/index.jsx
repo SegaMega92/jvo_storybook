@@ -111,7 +111,7 @@ export function FeatureSlider({
             <p className={styles.description}>{sectionDescription}</p>
           </div>
           <div className={styles.buttonDesktop}>
-            <Button href={buttonHref} variant="outline" size="medium">
+            <Button href={buttonHref} variant="primary" size="medium">
               {buttonText}
             </Button>
           </div>
@@ -126,6 +126,12 @@ export function FeatureSlider({
         >
           {/* Область для медиа-контента */}
           <div className={styles.mediaArea}>
+            {/* Счётчик слайдов */}
+            {slidesCount > 1 && (
+              <span className={styles.slideCounter}>
+                {currentSlide + 1} из {slidesCount}
+              </span>
+            )}
             {/* Фоны слайдов */}
             {slides.map((slide, index) => (
               <div
@@ -217,7 +223,7 @@ export function FeatureSlider({
 
         {/* Кнопка для мобильных — под слайдером */}
         <div className={styles.buttonMobile}>
-          <Button href={buttonHref} variant="outline" size="medium">
+          <Button href={buttonHref} variant="primary" size="medium">
             {buttonText}
           </Button>
         </div>

@@ -3,7 +3,13 @@
    =========================================== */
 
 /* RF Dewi (regular width) - Body text */
-@import url('https://db.onlinewebfonts.com/c/bfb30c2677ae3236b6f893704c76f019?family=RF+Dewi');
+@font-face {
+  font-family: 'RF Dewi';
+  src: url('./RFDewi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* RF Dewi Extended - Headings */
 @font-face {

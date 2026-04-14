@@ -1,0 +1,204 @@
+/* MainPage - Главная страница Дживио v4 */
+
+.page {
+  min-height: 100vh;
+  background: #ffffff;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 120px;
+}
+
+/* ---- Placeholder (generic small) ---- */
+.placeholder {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 60px 24px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.placeholderInner {
+  border: 2px dashed rgba(21, 24, 31, 0.15);
+  border-radius: 24px;
+  padding: 60px 40px;
+  text-align: center;
+  background: rgba(21, 24, 31, 0.02);
+}
+
+.placeholderTitle {
+  margin: 0 0 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: rgba(21, 24, 31, 0.4);
+  font-family: var(--font-family-heading, 'RF Dewi Extended', sans-serif);
+}
+
+.placeholderDescription {
+  margin: 0;
+  font-size: 16px;
+  color: rgba(21, 24, 31, 0.3);
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ---- AwardsSection ---- */
+.awardsSection {
+  width: 100%;
+  padding: 80px 0;
+}
+
+.awardsInner {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+.awardsTitle {
+  margin: 0 0 40px;
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #15181f;
+  font-family: var(--font-family-heading, 'RF Dewi Extended', sans-serif);
+  text-align: center;
+}
+
+.awardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.awardItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 20px 24px;
+  border-radius: 16px;
+  background: #f5f5f7;
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+}
+
+.awardIcon {
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.awardText {
+  font-size: 15px;
+  line-height: 1.4;
+  color: #15181f;
+  font-weight: 500;
+}
+
+/* ---- FinalCTASection ---- */
+.finalCtaSection {
+  width: 100%;
+  padding: 80px 0;
+  background: #15181f;
+}
+
+.finalCtaInner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.finalCtaTitle {
+  margin: 0 0 16px;
+  font-size: clamp(24px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #ffffff;
+  font-family: var(--font-family-heading, 'RF Dewi Extended', sans-serif);
+}
+
+.finalCtaSubtitle {
+  margin: 0 0 40px;
+  font-size: clamp(16px, 2vw, 18px);
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+}
+
+.finalCtaForm {
+  width: 100%;
+}
+
+.finalCtaFormPlaceholder {
+  border: 2px dashed rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 48px 32px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.finalCtaFormLabel {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  margin-bottom: 12px;
+}
+
+.finalCtaFormFields {
+  margin: 0 0 24px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.2);
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+}
+
+.finalCtaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #15181f;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: var(--font-family-primary, 'Manrope', sans-serif);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.finalCtaButton:hover {
+  opacity: 0.85;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .awardsSection {
+    padding: 60px 0;
+  }
+
+  .awardsInner {
+    padding: 0 16px;
+  }
+
+  .awardsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .finalCtaSection {
+    padding: 60px 0;
+  }
+
+  .finalCtaInner {
+    padding: 0 16px;
+  }
+
+  .finalCtaFormPlaceholder {
+    padding: 32px 20px;
+  }
+}
