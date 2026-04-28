@@ -19,6 +19,40 @@
   width: 100%;
 }
 
+/* Variant: centered (title above track, no left section, no gradient) */
+.container--centered {
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  --centered-item-w: 200px;
+  --centered-item-h: 100px;
+}
+
+@media (max-width: 640px) {
+  .container--centered {
+    gap: 16px;
+    --centered-item-w: 140px;
+    --centered-item-h: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container--centered {
+    --centered-item-w: 110px;
+    --centered-item-h: 55px;
+  }
+}
+
+
+.centeredTitle {
+  text-align: center;
+}
+
+.centeredTitle .title {
+  color: var(--color-text-dark-secondary, #505050);
+}
+
+
 /* ==========================================
    Left Section: Title + Divider
    ========================================== */
@@ -70,7 +104,6 @@
 .track {
   display: flex;
   align-items: center;
-  gap: 0;
   width: max-content;
   animation: scroll var(--marquee-speed, 20s) linear infinite;
   will-change: transform;
@@ -85,7 +118,7 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    transform: translateX(var(--scroll-offset, -50%));
   }
 }
 
@@ -109,6 +142,7 @@
   filter: grayscale(100%);
   opacity: 0.7;
   transition: all 0.3s ease;
+  mix-blend-mode: multiply;
 }
 
 .logoItem:hover .logo {
@@ -207,3 +241,4 @@
     height: 60px;
   }
 }
+

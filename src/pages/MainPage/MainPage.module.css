@@ -1,0 +1,27 @@
+/* MainPage - Новая главная страница */
+
+.page {
+  min-height: 100vh;
+  background: var(--color-base-white, #fff);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoSection {
+  margin-top: 96px;
+}
+
+@media (max-width: 960px) {
+  .logoSection {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .logoSection {
+    margin-top: 24px;
+  }
+}

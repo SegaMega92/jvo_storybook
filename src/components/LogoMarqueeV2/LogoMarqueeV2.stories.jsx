@@ -9,7 +9,7 @@ export default {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['fixed', 'fluid'],
+      options: ['fixed', 'fluid', 'centered'],
     },
     speed: {
       control: { type: 'range', min: 5, max: 60, step: 5 },
@@ -53,5 +53,13 @@ export const FastSpeed = {
     title: 'Партнёры',
     variant: 'fluid',
     speed: 10,
+  },
+};
+
+export const Centered = {
+  args: {
+    title: 'Используется ведущими брендами',
+    variant: 'centered',
+    speed: 120,
   },
 };
