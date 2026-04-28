@@ -150,13 +150,13 @@ export function AgentsShowcaseV2({
         },
       });
 
-      // Tabs visibility trigger
+      // Tabs visibility trigger — use same trigger range as pin
       if (tabsRef.current) {
         gsap.set(tabsRef.current, { opacity: 0, y: 20 });
         tabsTriggerRef.current = ScrollTrigger.create({
           trigger: containerRef.current,
-          start: 'top 80%',
-          end: `+=${(agentsCount - 1) * 100}%`,
+          start: 'top bottom',
+          end: 'bottom bottom',
           onEnter: () => gsap.to(tabsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }),
           onLeave: () => gsap.to(tabsRef.current, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' }),
           onEnterBack: () => gsap.to(tabsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }),

@@ -5,6 +5,7 @@ import { Header } from '../../components/Header';
 import { HeroAgent } from '../../components/HeroAgent';
 import { LogoMarqueeV2 } from '../../components/LogoMarqueeV2';
 import { AgentsShowcaseV2 } from '../../components/AgentsShowcaseV2';
+import { ProblemSolution } from '../../components/ProblemSolution';
 
 /**
  * MainPage - Новая главная страница
@@ -27,6 +28,8 @@ export function MainPage({ className = '', embedded = false }) {
         </div>
 
         <AgentsShowcaseV2 />
+
+        <ProblemSolution />
 
         <div className={styles.nextSection}>
           <LogoMarqueeV2
