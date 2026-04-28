@@ -4,6 +4,7 @@ import styles from './MainPage.module.css';
 import { Header } from '../../components/Header';
 import { HeroAgent } from '../../components/HeroAgent';
 import { LogoMarqueeV2 } from '../../components/LogoMarqueeV2';
+import { AgentsShowcaseV2 } from '../../components/AgentsShowcaseV2';
 
 /**
  * MainPage - Новая главная страница
@@ -18,6 +19,16 @@ export function MainPage({ className = '', embedded = false }) {
         <HeroAgent />
 
         <div className={styles.logoSection}>
+          <LogoMarqueeV2
+            title="Используется ведущими брендами"
+            variant="centered"
+            speed={120}
+          />
+        </div>
+
+        <AgentsShowcaseV2 />
+
+        <div className={styles.nextSection}>
           <LogoMarqueeV2
             title="Используется ведущими брендами"
             variant="centered"

@@ -20,6 +20,11 @@
   }
 }
 
+.nextSection {
+  margin-top: 180px;
+  padding-bottom: 200px;
+}
+
 @media (max-width: 640px) {
   .logoSection {
     margin-top: 24px;
