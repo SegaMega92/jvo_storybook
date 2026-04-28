@@ -1,0 +1,305 @@
+/* HeroAgent - Main hero section with AI agent theme */
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--color-bg-light);
+  padding: 200px 24px 80px;
+  overflow: hidden;
+}
+
+.hero__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+}
+
+/* Badge */
+.hero__badgeWrap {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 16px;
+  background: #f6f6f9;
+  border-radius: var(--radius-full);
+  cursor: default;
+  transition: background var(--transition-fast);
+}
+
+.hero__badge:hover {
+  background: #ededf0;
+}
+
+.hero__badgeIcon {
+  width: 19px;
+  height: 20px;
+}
+
+.hero__badgeText {
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-md);
+  line-height: 1.4;
+  color: var(--color-base-black);
+  white-space: nowrap;
+}
+
+/* Badge icon container */
+.hero__badgeIconWrap {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Badge tooltip */
+.hero__badgeTooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  color: var(--color-text-dark-secondary);
+  text-align: center;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  margin-bottom: 14px;
+  transition: opacity 0.25s ease;
+}
+
+.hero__badgeWrap:hover .hero__badgeTooltip {
+  opacity: 1;
+}
+
+/* Title */
+.hero__title {
+  font-family: var(--font-family-heading);
+  font-size: 90px;
+  font-weight: 900;
+  line-height: 0.9;
+  letter-spacing: -2px;
+  color: var(--color-base-black);
+  text-align: center;
+  margin: 0;
+  max-width: 1630px;
+}
+
+/* Subtitle */
+.hero__subtitle {
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-relaxed);
+  letter-spacing: -0.24px;
+  color: var(--color-base-black);
+  text-align: center;
+  margin: 0;
+  max-width: 970px;
+}
+
+/* CTA Button — pink style per Figma */
+.hero__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  height: 48px;
+  background: var(--color-pink-main);
+  color: var(--color-pink-dark);
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  letter-spacing: 0.16px;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  white-space: nowrap;
+}
+
+.hero__button:hover {
+  background: var(--color-accent-pink-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 143, 218, 0.4);
+}
+
+/* Illustration container */
+.hero__illustration {
+  width: 100%;
+  max-width: 1200px;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  position: relative;
+  margin-top: 36px;
+}
+
+@media (min-width: 1201px) {
+  .hero__illustration {
+    max-width: 1440px;
+  }
+}
+
+/* Gradient background — performance-friendly CSS-only version */
+.hero__illustrationBg {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 80% 60% at 55% 15%, rgba(255, 143, 218, 0.20) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 50% 100%, rgba(255, 219, 241, 0.85) 0%, rgba(234, 215, 254, 0.5) 50%, transparent 100%),
+    radial-gradient(ellipse 70% 50% at 20% 70%, rgba(234, 215, 254, 0.6) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 60%, rgba(247, 240, 255, 0.7) 0%, transparent 70%),
+    linear-gradient(180deg, #fff 0%, #f7f0ff 30%, #ead7fe 70%, #ffdbf1 100%);
+}
+
+/* Subtle color-burn overlay for depth */
+.hero__illustrationBg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    radial-gradient(ellipse 40% 30% at 50% 80%, rgba(48, 2, 71, 0.06) 0%, transparent 100%);
+  mix-blend-mode: color-burn;
+  pointer-events: none;
+}
+
+/* Illustration content (children slot) */
+.hero__illustrationContent {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 960px) {
+  .hero {
+    padding: 140px 20px 60px;
+  }
+
+  .hero__container {
+    gap: 28px;
+  }
+
+  .hero__title {
+    font-size: 64px;
+    letter-spacing: -2.56px;
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-xl);
+    max-width: 700px;
+  }
+
+  .hero__illustration {
+    max-width: 100%;
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 120px 16px 40px;
+  }
+
+  .hero__container {
+    gap: 24px;
+  }
+
+  .hero__badge {
+    padding: 6px 14px;
+  }
+
+  .hero__badgeIconWrap {
+    display: none;
+  }
+
+  .hero__badgeText {
+    font-size: var(--font-size-sm);
+    white-space: normal;
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .hero__badgeTooltip {
+    position: static;
+    transform: none;
+    margin-bottom: 0;
+    margin-top: 0;
+    white-space: normal;
+    max-width: 100%;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.25s ease, margin-top 0.3s ease;
+  }
+
+  .hero__badgeWrap--open .hero__badgeTooltip {
+    max-height: 60px;
+    opacity: 1;
+    margin-top: 6px;
+  }
+
+  .hero__title {
+    font-size: 36px;
+    letter-spacing: -1.44px;
+    line-height: 0.95;
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-lg);
+    max-width: 100%;
+  }
+
+  .hero__button {
+    height: 44px;
+    font-size: var(--font-size-base);
+  }
+
+  .hero__illustration {
+    border-radius: var(--radius-lg);
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero__title {
+    font-size: 28px;
+    letter-spacing: -1.12px;
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-md);
+  }
+}
