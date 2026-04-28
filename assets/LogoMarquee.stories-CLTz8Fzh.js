@@ -1,0 +1,44 @@
+import{r as f,j as e}from"./iframe-BWxcWfmx.js";import{P as s}from"./index-BE2X4u3S.js";import"./preload-helper-D7k33qEn.js";const C="_marquee_hzr30_3",h="_marquee__track_hzr30_9",y="_marquee__item_hzr30_31",L="_marquee__logo_hzr30_43",o={marquee:C,marquee__track:h,"marquee__track--paused":"_marquee__track--paused_hzr30_18",marquee__item:y,marquee__logo:L},V="/jvo_storybook/assets/izvestia-NtmOBBhm.svg",q="data:image/svg+xml,%3csvg%20overflow='visible'%20style='display:%20block;'%20viewBox='0%200%2090.5656%2024.2667'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20id='Group-2'%3e%3cg%20id='Group'%3e%3cpath%20id='Fill-1'%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M0%204.85398e-05V22.6489L22.6489%204.85398e-05H0Z'%20fill='var(--fill-0,%20%23B9B9B9)'/%3e%3cpath%20id='Fill-2'%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M1.61719%2024.2661H24.2661V1.61724L1.61719%2024.2661Z'%20fill='var(--fill-0,%20%23686868)'/%3e%3c/g%3e%3cpath%20id='Fill-3'%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M36.9888%2011.6073C39.6222%2011.6073%2041.0222%2010.3177%2041.0222%207.90815V7.77201C41.0222%205.19278%2039.5554%204.17467%2036.9888%204.17467H34.2553V11.6073H36.9888ZM28.8888%200H37.1221C42.922%200%2046.2222%202.61317%2046.2222%207.73847V7.87382C46.2222%2012.9987%2042.7223%2015.4426%2037.2886%2015.4426H34.2553V24.2667H28.8888V0Z'%20fill='var(--fill-0,%20black)'/%3e%3cpath%20id='Fill-5'%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M56.9057%2020.092C59.4895%2020.092%2060.7978%2018.9381%2060.7978%2016.7318V16.5965C60.7978%2014.4241%2059.4895%2013.2363%2056.775%2013.2363H53.766V20.092H56.9057ZM57.1021%2024.2667H48.5334V0H63.7738V4.27648H53.799L53.766%209.36706H57.2654C62.6618%209.36706%2065.8667%2011.777%2065.8667%2016.63V16.7662C65.8667%2021.5174%2062.8907%2024.2667%2057.1021%2024.2667Z'%20fill='var(--fill-0,%20black)'/%3e%3cpath%20id='Fill-8'%20fill-rule='evenodd'%20clip-rule='evenodd'%20d='M69.7656%200.0339384H75.4005V10.4728L84.096%204.85398e-05H90.0787L80.2352%2011.4895L90.5656%2024.2667H83.9916L75.4005%2013.3873V24.2667H69.7656V0.0339384Z'%20fill='var(--fill-0,%20black)'/%3e%3c/g%3e%3c/svg%3e",x="data:image/svg+xml,%3csvg%20overflow='visible'%20style='display:%20block;'%20viewBox='0%200%2099%2029.7'%20fill='none'%20xmlns='http://www.w3.org/2000/svg'%3e%3cg%20id='6%20rgru'%20clip-path='url(%23clip0_641_4662)'%3e%3cpath%20id='Vector'%20d='M56.5859%205.47389H61.9282C65.6432%205.47389%2067.0552%206.62344%2067.0552%209.00429C67.0552%2011.6775%2065.517%2012.8729%2061.9282%2012.8729H56.5859V5.47389ZM49.5%20-9.74215e-05V27.3401H56.5859V18.306H60.39L67.4809%2029.7296H75.7226L67.8744%2017.2853C72.1859%2016.3934%2074.5346%2013.0822%2074.5346%208.91882C74.5346%203.26646%2070.3531%200.00485753%2062.2364%200.00485753L49.5%20-9.74215e-05Z'%20fill='var(--fill-0,%20%238A8A8A)'/%3e%3cpath%20id='Vector_2'%20d='M74.3828%200V19.255C74.3828%2025.9095%2078.672%2029.7297%2086.837%2029.7297C95.0033%2029.7297%2099.0016%2025.7856%2099.0016%2019.1311V0H92.3538V18.1314C92.3538%2021.6977%2090.6287%2023.9262%2086.837%2023.9262C83.0453%2023.9262%2081.3648%2021.725%2081.3648%2018.1314V0H74.3828Z'%20fill='var(--fill-0,%20%238A8A8A)'/%3e%3cpath%20id='Vector_3'%20d='M6.9696%205.47399H12.224C15.8784%205.47399%2017.2668%206.62354%2017.2668%209.00439C17.2668%2011.6776%2015.7558%2012.873%2012.224%2012.873H6.9696V5.47399ZM0%200V29.7297H6.9696V18.3061H10.7118L17.6863%2029.7297H25.7932L18.0737%2017.2854C22.3146%2016.3935%2024.625%2013.0823%2024.625%208.91892C24.625%203.26655%2020.5116%200.00495496%2012.5284%200.00495496L0%200Z'%20fill='var(--fill-0,%20%23666666)'/%3e%3cpath%20id='Vector_4'%20d='M49.5931%205.65608C46.7989%201.83333%2042.9453%200%2038.0782%200C29.5568%200%2023.8457%205.74032%2023.8457%2014.9887C23.8457%2024.0328%2029.8006%2029.7297%2037.9124%2029.7297C42.4169%2029.7297%2046.2655%2027.9831%2049.6303%2024.3189V13.4428H36.7776V18.6542H42.9057V22.0768C41.4911%2023.0938%2039.7975%2023.6492%2038.0559%2023.6673C33.6479%2023.6673%2030.9155%2020.7712%2030.9155%2015.1101C30.9155%208.99944%2033.6752%205.86171%2038.2638%205.86171C41.063%205.86171%2043.3735%207.16734%2045.2371%209.73401L49.5931%205.65608Z'%20fill='var(--fill-0,%20%23666666)'/%3e%3cpath%20id='Vector_5'%20d='M53.1116%2029.7301C53.8665%2029.7301%2054.6052%2029.5034%2055.2339%2029.0798C55.8638%2028.6539%2056.3531%2028.0503%2056.6397%2027.3455C56.9269%2026.6399%2057.0015%2025.8655%2056.8541%2025.1179C56.7068%2024.3704%2056.344%2023.6824%2055.8106%2023.1388C55.2794%2022.5996%2054.5991%2022.2321%2053.8574%2022.0835C53.1156%2021.9349%2052.3464%2022.0121%2051.6489%2022.3051C50.9498%2022.6%2050.3538%2023.0957%2049.9362%2023.7297C49.587%2024.259%2049.3724%2024.8657%2049.3112%2025.497C49.2499%2026.1283%2049.3438%2026.7651%2049.5847%2027.3517C49.7778%2027.8187%2050.0587%2028.2436%2050.4138%2028.6029C50.7673%2028.9592%2051.1875%2029.2422%2051.6505%2029.4357C52.1134%2029.6291%2052.6099%2029.7292%2053.1116%2029.7301Z'%20fill='var(--fill-0,%20%23666666)'/%3e%3c/g%3e%3cdefs%3e%3cclipPath%20id='clip0_641_4662'%3e%3crect%20width='99'%20height='29.7'%20fill='white'/%3e%3c/clipPath%3e%3c/defs%3e%3c/svg%3e",H="/jvo_storybook/assets/cnews-Ba1A3JX9.svg",b="/jvo_storybook/assets/forbes-CMb8wBpw.svg",k="/jvo_storybook/assets/rusbase-C_dESpqt.svg",w="/jvo_storybook/assets/kommersant-YSnrFTYO.svg",M=[{src:b,alt:"Forbes"},{src:k,alt:"Rusbase"},{src:w,alt:"Коммерсантъ"},{src:V,alt:"Известия"},{src:q,alt:"РБК"},{src:x,alt:"Российская газета"},{src:H,alt:"CNews"}];function c({logos:r=M,speed:p=10,direction:u="right"}){const[g,d]=f.useState(!1),m=[...r,...r],v=`${o.marquee__track} ${g?o["marquee__track--paused"]:""}`;return e.jsx("div",{className:o.marquee,onMouseEnter:()=>d(!0),onMouseLeave:()=>d(!1),children:e.jsx("div",{className:v,style:{"--marquee-speed":`${p}s`,"--marquee-direction":u==="right"?"reverse":"normal"},children:m.map((n,_)=>e.jsx("div",{className:o.marquee__item,children:e.jsx("img",{src:n.src,alt:n.alt,className:o.marquee__logo,loading:"lazy"})},_))})})}c.propTypes={logos:s.arrayOf(s.shape({src:s.string.isRequired,alt:s.string.isRequired})),speed:s.number,direction:s.oneOf(["left","right"])};c.__docgenInfo={description:`LogoMarquee - Infinite scrolling logo ticker
+Displays press/partner logos in a continuous loop`,methods:[],displayName:"LogoMarquee",props:{logos:{defaultValue:{value:`[
+  { src: forbesLogo, alt: 'Forbes' },
+  { src: rusbaseLogo, alt: 'Rusbase' },
+  { src: kommersantLogo, alt: 'Коммерсантъ' },
+  { src: izvestiaLogo, alt: 'Известия' },
+  { src: rbkLogo, alt: 'РБК' },
+  { src: rgruLogo, alt: 'Российская газета' },
+  { src: cnewsLogo, alt: 'CNews' },
+]`,computed:!1},description:"",type:{name:"arrayOf",value:{name:"shape",value:{src:{name:"string",required:!0},alt:{name:"string",required:!0}}}},required:!1},speed:{defaultValue:{value:"10",computed:!1},description:"",type:{name:"number"},required:!1},direction:{defaultValue:{value:"'right'",computed:!1},description:"",type:{name:"enum",value:[{value:"'left'",computed:!1},{value:"'right'",computed:!1}]},required:!1}}};const F={title:"Components/LogoMarquee",component:c,parameters:{layout:"fullscreen",docs:{description:{component:"Бегущая строка с логотипами партнёров/клиентов. Бесконечная анимация, настраиваемая скорость и направление."}}},tags:["autodocs"]},a={args:{},decorators:[r=>e.jsx("div",{style:{padding:"40px 0"},children:e.jsx(r,{})})]},t={args:{speed:60},decorators:[r=>e.jsx("div",{style:{padding:"40px 0"},children:e.jsx(r,{})})]},l={args:{speed:15},decorators:[r=>e.jsx("div",{style:{padding:"40px 0"},children:e.jsx(r,{})})]},i={args:{direction:"right"},decorators:[r=>e.jsx("div",{style:{padding:"40px 0"},children:e.jsx(r,{})})]};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  args: {},
+  decorators: [Story => <div style={{
+    padding: '40px 0'
+  }}>
+        <Story />
+      </div>]
+}`,...a.parameters?.docs?.source}}};t.parameters={...t.parameters,docs:{...t.parameters?.docs,source:{originalSource:`{
+  args: {
+    speed: 60
+  },
+  decorators: [Story => <div style={{
+    padding: '40px 0'
+  }}>
+        <Story />
+      </div>]
+}`,...t.parameters?.docs?.source}}};l.parameters={...l.parameters,docs:{...l.parameters?.docs,source:{originalSource:`{
+  args: {
+    speed: 15
+  },
+  decorators: [Story => <div style={{
+    padding: '40px 0'
+  }}>
+        <Story />
+      </div>]
+}`,...l.parameters?.docs?.source}}};i.parameters={...i.parameters,docs:{...i.parameters?.docs,source:{originalSource:`{
+  args: {
+    direction: 'right'
+  },
+  decorators: [Story => <div style={{
+    padding: '40px 0'
+  }}>
+        <Story />
+      </div>]
+}`,...i.parameters?.docs?.source}}};const z=["Default","SlowSpeed","FastSpeed","ReverseDirection"];export{a as Default,l as FastSpeed,i as ReverseDirection,t as SlowSpeed,z as __namedExportsOrder,F as default};
