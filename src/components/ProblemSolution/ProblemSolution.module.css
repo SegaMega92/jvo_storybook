@@ -38,10 +38,19 @@
   color: #15181f;
 }
 
-/* Shared transition for crossfade elements */
-.hidden {
-  opacity: 0 !important;
+/* Sequential fade for text elements:
+   hiding = fade out 0.3s immediately
+   showing = fade in 0.3s after 0.3s delay */
+
+.textHiding {
+  opacity: 0;
   pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.textShowing {
+  opacity: 1;
+  transition: opacity 0.3s ease 0.3s;
 }
 
 /* ==========================================
@@ -50,15 +59,14 @@
 
 .iconWrap {
   position: relative;
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
 }
 
 .icon {
-  width: 72px;
-  height: 72px;
+  width: 96px;
+  height: 96px;
   border-radius: 24px;
-  transition: opacity 0.5s ease;
 }
 
 .iconAbs {
@@ -82,14 +90,13 @@
 
 .title {
   font-family: var(--font-family-heading);
-  font-size: 48px;
+  font-size: var(--font-size-6xl);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -1.92px;
   text-align: center;
   margin: 0;
   max-width: 1072px;
-  transition: opacity 0.5s ease;
 }
 
 .titleAbs {
@@ -121,7 +128,6 @@
   text-align: center;
   margin: 0;
   max-width: 970px;
-  transition: opacity 0.5s ease;
 }
 
 .subtitleAbs {

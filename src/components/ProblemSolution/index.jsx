@@ -44,6 +44,7 @@ export function ProblemSolution({ tags = defaultTags }) {
   const pinWrapperRef = useRef(null);
   const scrollTriggerRef = useRef(null);
   const gsapRef = useRef(null);
+  const isTogglingRef = useRef(false);
 
   const tagsCount = tags.length;
   // 3 copies: [set0][set1][set2] — we animate through set1, then jump back
@@ -95,16 +96,22 @@ export function ProblemSolution({ tags = defaultTags }) {
     if (scrollTriggerRef.current) scrollTriggerRef.current.kill();
 
     const timer = setTimeout(() => {
-      scrollTriggerRef.current = ScrollTrigger.create({
+      const { ScrollTrigger: ST } = gsapRef.current;
+      scrollTriggerRef.current = ST.create({
         trigger: containerRef.current,
         pin: pinWrapperRef.current,
         pinSpacing: true,
         start: 'top top',
         end: '+=100%',
         scrub: 0.3,
-        onUpdate: (self) => setIsOn(self.progress > 0.5),
+        snap: { snapTo: [0, 1], duration: 0.4, ease: 'power2.inOut' },
+        onUpdate: (self) => {
+          if (isTogglingRef.current) return;
+          setIsOn(self.progress > 0.5);
+        },
       });
-    }, 100);
+      ST.refresh();
+    }, 200);
 
     return () => {
       clearTimeout(timer);
@@ -114,11 +121,19 @@ export function ProblemSolution({ tags = defaultTags }) {
 
   const handleToggle = useCallback(() => {
     const next = !isOn;
+    isTogglingRef.current = true;
     setIsOn(next);
     if (scrollTriggerRef.current && gsapRef.current && !isMobile) {
       const { gsap } = gsapRef.current;
       const trigger = scrollTriggerRef.current;
-      gsap.to(window, { scrollTo: trigger.start + (trigger.end - trigger.start) * (next ? 1 : 0), duration: 0.8, ease: 'power2.inOut' });
+      gsap.to(window, {
+        scrollTo: trigger.start + (trigger.end - trigger.start) * (next ? 1 : 0),
+        duration: 0.8,
+        ease: 'power2.inOut',
+        onComplete: () => { isTogglingRef.current = false; },
+      });
+    } else {
+      isTogglingRef.current = false;
     }
   }, [isOn, isMobile]);
 
@@ -131,30 +146,30 @@ export function ProblemSolution({ tags = defaultTags }) {
 
   const content = (
     <div className={`${styles.container} ${isOn ? styles.containerOn : styles.containerOff}`}>
-      {/* Icon — crossfade pair */}
+      {/* Icon — sequential fade */}
       <div className={styles.iconWrap}>
-        <img src={iconProblem} alt="" className={`${styles.icon} ${isOn ? styles.hidden : ''}`} />
-        <img src={iconSolution} alt="" className={`${styles.icon} ${styles.iconAbs} ${isOn ? '' : styles.hidden}`} />
+        <img src={iconProblem} alt="" className={`${styles.icon} ${isOn ? styles.textHiding : styles.textShowing}`} />
+        <img src={iconSolution} alt="" className={`${styles.icon} ${styles.iconAbs} ${isOn ? styles.textShowing : styles.textHiding}`} />
       </div>
 
-      {/* Title — crossfade pair */}
+      {/* Title — sequential fade */}
       <div className={styles.titleWrap}>
-        <h2 className={`${styles.title} ${isOn ? styles.hidden : ''}`}>
+        <h2 className={`${styles.title} ${isOn ? styles.textHiding : styles.textShowing}`}>
           Скрытые бизнес-потери масштабируются с каждым SKU
         </h2>
-        <h2 className={`${styles.title} ${styles.titleAbs} ${isOn ? '' : styles.hidden}`}>
+        <h2 className={`${styles.title} ${styles.titleAbs} ${isOn ? styles.textShowing : styles.textHiding}`}>
           Действия важнее данных
         </h2>
       </div>
 
-      {/* Subtitle — crossfade pair */}
+      {/* Subtitle — sequential fade */}
       <div className={styles.subtitleWrap}>
-        <p className={`${styles.subtitle} ${isOn ? styles.hidden : ''}`}>
+        <p className={`${styles.subtitle} ${isOn ? styles.textHiding : styles.textShowing}`}>
           Вы системно теряете прибыль из-за скрытых проблем в сложной структуре SKU,
           управляете последствиями вместо причин и сталкиваетесь с неконтролируемым
           ростом операционных задач.
         </p>
-        <p className={`${styles.subtitle} ${styles.subtitleAbs} ${isOn ? '' : styles.hidden}`}>
+        <p className={`${styles.subtitle} ${styles.subtitleAbs} ${isOn ? styles.textShowing : styles.textHiding}`}>
           Без приоритизации и структурированных данных вы теряете контроль над
           собственным бизнесом. Приходится постоянно разбираться с последствиями,
           «тушить пожары» и бесконечно упускать возможности для роста.

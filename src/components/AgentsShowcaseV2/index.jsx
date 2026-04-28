@@ -1,5 +1,4 @@
-import { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './AgentsShowcaseV2.module.css';
 
@@ -86,17 +85,15 @@ export function AgentsShowcaseV2({
   agents = defaultAgents,
 }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(null);
   const [isMobile, setIsMobile] = useState(null);
   const [gsapLoaded, setGsapLoaded] = useState(false);
 
   const containerRef = useRef(null);
   const pinWrapperRef = useRef(null);
   const scrollTriggerRef = useRef(null);
-  const tabsTriggerRef = useRef(null);
   const gsapRef = useRef(null);
   const slidesRef = useRef({});
-  const tabsRef = useRef(null);
+  const titleRef = useRef(null);
   const isScrollingRef = useRef(false);
   const activeIndexRef = useRef(0);
 
@@ -120,88 +117,116 @@ export function AgentsShowcaseV2({
     return () => window.removeEventListener('resize', check);
   }, []);
 
-  // GSAP ScrollTrigger — pin + slide switching (desktop only)
+  // GSAP Timeline + ScrollTrigger (desktop only)
+  const timelineRef = useRef(null);
+
   useEffect(() => {
     if (isMobile === null || isMobile || agentsCount <= 1 || !gsapLoaded) return;
-    if (!containerRef.current || !pinWrapperRef.current) return;
+    if (!containerRef.current || !pinWrapperRef.current || !titleRef.current) return;
 
     const { gsap, ScrollTrigger } = gsapRef.current;
 
+    // Kill previous
     if (scrollTriggerRef.current) scrollTriggerRef.current.kill();
-    if (tabsTriggerRef.current) tabsTriggerRef.current.kill();
+    if (timelineRef.current) timelineRef.current.kill();
 
     const timer = setTimeout(() => {
-      // Main pin trigger
+      const slides = slidesRef.current;
+      const tl = gsap.timeline();
+
+      // Structure: [titleFade][hold0][trans0→1][hold1][trans1→2][hold2]
+      const fadeDur = 0.5;  // title fade
+      const holdDur = 1;    // each agent hold
+      const transDur = 0.5; // crossfade between agents
+
+      Object.entries(slides).forEach(([idx, el]) => {
+        if (el) gsap.set(el, { opacity: parseInt(idx) === 0 ? 1 : 0 });
+      });
+
+      // Title fade at start of timeline
+      tl.to(titleRef.current, { opacity: 0, duration: fadeDur * 0.6, ease: 'power2.in' }, 0);
+      tl.to(titleRef.current, { height: 0, marginBottom: 0, duration: fadeDur * 0.4, ease: 'power2.inOut' }, fadeDur * 0.6);
+
+      // Agent holds + transitions
+      for (let i = 0; i < agentsCount - 1; i++) {
+        const transStart = fadeDur + holdDur * (i + 1) + transDur * i;
+        if (slides[i]) {
+          tl.to(slides[i], { opacity: 0, duration: transDur, ease: 'power2.inOut' }, transStart);
+        }
+        if (slides[i + 1]) {
+          tl.to(slides[i + 1], { opacity: 1, duration: transDur, ease: 'power2.inOut' }, transStart);
+        }
+      }
+
+      // Ensure total duration includes final hold
+      const totalDur = fadeDur + holdDur * agentsCount + transDur * (agentsCount - 1);
+      tl.to({}, { duration: 0.01 }, totalDur);
+
+      timelineRef.current = tl;
+
+      // Snap points: center of each hold phase
+      const snapPoints = [];
+      for (let i = 0; i < agentsCount; i++) {
+        const holdStart = fadeDur + holdDur * i + transDur * i;
+        const holdCenter = (holdStart + holdDur / 2) / totalDur;
+        snapPoints.push(holdCenter);
+      }
+
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: containerRef.current,
         pin: pinWrapperRef.current,
         pinSpacing: true,
         start: 'top top',
-        end: `+=${(agentsCount - 1) * 100}%`,
-        scrub: 0.5,
+        end: `+=${(agentsCount + 1) * 100}%`,
+        animation: tl,
+        scrub: 1,
+        snap: {
+          snapTo: snapPoints,
+          duration: 0.5,
+          delay: 0.1,
+          ease: 'power2.inOut',
+        },
         onUpdate: (self) => {
           if (isScrollingRef.current) return;
-          const progress = self.progress;
-          const newIndex = Math.min(Math.floor(progress * agentsCount), agentsCount - 1);
+          const timePos = self.progress * totalDur;
+          let newIndex = 0;
+          for (let i = 0; i < agentsCount; i++) {
+            const holdStart = fadeDur + holdDur * i + transDur * i;
+            if (timePos >= holdStart) newIndex = i;
+          }
           if (newIndex !== activeIndexRef.current) {
-            setPrevIndex(activeIndexRef.current);
             setActiveIndex(newIndex);
           }
         },
       });
 
-      // Tabs visibility trigger — use same trigger range as pin
-      if (tabsRef.current) {
-        gsap.set(tabsRef.current, { opacity: 0, y: 20 });
-        tabsTriggerRef.current = ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: 'top bottom',
-          end: 'bottom bottom',
-          onEnter: () => gsap.to(tabsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }),
-          onLeave: () => gsap.to(tabsRef.current, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' }),
-          onEnterBack: () => gsap.to(tabsRef.current, { opacity: 1, y: 0, duration: 0.4, ease: 'power2.out' }),
-          onLeaveBack: () => gsap.to(tabsRef.current, { opacity: 0, y: 20, duration: 0.3, ease: 'power2.in' }),
-        });
-      }
-    }, 100);
+      // Refresh all ScrollTriggers so subsequent sections calculate correct positions
+      ScrollTrigger.refresh();
+    }, 150);
 
     return () => {
       clearTimeout(timer);
       if (scrollTriggerRef.current) { scrollTriggerRef.current.kill(); scrollTriggerRef.current = null; }
-      if (tabsTriggerRef.current) { tabsTriggerRef.current.kill(); tabsTriggerRef.current = null; }
+      if (timelineRef.current) { timelineRef.current.kill(); timelineRef.current = null; }
     };
   }, [isMobile, agentsCount, gsapLoaded]);
-
-  // Initialize slides opacity
-  useLayoutEffect(() => {
-    if (!gsapRef.current || isMobile) return;
-    const { gsap } = gsapRef.current;
-    Object.entries(slidesRef.current).forEach(([index, slide]) => {
-      if (slide) gsap.set(slide, { opacity: parseInt(index) === activeIndex ? 1 : 0 });
-    });
-  }, [gsapLoaded, isMobile]);
-
-  // Fade animation between slides
-  useEffect(() => {
-    if (prevIndex === null || !gsapRef.current) return;
-    const { gsap } = gsapRef.current;
-    const prevSlide = slidesRef.current[prevIndex];
-    const activeSlide = slidesRef.current[activeIndex];
-    if (prevSlide) gsap.to(prevSlide, { opacity: 0, duration: 0.4, ease: 'power2.inOut' });
-    if (activeSlide) gsap.to(activeSlide, { opacity: 1, duration: 0.4, ease: 'power2.inOut' });
-  }, [activeIndex, prevIndex]);
 
   // Tab click — scroll to agent
   const handleTabClick = useCallback((index) => {
     if (index === activeIndex) return;
-    setPrevIndex(activeIndex);
     setActiveIndex(index);
 
     if (scrollTriggerRef.current && gsapRef.current && !isMobile) {
       isScrollingRef.current = true;
       const { gsap } = gsapRef.current;
       const trigger = scrollTriggerRef.current;
-      const targetProgress = index / (agentsCount - 1 || 1);
+      // Match snap points calculation
+      const fadeDur = 0.5;
+      const holdDur = 1;
+      const transDur = 0.5;
+      const totalDur = fadeDur + holdDur * agentsCount + transDur * (agentsCount - 1);
+      const holdStart = fadeDur + holdDur * index + transDur * index;
+      const targetProgress = (holdStart + holdDur / 2) / totalDur;
       const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
       gsap.to(window, {
         scrollTo: targetScroll,
@@ -288,16 +313,35 @@ export function AgentsShowcaseV2({
     );
   }
 
-  // Desktop — scroll-driven pinned layout with fixed bottom tabs
+  // Desktop — scroll-driven pinned layout with inline tabs
   return (
     <div ref={containerRef} className={styles.wrapper}>
       <section ref={pinWrapperRef} className={styles.section}>
         <div className={styles.container}>
-          <h2 className={styles.title}>
-            {title.split('\n').map((line, i, arr) => (
-              <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+          <div ref={titleRef} className={styles.titleBlock}>
+            <h2 className={styles.title}>
+              {title.split('\n').map((line, i, arr) => (
+                <span key={i}>{line}{i < arr.length - 1 && <br />}</span>
+              ))}
+            </h2>
+          </div>
+
+          {/* Tabs — in flow, between title and slides */}
+          <nav className={styles.tabs}>
+            {agents.map((agent, index) => (
+              <button
+                key={agent.id}
+                type="button"
+                className={`${styles.tab} ${index === activeIndex ? styles.tabActive : ''}`}
+                onClick={() => handleTabClick(index)}
+              >
+                <div className={styles.tabIconWrapper}>
+                  <img src={agent.tabIcon} alt="" className={styles.tabIcon} />
+                </div>
+                <span className={styles.tabLabel}>{agent.tabLabel}</span>
+              </button>
             ))}
-          </h2>
+          </nav>
 
           {/* Slides */}
           <div className={styles.slidesWrapper}>
@@ -306,7 +350,6 @@ export function AgentsShowcaseV2({
                 key={agent.id}
                 ref={(el) => (slidesRef.current[index] = el)}
                 className={styles.slide}
-                style={{ opacity: index === 0 ? 1 : 0 }}
               >
                 {renderCard(agent)}
               </div>
@@ -314,26 +357,6 @@ export function AgentsShowcaseV2({
           </div>
         </div>
       </section>
-
-      {/* Fixed bottom tabs — portaled to body to avoid GSAP transform breaking fixed positioning */}
-      {createPortal(
-        <nav ref={tabsRef} className={styles.tabsFixed}>
-          {agents.map((agent, index) => (
-            <button
-              key={agent.id}
-              type="button"
-              className={`${styles.tab} ${index === activeIndex ? styles.tabActive : ''}`}
-              onClick={() => handleTabClick(index)}
-            >
-              <div className={styles.tabIconWrapper}>
-                <img src={agent.tabIcon} alt="" className={styles.tabIcon} />
-              </div>
-              <span className={styles.tabLabel}>{agent.tabLabel}</span>
-            </button>
-          ))}
-        </nav>,
-        document.body
-      )}
     </div>
   );
 }
