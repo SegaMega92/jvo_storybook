@@ -1,0 +1,408 @@
+/* IllustrationCommunications — pixel-perfect from Figma */
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Golos Text', var(--font-family-primary);
+}
+
+/* ==========================================
+   Scene management
+   ========================================== */
+.scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(16px, 5%, 40px);
+  transition: opacity 0.5s ease;
+}
+.sceneActive { opacity: 1; pointer-events: auto; }
+.sceneHidden { opacity: 0; pointer-events: none; }
+
+.hidden { opacity: 0; transform: translateY(8px); pointer-events: none; }
+.fadeIn { opacity: 1; transform: translateY(0); transition: opacity 0.4s ease, transform 0.4s ease; }
+.fadeInAuto { animation: fadeInUp 0.5s ease forwards; }
+.slideUp { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   Agent icon (white circle 36px, logo 16px)
+   ========================================== */
+.agentIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 100px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.agentLogoImg {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================
+   Step 1: Chat
+   ========================================== */
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.userBubble {
+  align-self: flex-end;
+  background: #fff;
+  border-radius: 12px 12px 0 12px;
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #2b2b2b;
+  max-width: 75%;
+  line-height: 1.4;
+}
+
+.cursor {
+  color: #c16ffb;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.agentRow {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.agentRowCenter {
+  align-items: center;
+}
+.agentText {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #2b2b2b;
+}
+
+.loaderRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #2b2b2b;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+.loaderText {
+  font-size: 15px;
+  font-weight: 400;
+  color: #2b2b2b;
+}
+
+/* ==========================================
+   Step 2: Scenario — pixel-perfect
+   ========================================== */
+.scenarioWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 384px;
+  max-width: 100%;
+}
+
+.scenarioTitle {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #404040;
+}
+
+.scenarioCard {
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.scenarioCardHeader {
+  padding: 18px;
+  font-family: var(--font-family-heading, 'RF Dewi Extended');
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 21px;
+  letter-spacing: -0.3px;
+  color: #404040;
+  white-space: pre-line;
+}
+
+.scenarioSteps {
+  padding: 9px 18px 24px;
+}
+
+.stepList {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepItem {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding-bottom: 9px;
+  padding-top: 2.25px;
+}
+
+.stepNumber {
+  width: 22px;
+  height: 22px;
+  border-radius: 24px;
+  border: 1.5px solid #2b2b2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.5px;
+  color: #2b2b2b;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.stepText {
+  flex: 1;
+  min-width: 0;
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.5px;
+  color: #2b2b2b;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+.stepCheck {
+  width: 22px;
+  height: 22px;
+  border-radius: 24px;
+  border: 1.5px solid #2b2b2b;
+  background: #83d2b3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.5px;
+  color: #2b2b2b;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.stepTextDone {
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.5px;
+  color: #2b2b2b;
+  margin: 0;
+}
+
+/* Rate bar */
+.rateBar {
+  display: flex;
+  align-items: center;
+  border: 0.75px solid #eaeaea;
+  border-radius: 9px;
+  padding: 3px;
+}
+
+.rateText {
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16.5px;
+  color: #555;
+  padding: 0 9px;
+  white-space: nowrap;
+}
+
+.rateBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 27px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 6px;
+  padding: 0;
+}
+
+
+/* ==========================================
+   Step 3: Review
+   ========================================== */
+.reviewCard {
+  background: #fff;
+  border-radius: 16px;
+  padding: clamp(14px, 3%, 24px);
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.reviewHeader {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.reviewAvatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.reviewMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.reviewAuthorRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.reviewAuthor {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.reviewStars {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.reviewSubMeta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #999;
+  margin-top: 4px;
+}
+
+.reviewText {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #2b2b2b;
+  margin: 0;
+}
+
+.reviewPhotos {
+  display: flex;
+  gap: 8px;
+}
+
+.reviewPhoto {
+  width: 90px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.sellerReply {
+  background: rgb(253, 247, 253);
+  border: 0.75px solid rgba(193, 111, 251, 0.4);
+  border-radius: 9px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  overflow: hidden;
+  animation: expandReply 0.5s ease forwards;
+}
+
+@keyframes expandReply {
+  from { max-height: 0; opacity: 0; padding: 0 12px; border-width: 0; }
+  to { max-height: 300px; opacity: 1; padding: 12px; border-width: 0.75px; }
+}
+
+.sellerReplyHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-family: 'Inter', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(21, 24, 31, 0.4);
+}
+
+.menuDots {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menuDot {
+  width: 3px;
+  height: 3px;
+  border-radius: 75px;
+  background: rgba(21, 24, 31, 0.4);
+}
+
+.sellerReplyText {
+  font-family: 'Inter', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #15181f;
+  margin: 0;
+}
+
+
+/* ==========================================
+   Responsive
+   ========================================== */
+@media (max-width: 640px) {
+  .reviewPhoto {
+    width: 70px;
+    height: 90px;
+  }
+}

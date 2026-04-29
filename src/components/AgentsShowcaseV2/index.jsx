@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styles from './AgentsShowcaseV2.module.css';
 
@@ -9,6 +9,14 @@ import iconAdvertising from '../../assets/agents/icon-advertising-lg.png';
 
 import { loadGsap } from '../../utils/loadGsap';
 import { typograph, typographArray } from '../../utils/typograph';
+import { IllustrationCommunications } from '../Illustrations/IllustrationCommunications';
+import { IllustrationPricing } from '../Illustrations/IllustrationPricing';
+import { IllustrationAdvertising } from '../Illustrations/IllustrationAdvertising';
+
+// Gradient backgrounds for illustration area
+import gradCommunications from '../../assets/agents/gradients/communications.webp';
+import gradPricing from '../../assets/agents/gradients/pricing.webp';
+import gradAdvertising from '../../assets/agents/gradients/advertising.webp';
 
 const defaultAgents = [
   {
@@ -17,7 +25,7 @@ const defaultAgents = [
     tabIcon: iconCommunications,
     title: 'ИИ-агент коммуникаций',
     icon: iconCommunications,
-    gradientBg: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(255,219,241,0.8) 0%, rgba(234,215,254,0.5) 50%, rgba(247,240,255,0.3) 100%), linear-gradient(135deg, #fff 0%, #f7f0ff 30%, #ead7fe 70%, #ffdbf1 100%)',
+    gradientBg: `url(${gradCommunications}) center/cover no-repeat`,
     description: typograph('Отвечает на отзывы и вопросы в указанное вами время. Общается на языке вашего бренда, без шаблонов, сохраняет тон и стиль общения бренда.'),
     features: typographArray([
       'Отвечает клиентам 24/7',
@@ -27,6 +35,7 @@ const defaultAgents = [
     ]),
     buttonText: 'Узнать больше',
     buttonHref: '/agent-communication',
+    illustration: <IllustrationCommunications />,
   },
   {
     id: 'pricing',
@@ -34,7 +43,7 @@ const defaultAgents = [
     tabIcon: iconPricing,
     title: 'ИИ-агент Ценообразования',
     icon: iconPricing,
-    gradientBg: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(216,249,149,0.6) 0%, rgba(132,224,132,0.4) 40%, rgba(41,158,88,0.2) 80%, transparent 100%), linear-gradient(135deg, #f0fde0 0%, #d8f995 40%, #84e084 70%, #299e58 100%)',
+    gradientBg: `url(${gradPricing}) center/cover no-repeat`,
     description: typograph('Управляет ценами, опираясь на события — удерживает маржу, активирует кросс-продажи и предотвращает Out-of-Stock.'),
     features: typographArray([
       'Самостоятельно управляет ценами товаров',
@@ -45,6 +54,7 @@ const defaultAgents = [
     ]),
     buttonText: 'Узнать больше',
     buttonHref: '/agent-prices',
+    illustration: <IllustrationPricing />,
   },
   {
     id: 'advertising',
@@ -52,7 +62,7 @@ const defaultAgents = [
     tabIcon: iconAdvertising,
     title: 'ИИ-агент Рекламы',
     icon: iconAdvertising,
-    gradientBg: 'radial-gradient(ellipse 80% 70% at 50% 50%, rgba(234,215,254,0.7) 0%, rgba(193,111,251,0.3) 50%, rgba(255,143,218,0.2) 80%, transparent 100%), linear-gradient(135deg, #f7f0ff 0%, #ead7fe 30%, #c16ffb 70%, #ff8fda 100%)',
+    gradientBg: `url(${gradAdvertising}) center/cover no-repeat`,
     description: typograph('Формирует ставки на АРК и Поиске с привязкой к конверсии карточки и органическим позициям'),
     features: typographArray([
       'Целиком управляет вашими рекламными кампаниями на Wildberries и Ozon',
@@ -62,6 +72,7 @@ const defaultAgents = [
     ]),
     buttonText: 'Узнать больше',
     buttonHref: '/requestdemo',
+    illustration: <IllustrationAdvertising />,
   },
 ];
 
@@ -272,7 +283,7 @@ export function AgentsShowcaseV2({
   if (isMobile === null) return null;
 
   // Render card content
-  const renderCard = (agent) => (
+  const renderCard = (agent, index) => (
     <>
       <div className={styles.cardText}>
         <div className={styles.cardTextInner}>
@@ -297,7 +308,7 @@ export function AgentsShowcaseV2({
       <div className={styles.cardIllustration}>
         <div className={styles.cardIllustrationBg} style={{ background: agent.gradientBg }} />
         <div className={styles.cardIllustrationContent}>
-          {agent.illustration || null}
+          {agent.illustration ? React.cloneElement(agent.illustration, { isActive: index === activeIndex }) : null}
         </div>
       </div>
     </>
@@ -318,6 +329,11 @@ export function AgentsShowcaseV2({
               <div key={agent.id} className={styles.mobileCard}>
                 <div className={styles.mobileIllustration}>
                   <div className={styles.cardIllustrationBg} style={{ background: agent.gradientBg }} />
+                  {agent.illustration && (
+                    <div className={styles.mobileIllustrationContent}>
+                      {agent.illustration}
+                    </div>
+                  )}
                 </div>
                 <div className={styles.mobileInfo}>
                   <div className={styles.cardHeader}>
@@ -379,9 +395,9 @@ export function AgentsShowcaseV2({
           {/* Horizontal track */}
           <div className={styles.trackViewport}>
             <div ref={slidesRef} className={styles.track}>
-              {agents.map((agent) => (
+              {agents.map((agent, index) => (
                 <div key={agent.id} className={styles.trackCard}>
-                  {renderCard(agent)}
+                  {renderCard(agent, index)}
                 </div>
               ))}
             </div>
