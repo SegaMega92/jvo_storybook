@@ -212,8 +212,8 @@ export function AgentsShowcaseV2({
         snapPoints.push(timelinePos / totalDur);
       }
 
-      // Each card = 2 viewport heights + 1 extra for title fade + hold on last card
-      const scrollEnd = (agentsCount * 2 + 1) * window.innerHeight;
+      // 1 screen per card + 0.5 for title fade + 0.5 for hold
+      const scrollEnd = (agentsCount + 1) * window.innerHeight;
 
       scrollTriggerRef.current = ScrollTrigger.create({
         trigger: containerRef.current,
@@ -225,8 +225,12 @@ export function AgentsShowcaseV2({
         scrub: 1,
         refreshPriority: 1,
         onUpdate: (self) => {
-          if (isScrollingRef.current) return;
           const currentX = Math.abs(parseFloat(gsap.getProperty(track, 'x')) || 0);
+          // Always update progress for tab indicator
+          const hProgress = scrollDistance > 0 ? currentX / scrollDistance : 0;
+          setScrollProgress(Math.min(Math.max(hProgress, 0), 1));
+          // Only update activeIndex when not programmatically scrolling
+          if (isScrollingRef.current) return;
           const newIndex = Math.min(
             Math.round(currentX / (cardWidth + gap)),
             agentsCount - 1
@@ -234,9 +238,6 @@ export function AgentsShowcaseV2({
           if (newIndex !== activeIndexRef.current) {
             setActiveIndex(newIndex);
           }
-          // Smooth horizontal progress 0→1
-          const hProgress = scrollDistance > 0 ? currentX / scrollDistance : 0;
-          setScrollProgress(Math.min(Math.max(hProgress, 0), 1));
         },
       });
     }, 200);
@@ -269,7 +270,8 @@ export function AgentsShowcaseV2({
       const fadeDur = 0.5;
       const totalDur = fadeDur + agentsCount;
       const cardScrollPos = index * (cardWidth + gap);
-      const targetProgress = (fadeDur + (scrollDistance > 0 ? (cardScrollPos / scrollDistance) * agentsCount : 0)) / totalDur;
+      const horizontalProgress = scrollDistance > 0 ? Math.min(cardScrollPos / scrollDistance, 1) : 0;
+      const targetProgress = Math.min((fadeDur + horizontalProgress * agentsCount) / totalDur, 0.95);
       const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
       gsap.to(window, {
         scrollTo: targetScroll,

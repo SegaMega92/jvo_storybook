@@ -101,8 +101,8 @@ export function ProblemSolution({ tags = defaultTags }) {
         pin: pinWrapperRef.current,
         pinSpacing: true,
         start: 'top top',
-        end: '+=100%',
-        scrub: 0.8,
+        end: '+=200%',
+        scrub: 1,
         refreshPriority: -1,
         snap: { snapTo: [0, 1], duration: 0.4, ease: 'power2.inOut' },
         onUpdate: (self) => {
