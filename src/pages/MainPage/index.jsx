@@ -12,6 +12,7 @@ import { ProblemSolution } from '../../components/ProblemSolution';
  * Header + HeroAgent + LogoMarquee (centered)
  */
 export function MainPage({ className = '', embedded = false }) {
+
   return (
     <div className={`${styles.page} ${className}`}>
       {!embedded && <Header />}

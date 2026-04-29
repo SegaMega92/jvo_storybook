@@ -2,16 +2,17 @@ import { useState, useCallback } from 'react';
 import styles from './HeroAgent.module.css';
 import PropTypes from 'prop-types';
 import trophyIcon from '../../assets/icons/badge-trophy.svg';
+import { typograph } from '../../utils/typograph';
 
 /**
  * HeroAgent — hero-секция с ИИ-агентом
  * Заголовок + подзаголовок + CTA + контейнер для иллюстрации с градиентным фоном
  */
 export function HeroAgent({
-  title = 'ИИ-агенты для победы\nна маркетплейсах',
-  subtitle = 'Находим утечки и точки роста, превращаем их в задачи и выполняем автоматически с помощью ИИ-агентов — 24/7.',
-  badgeText = 'Решение № 1 для управления бизнесом в е-commerce *',
-  badgeTooltip = 'По версии премии Startech.Awards 2025 в номинации «Лучшая технология в электронной коммерции и платежах»',
+  title = typograph('ИИ-агенты для управления бизнесом на маркетплейсах'),
+  subtitle = typograph('Находим утечки и точки роста, превращаем их в задачи и выполняем автоматически с помощью ИИ-агентов — 24/7.'),
+  badgeText = typograph('Решение № 1 для управления бизнесом в е-commerce *'),
+  badgeTooltip = typograph('По версии премии Startech.Awards 2025 в номинации «Лучшая технология в электронной коммерции и платежах»'),
   buttonText = 'Получить демо',
   buttonHref = '#form',
   showBadge = true,
