@@ -105,35 +105,42 @@ export function AgentsShowcaseV2({
 
   useEffect(() => { activeIndexRef.current = activeIndex; }, [activeIndex]);
 
-  // Position tab indicator based on scroll progress
-  useEffect(() => {
+  // Position tab indicator
+  const updateIndicator = useCallback((tabIdx) => {
     const nav = tabsNavRef.current;
     const indicator = tabIndicatorRef.current;
-    if (!nav || !indicator || isMobile) return;
+    if (!nav || !indicator) return;
 
     const tabs = nav.querySelectorAll('button');
     if (tabs.length === 0) return;
 
-    // Map progress (0→1) to tab positions, clamp to valid range
-    const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
-    const tabIndex = Math.min(clampedProgress * (tabs.length - 1), tabs.length - 1);
-    const lowerIdx = Math.min(Math.floor(tabIndex), tabs.length - 1);
+    const lowerIdx = Math.min(Math.floor(tabIdx), tabs.length - 1);
     const upperIdx = Math.min(lowerIdx + 1, tabs.length - 1);
-    const frac = tabIndex - lowerIdx;
+    const frac = tabIdx - lowerIdx;
 
-    const lowerTab = tabs[lowerIdx];
-    const upperTab = tabs[upperIdx];
     const navRect = nav.getBoundingClientRect();
-
-    const lowerRect = lowerTab.getBoundingClientRect();
-    const upperRect = upperTab.getBoundingClientRect();
+    const lowerRect = tabs[lowerIdx].getBoundingClientRect();
+    const upperRect = tabs[upperIdx].getBoundingClientRect();
 
     const left = lowerRect.left - navRect.left + (upperRect.left - lowerRect.left) * frac;
     const width = lowerRect.width + (upperRect.width - lowerRect.width) * frac;
 
     indicator.style.transform = `translateX(${left}px)`;
     indicator.style.width = `${width}px`;
-  }, [scrollProgress, isMobile]);
+  }, []);
+
+  // During manual scroll — smooth indicator from scrollProgress
+  useEffect(() => {
+    if (isMobile || isScrollingRef.current) return;
+    const clampedProgress = Math.min(Math.max(scrollProgress, 0), 1);
+    updateIndicator(clampedProgress * (agentsCount - 1));
+  }, [scrollProgress, isMobile, agentsCount, updateIndicator]);
+
+  // During tab click — snap indicator to activeIndex
+  useEffect(() => {
+    if (isMobile) return;
+    updateIndicator(activeIndex);
+  }, [activeIndex, isMobile, updateIndicator]);
 
 
 
@@ -249,7 +256,7 @@ export function AgentsShowcaseV2({
     };
   }, [isMobile, agentsCount, gsapLoaded]);
 
-  // Tab click — scroll to agent
+  // Tab click — scroll to simple fixed points per agent
   const handleTabClick = useCallback((index) => {
     if (index === activeIndex) return;
     setActiveIndex(index);
@@ -258,24 +265,14 @@ export function AgentsShowcaseV2({
       isScrollingRef.current = true;
       const { gsap } = gsapRef.current;
       const trigger = scrollTriggerRef.current;
-      // Match snap points: scroll to card position
-      const track = slidesRef.current;
-      if (!track) return;
-      const cardWidth = track.children[0]?.offsetWidth || 0;
-      const gap = 24;
-      const totalTrackWidth = agentsCount * cardWidth + (agentsCount - 1) * gap;
-      // Last card aligns to the right edge of the content container
-      const contentWidth = containerRef.current.offsetWidth;
-      const scrollDistance = Math.max(0, totalTrackWidth - contentWidth);
-      const fadeDur = 0.5;
-      const totalDur = fadeDur + agentsCount;
-      const cardScrollPos = index * (cardWidth + gap);
-      const horizontalProgress = scrollDistance > 0 ? Math.min(cardScrollPos / scrollDistance, 1) : 0;
-      const targetProgress = Math.min((fadeDur + horizontalProgress * agentsCount) / totalDur, 0.95);
+      // Simple fixed points: evenly spaced after title fade
+      // Agent 0 = 0.15, Agent 1 = 0.5, Agent 2 = 0.85
+      const points = [0.15, 0.5, 0.85];
+      const targetProgress = points[Math.min(index, points.length - 1)];
       const targetScroll = trigger.start + (trigger.end - trigger.start) * targetProgress;
       gsap.to(window, {
         scrollTo: targetScroll,
-        duration: 0.8,
+        duration: 0.6,
         ease: 'power2.inOut',
         onComplete: () => { isScrollingRef.current = false; },
       });

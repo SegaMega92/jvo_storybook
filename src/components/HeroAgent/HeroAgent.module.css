@@ -164,6 +164,16 @@
   }
 }
 
+/* Video background */
+.hero__videoBg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+
 /* Gradient background — performance-friendly CSS-only version */
 .hero__illustrationBg {
   position: absolute;
@@ -197,6 +207,17 @@
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.hero__illustrationContentPadded {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
   justify-content: center;
 }
 
@@ -206,7 +227,7 @@
 
 @media (max-width: 960px) {
   .hero {
-    padding: 140px 20px 0;
+    padding: 100px 20px 0;
   }
 
   .hero__container {
@@ -215,6 +236,11 @@
 
   .hero__subtitle {
     max-width: 700px;
+  }
+
+  .hero__illustration {
+    aspect-ratio: auto;
+    height: 480px;
   }
 
   .hero__illustration {
@@ -278,6 +304,7 @@
   .hero__illustration {
     border-radius: var(--radius-lg);
     margin-top: 20px;
+    height: 540px;
   }
 }
 

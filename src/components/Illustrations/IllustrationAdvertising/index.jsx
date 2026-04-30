@@ -39,7 +39,17 @@ export function IllustrationAdvertising({ isActive = true }) {
   const [subStep, setSubStep] = useState(0);
   const [typedText, setTypedText] = useState('');
   const [visibleOps, setVisibleOps] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const wasActiveRef = useRef(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.matchMedia('(max-width: 960px)').matches);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  const visibleOperations = isMobile ? OPERATIONS.slice(0, 2) : OPERATIONS;
 
   useEffect(() => {
     if (isActive && !wasActiveRef.current) {
@@ -79,7 +89,7 @@ export function IllustrationAdvertising({ isActive = true }) {
   // Step 3: reveal operations one by one
   useEffect(() => {
     if (step !== 2) return;
-    if (visibleOps >= OPERATIONS.length) return;
+    if (visibleOps >= visibleOperations.length) return;
     const timeout = setTimeout(() => setVisibleOps(v => v + 1), 800);
     return () => clearTimeout(timeout);
   }, [step, visibleOps]);
@@ -185,7 +195,7 @@ export function IllustrationAdvertising({ isActive = true }) {
 
           {/* Operations list */}
           <div className={styles.opsList}>
-            {OPERATIONS.map((op, i) => (
+            {visibleOperations.map((op, i) => (
               <div
                 key={i}
                 className={`${styles.opsRow} ${i < visibleOps ? styles.opsRowVisible : ''}`}
@@ -207,22 +217,6 @@ export function IllustrationAdvertising({ isActive = true }) {
             ))}
           </div>
         </div>
-      </div>
-      {/* Debug dots */}
-      <div style={{ position: 'absolute', bottom: 12, left: '50%', transform: 'translateX(-50%)', display: 'flex', gap: 8, zIndex: 10 }}>
-        {[0,1,2].map(i => (
-          <button
-            key={i}
-            type="button"
-            style={{
-              width: 10, height: 10, borderRadius: '50%', padding: 0,
-              border: `1.5px solid rgba(0,0,0,${step === i ? 0.5 : 0.3})`,
-              background: step === i ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.5)',
-              cursor: 'pointer',
-            }}
-            onClick={() => { setStep(i); setSubStep(0); setTypedText(i === 0 ? '' : USER_MSG); setVisibleOps(0); }}
-          />
-        ))}
       </div>
     </div>
   );

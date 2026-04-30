@@ -1,0 +1,68 @@
+/*
+  Tilda CSS Overrides
+  Tilda's global styles (.tn-atom, button resets) override our component styles.
+  This file adds higher specificity to protect our buttons and interactive elements.
+*/
+
+/* Protect hero CTA button */
+#jvo-main-page-root .hero__button,
+#jvo-main-page-main .hero__button,
+[id^="jvo-"] a[class*="hero__button"] {
+  background: #ff8fda !important;
+  color: #3f0030 !important;
+  border: none !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  font-family: 'RF Dewi Extended', 'Inter', Arial, sans-serif !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+}
+
+/* Protect all buttons inside our root */
+[id^="jvo-"] button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+}
+
+/* Protect card buttons (AgentsShowcase) */
+[id^="jvo-"] a[class*="cardButton"] {
+  background: #15181f !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+}
+
+[id^="jvo-"] a[class*="cardButton"]:hover {
+  background: #2d3142 !important;
+}
+
+/* Protect toggle button (ProblemSolution) */
+[id^="jvo-"] button[class*="toggle"] {
+  border: none !important;
+  cursor: pointer !important;
+}
+
+/* Protect command tags (IllustrationHero) */
+[id^="jvo-"] button[class*="commandTag"] {
+  border: 1px solid #e9ebf0 !important;
+  background: #f6f6f9 !important;
+  cursor: pointer !important;
+}
+
+/* Prevent Tilda from adding underlines to our links */
+[id^="jvo-"] a {
+  text-decoration: none !important;
+}
+
+/* Prevent Tilda font overrides inside our components */
+[id^="jvo-"] {
+  font-family: 'Manrope', 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

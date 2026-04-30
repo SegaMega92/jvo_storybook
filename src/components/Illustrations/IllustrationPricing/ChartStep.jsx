@@ -59,7 +59,7 @@ export function ChartStep({ isActive = true }) {
         ))}
       </div>
 
-      {/* Graph line — SVG animated via stroke-dashoffset */}
+      {/* Graph line + event dot — all inside SVG for correct scaling */}
       <svg className={styles.graphSvg} viewBox="0 0 523 126" fill="none">
         <path
           className={`${styles.graphLine} ${isActive ? styles.graphLineAnimate : styles.graphLineReset}`}
@@ -70,29 +70,30 @@ export function ChartStep({ isActive = true }) {
           strokeLinecap="round"
           strokeLinejoin="round"
         />
+        {/* Pulse + dot at the drop point (x=200, y=96) */}
+        <circle cx="200" cy="96" r="12" fill="#f2e7fe" opacity={phase >= 1 ? 1 : 0}>
+          {phase >= 1 && <animate attributeName="r" values="6;16;6" dur="2s" repeatCount="indefinite" />}
+          {phase >= 1 && <animate attributeName="opacity" values="0.6;0;0.6" dur="2s" repeatCount="indefinite" />}
+        </circle>
+        <circle cx="200" cy="96" r="5" fill="#C16FFB" className={phase >= 1 ? styles.svgDotVisible : styles.svgDotHidden} />
       </svg>
 
-      {/* Event dot — pulse effect */}
-      <div className={`${styles.eventDot} ${phase >= 1 ? styles.eventDotVisible : ''}`}>
-        <div className={styles.dotOuter} />
-        <div className={styles.dotInner} />
-      </div>
-
-      {/* Price drop badge */}
-      <div className={`${styles.dropBadge} ${phase >= 1 ? styles.dropBadgeVisible : ''}`}>
-        <img src={arrowDownSvg} alt="" className={styles.arrowIcon} />
-        <span>{typograph('24 ₽')}</span>
-      </div>
-
-      {/* Tooltip */}
-      <div className={`${styles.tooltip} ${phase >= 1 ? styles.tooltipVisible : ''}`}>
-        <div className={styles.tooltipHeader}>
-          <span className={styles.tooltipDot} />
-          <span className={styles.tooltipLabel}>{typograph('Агент ценообразования')}</span>
+      {/* Price drop badge — positioned relative to graphSvg via percentages */}
+      <div className={styles.graphOverlay}>
+        <div className={`${styles.dropBadge} ${phase >= 1 ? styles.dropBadgeVisible : ''}`}>
+          <img src={arrowDownSvg} alt="" className={styles.arrowIcon} />
+          <span>{typograph('24 ₽')}</span>
         </div>
-        <p className={styles.tooltipText}>
-          {typograph('Конкурент снизил стоимость\nдо 3 199 ₽, новая стоимость: 3 198 ₽')}
-        </p>
+
+        <div className={`${styles.tooltip} ${phase >= 1 ? styles.tooltipVisible : ''}`}>
+          <div className={styles.tooltipHeader}>
+            <span className={styles.tooltipDot} />
+            <span className={styles.tooltipLabel}>{typograph('Агент ценообразования')}</span>
+          </div>
+          <p className={styles.tooltipText}>
+            {typograph('Конкурент снизил стоимость\nдо 3 199 ₽, новая стоимость: 3 198 ₽')}
+          </p>
+        </div>
       </div>
     </div>
   );

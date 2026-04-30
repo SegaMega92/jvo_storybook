@@ -16,6 +16,7 @@ export function HeroAgent({
   buttonText = 'Получить демо',
   buttonHref = '#form',
   showBadge = true,
+  videoBg,
   children,
 }) {
   const [badgeOpen, setBadgeOpen] = useState(false);
@@ -64,8 +65,19 @@ export function HeroAgent({
 
         {/* Illustration container */}
         <div className={styles.hero__illustration}>
-          <div className={styles.hero__illustrationBg} aria-hidden="true" />
-          <div className={styles.hero__illustrationContent}>
+          {videoBg ? (
+            <video
+              src={videoBg}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className={styles.hero__videoBg}
+            />
+          ) : (
+            <div className={styles.hero__illustrationBg} aria-hidden="true" />
+          )}
+          <div className={children ? styles.hero__illustrationContentPadded : styles.hero__illustrationContent}>
             {children}
           </div>
         </div>
@@ -82,6 +94,7 @@ HeroAgent.propTypes = {
   buttonText: PropTypes.string,
   buttonHref: PropTypes.string,
   showBadge: PropTypes.bool,
+  videoBg: PropTypes.string,
   children: PropTypes.node,
 };
 

@@ -1,0 +1,595 @@
+/* IllustrationHero — 5-step interactive chat (pixel-perfect) */
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+}
+
+/* Chat wrapper */
+.chatWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(12px, 3%, 36px);
+}
+
+.chatInner {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 780px;
+  transition: all 0.5s ease;
+}
+
+.chatContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid #ead7fe;
+  border-radius: 24px;
+  padding: 36px;
+  align-items: flex-start;
+  text-align: left;
+}
+
+/* Agent icon — 72px SVG directly */
+.agentIcon {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  border: 1px solid #ead7fe;
+  border-radius: 50%;
+  box-sizing: content-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.agentIcon:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(193, 111, 251, 0.2);
+}
+
+.agentIconImg {
+  width: 72px;
+  height: 72px;
+}
+
+/* Input group (tags + input on step 0) */
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: flex-start;
+  width: 100%;
+}
+
+/* Command tags */
+.commandTags {
+  display: flex;
+  gap: 4px;
+}
+
+.commandTag {
+  padding: 4px 12px 6px;
+  background: #f6f6f9;
+  border: 1px solid #e9ebf0;
+  border-radius: 12px;
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #2b2b2b;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.commandTag:hover {
+  background: #eeeef1;
+}
+
+/* Input field */
+.inputWrap {
+  display: flex;
+  align-items: flex-end;
+  border: 2px solid #aa50ea;
+  border-radius: 12px;
+  padding: 12px 12px 12px 16px;
+  gap: 12px;
+  background: #fff;
+  outline: 4px solid #ead7fe;
+  align-self: stretch;
+}
+
+.input {
+  flex: 1;
+  min-height: 56px;
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #15181f;
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.inputText {
+  word-break: break-word;
+}
+
+.inputCursor {
+  color: #c16ffb;
+  animation: blink 0.8s step-end infinite;
+}
+
+@keyframes blink { 50% { opacity: 0; } }
+
+.sendBtn {
+  width: 56px;
+  height: 56px;
+  border-radius: 52px;
+  background: #c16ffb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sendBtnIcon {
+  width: 24px;
+  height: 24px;
+}
+
+/* User bubble — right-aligned */
+.userBubble {
+  align-self: flex-end !important;
+  background: #f9f9f9;
+  border-radius: 12px 12px 0 12px;
+  padding: 16px;
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 25px;
+  color: #2b2b2b;
+  max-width: 432px;
+}
+
+/* Loader */
+.loaderRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #2b2b2b;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+.dot:nth-child(2) { animation-delay: 0.2s; }
+.dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes dotPulse {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+.loaderText {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  color: #2b2b2b;
+}
+
+/* Result text (purple) */
+.resultText {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #c16ffb;
+  margin: 0;
+}
+
+/* Result text (black) */
+.resultTextBlack {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  color: #2b2b2b;
+  margin: 0;
+}
+
+/* Done row */
+.doneRow {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.doneIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.doneText {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 22px;
+}
+
+/* Section group (header + content under it) */
+.sectionGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+/* Fade in animation */
+.fadeIn {
+  animation: fadeInUp 0.4s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scenario card */
+.scenarioCard {
+  border: 1px solid #e9ebf0;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: background 0.5s ease, border-color 0.5s ease;
+}
+
+.scenarioCardGhost {
+  background: rgba(193, 111, 251, 0.06);
+  border-color: rgba(193, 111, 251, 0.2);
+  animation: ghostToNormal 0.8s ease forwards;
+  animation-delay: 2s;
+}
+
+@keyframes ghostToNormal {
+  to {
+    background: #fff;
+    border-color: #e9ebf0;
+  }
+}
+
+.scenarioCardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.scenarioCardTitle {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.scenarioCardSettingsIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.scenarioCardBottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.scenarioCardIcons {
+  display: flex;
+}
+
+.mpIcon {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.mpIconOverlap {
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  margin-left: -4px;
+}
+
+.scenarioCardMeta {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 400;
+  color: #7c3aed;
+}
+
+/* Results row */
+.resultsRow {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.resultItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.resultLabel {
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  color: #2b2b2b;
+}
+
+.resultValue {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-family: 'Manrope', var(--font-family-primary);
+  font-size: 13px;
+  font-weight: 600;
+  color: #065f46;
+}
+
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+/* Tablet */
+@media (max-width: 960px) {
+  .chatInner {
+    gap: 16px;
+  }
+
+  .chatContent {
+    align-items: flex-start;
+  }
+
+  .agentIcon, .agentIconImg {
+    width: 56px;
+    height: 56px;
+  }
+
+  .chatContent {
+    padding: 28px;
+    gap: 14px;
+  }
+
+  .input {
+    font-size: 16px;
+    min-height: 48px;
+  }
+
+  .sendBtn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .sendBtnIcon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .userBubble {
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .loaderText, .doneText, .resultLabel, .resultTextBlack, .resultText {
+    font-size: 14px;
+  }
+
+  .scenarioCardTitle {
+    font-size: 14px;
+  }
+
+  .scenarioCardMeta {
+    font-size: 12px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+
+  .chatInner {
+    gap: 12px;
+  }
+
+  .agentIcon, .agentIconImg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .chatContent {
+    padding: 20px;
+    gap: 10px;
+    border-radius: 16px;
+  }
+
+  .inputGroup {
+    gap: 10px;
+  }
+
+  .commandTags {
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .commandTag {
+    font-size: 12px;
+    padding: 3px 8px 4px;
+    border-radius: 8px;
+  }
+
+  .inputWrap {
+    border-width: 1.5px;
+    outline-width: 3px;
+    border-radius: 10px;
+    padding: 8px 8px 8px 12px;
+  }
+
+  .input {
+    font-size: 14px;
+    min-height: 36px;
+    line-height: 20px;
+  }
+
+  .sendBtn {
+    width: 36px;
+    height: 36px;
+    border-radius: 36px;
+  }
+
+  .sendBtnIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .userBubble {
+    font-size: 13px;
+    padding: 10px;
+    line-height: 20px;
+    max-width: 85%;
+  }
+
+  .loaderText {
+    font-size: 13px;
+  }
+
+  .doneIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .doneText {
+    font-size: 13px;
+  }
+
+  .resultText, .resultTextBlack {
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .scenarioCard {
+    padding: 12px;
+    gap: 10px;
+    border-radius: 10px;
+  }
+
+  .scenarioCardTitle {
+    font-size: 13px;
+  }
+
+  .scenarioCardSettingsIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .mpIcon, .mpIconOverlap {
+    width: 20px;
+    height: 20px;
+  }
+
+  .scenarioCardMeta {
+    font-size: 11px;
+  }
+
+  .resultsRow {
+    gap: 10px;
+  }
+
+  .resultLabel {
+    font-size: 13px;
+  }
+
+  .resultValue {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .sectionGroup {
+    gap: 6px;
+  }
+
+  .doneRow {
+    margin-top: 10px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 400px) {
+  .chatContent {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .agentIcon, .agentIconImg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .chatInner {
+    gap: 8px;
+  }
+
+  .commandTag {
+    font-size: 11px;
+  }
+
+  .input {
+    font-size: 13px;
+    min-height: 32px;
+  }
+
+  .sendBtn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .userBubble {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .loaderText, .doneText, .resultLabel {
+    font-size: 12px;
+  }
+
+  .resultText, .resultTextBlack {
+    font-size: 12px;
+  }
+
+  .resultsRow {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

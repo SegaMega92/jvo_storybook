@@ -6,6 +6,9 @@ import { HeroAgent } from '../../components/HeroAgent';
 import { LogoMarqueeV2 } from '../../components/LogoMarqueeV2';
 import { AgentsShowcaseV2 } from '../../components/AgentsShowcaseV2';
 import { ProblemSolution } from '../../components/ProblemSolution';
+import { FeatureBlock } from '../../components/FeatureBlock';
+import heroVideo from '../../assets/hero-video.mp4';
+import { IllustrationHero } from '../../components/Illustrations/IllustrationHero';
 
 /**
  * MainPage - Новая главная страница
@@ -18,7 +21,9 @@ export function MainPage({ className = '', embedded = false }) {
       {!embedded && <Header />}
 
       <main className={styles.main}>
-        <HeroAgent />
+        <HeroAgent videoBg={heroVideo}>
+          <IllustrationHero />
+        </HeroAgent>
 
         <div className={styles.logoSection}>
           <LogoMarqueeV2
@@ -32,13 +37,7 @@ export function MainPage({ className = '', embedded = false }) {
 
         <ProblemSolution />
 
-        <div className={styles.nextSection}>
-          <LogoMarqueeV2
-            title="Используется ведущими брендами"
-            variant="centered"
-            speed={120}
-          />
-        </div>
+        <FeatureBlock />
       </main>
     </div>
   );

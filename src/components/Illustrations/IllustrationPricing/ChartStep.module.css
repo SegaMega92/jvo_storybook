@@ -137,61 +137,36 @@
   }
 }
 
-/* Event dot */
-.eventDot {
-  position: absolute;
-  top: 187px;
-  left: calc(27px + 34.4%);
-  transform: translate(-50%, -50%);
-  z-index: 4;
+/* SVG dot */
+.svgDotHidden {
   opacity: 0;
+}
+.svgDotVisible {
+  opacity: 1;
+  animation: svgDotAppear 0.5s ease forwards;
+}
+@keyframes svgDotAppear {
+  0% { opacity: 0; r: 0; }
+  50% { opacity: 1; r: 7; }
+  100% { opacity: 1; r: 5; }
+}
+
+/* Overlay for tooltip + badge — same position/size as graphSvg */
+.graphOverlay {
+  position: absolute;
+  top: 92px;
+  left: 20px;
+  width: calc(100% - 40px);
+  height: 126px;
+  z-index: 5;
   pointer-events: none;
 }
 
-.eventDotVisible {
-  opacity: 1;
-  animation: dotAppear 0.5s ease forwards;
-}
-
-@keyframes dotAppear {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
-  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-}
-
-.dotOuter {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #f2e7fe;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  animation: dotPulse 2s ease-in-out infinite;
-}
-
-@keyframes dotPulse {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
-  50% { transform: translate(-50%, -50%) scale(1.8); opacity: 0; }
-}
-
-.dotInner {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #c16ffb;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* Price drop badge */
+/* Price drop badge — percentage position within graph area */
 .dropBadge {
   position: absolute;
-  top: 205px;
-  left: calc(12px + 34.4%);
+  top: 82%;
+  left: 30%;
   display: flex;
   align-items: center;
   gap: 2px;
@@ -224,8 +199,8 @@
 /* Tooltip */
 .tooltip {
   position: absolute;
-  top: 50px;
-  left: calc(35px + 34.4%);
+  bottom: 60%;
+  left: 38%;
   max-width: 240px;
   padding: 12px;
   background: rgb(253, 247, 253);
