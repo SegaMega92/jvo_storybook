@@ -1,0 +1,17 @@
+<svg width="575" height="480" viewBox="0 0 575 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="575" height="480" fill="url(#paint0_radial_1674_28804)"/>
+<g clip-path="url(#paint1_diamond_1674_28804_clip_path)" data-figma-skip-parse="true"><g transform="matrix(-0.3945 -0.217 0.860976 -1.05926 265 185)"><rect x="0" y="0" width="966.213" height="288.558" fill="url(#paint1_diamond_1674_28804)" opacity="0.2" shape-rendering="crispEdges"/><rect x="0" y="0" width="966.213" height="288.558" transform="scale(1 -1)" fill="url(#paint1_diamond_1674_28804)" opacity="0.2" shape-rendering="crispEdges"/><rect x="0" y="0" width="966.213" height="288.558" transform="scale(-1 1)" fill="url(#paint1_diamond_1674_28804)" opacity="0.2" shape-rendering="crispEdges"/><rect x="0" y="0" width="966.213" height="288.558" transform="scale(-1)" fill="url(#paint1_diamond_1674_28804)" opacity="0.2" shape-rendering="crispEdges"/></g></g><rect width="575" height="480" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_DIAMOND&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.99607843160629272,&#34;g&#34;:0.64313727617263794,&#34;b&#34;:0.64313727617263794,&#34;a&#34;:0.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.24705882370471954,&#34;g&#34;:0.0,&#34;b&#34;:0.18823529779911041,&#34;a&#34;:1.0},&#34;position&#34;:0.250},{&#34;color&#34;:{&#34;r&#34;:0.99607843160629272,&#34;g&#34;:0.64313727617263794,&#34;b&#34;:0.64313727617263794,&#34;a&#34;:0.0},&#34;position&#34;:0.60000002384185791}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.99607843160629272,&#34;g&#34;:0.64313727617263794,&#34;b&#34;:0.64313727617263794,&#34;a&#34;:0.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.24705882370471954,&#34;g&#34;:0.0,&#34;b&#34;:0.18823529779911041,&#34;a&#34;:1.0},&#34;position&#34;:0.250},{&#34;color&#34;:{&#34;r&#34;:0.99607843160629272,&#34;g&#34;:0.64313727617263794,&#34;b&#34;:0.64313727617263794,&#34;a&#34;:0.0},&#34;position&#34;:0.60000002384185791}],&#34;transform&#34;:{&#34;m00&#34;:-789.00006103515625,&#34;m01&#34;:1721.9520263671875,&#34;m02&#34;:-201.47602844238281,&#34;m10&#34;:-433.99996948242188,&#34;m11&#34;:-2118.522949218750,&#34;m12&#34;:1461.2614746093750},&#34;opacity&#34;:0.20000000298023224,&#34;blendMode&#34;:&#34;COLOR_BURN&#34;,&#34;visible&#34;:true}" style="mix-blend-mode:color-burn"/>
+<defs>
+<clipPath id="paint1_diamond_1674_28804_clip_path"><rect width="575" height="480"/></clipPath><radialGradient id="paint0_radial_1674_28804" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(287.5 480) rotate(-90) scale(480 1103.08)">
+<stop stop-color="#FFF4D6"/>
+<stop offset="0.452753" stop-color="#FFDBD2"/>
+<stop offset="0.702057" stop-color="#FF965F"/>
+<stop offset="1" stop-color="#480404"/>
+</radialGradient>
+<linearGradient id="paint1_diamond_1674_28804" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FEA4A4" stop-opacity="0"/>
+<stop offset="0.25" stop-color="#3F0030"/>
+<stop offset="0.6" stop-color="#FEA4A4" stop-opacity="0"/>
+</linearGradient>
+</defs>
+</svg>

@@ -20,7 +20,7 @@
 
 .chatInner {
   display: flex;
-  gap: 24px;
+  gap: clamp(8px, 2vw, 24px);
   align-items: flex-start;
   width: 100%;
   max-width: 780px;
@@ -31,19 +31,19 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: clamp(8px, 2vw, 16px);
   background: #fff;
   border: 1px solid #ead7fe;
-  border-radius: 24px;
-  padding: 36px;
+  border-radius: clamp(16px, 3vw, 24px);
+  padding: clamp(16px, 4vw, 36px);
   align-items: flex-start;
   text-align: left;
 }
 
-/* Agent icon — 72px SVG directly */
+/* Agent icon — responsive SVG */
 .agentIcon {
-  width: 72px;
-  height: 72px;
+  width: clamp(32px, 8vw, 72px);
+  height: clamp(32px, 8vw, 72px);
   flex-shrink: 0;
   border: 1px solid #ead7fe;
   border-radius: 50%;
@@ -57,8 +57,8 @@
 }
 
 .agentIconImg {
-  width: 72px;
-  height: 72px;
+  width: 100%;
+  height: 100%;
 }
 
 /* Input group (tags + input on step 0) */
@@ -82,7 +82,7 @@
   border: 1px solid #e9ebf0;
   border-radius: 12px;
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(11px, 2.2vw, 16px);
   font-weight: 500;
   line-height: 22px;
   color: #2b2b2b;
@@ -110,9 +110,9 @@
 
 .input {
   flex: 1;
-  min-height: 56px;
+  min-height: clamp(32px, 7vw, 56px);
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 18px;
+  font-size: clamp(13px, 2.5vw, 18px);
   font-weight: 500;
   line-height: 22px;
   color: #15181f;
@@ -133,8 +133,8 @@
 @keyframes blink { 50% { opacity: 0; } }
 
 .sendBtn {
-  width: 56px;
-  height: 56px;
+  width: clamp(32px, 7vw, 56px);
+  height: clamp(32px, 7vw, 56px);
   border-radius: 52px;
   background: #c16ffb;
   display: flex;
@@ -155,7 +155,7 @@
   border-radius: 12px 12px 0 12px;
   padding: 16px;
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 500;
   line-height: 25px;
   color: #2b2b2b;
@@ -192,7 +192,7 @@
 
 .loaderText {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 500;
   color: #2b2b2b;
 }
@@ -200,7 +200,7 @@
 /* Result text (purple) */
 .resultText {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 400;
   line-height: 22px;
   color: #c16ffb;
@@ -210,7 +210,7 @@
 /* Result text (black) */
 .resultTextBlack {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 400;
   line-height: 22px;
   color: #2b2b2b;
@@ -232,7 +232,7 @@
 
 .doneText {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 500;
   line-height: 22px;
 }
@@ -288,7 +288,7 @@
 
 .scenarioCardTitle {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 600;
   color: #2b2b2b;
 }
@@ -324,7 +324,7 @@
 
 .scenarioCardMeta {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 14px;
+  font-size: clamp(10px, 1.8vw, 14px);
   font-weight: 400;
   color: #7c3aed;
 }
@@ -345,7 +345,7 @@
 
 .resultLabel {
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 16px;
+  font-size: clamp(12px, 2.2vw, 16px);
   font-weight: 500;
   color: #2b2b2b;
 }
@@ -354,7 +354,7 @@
   padding: 4px 10px;
   border-radius: 8px;
   font-family: 'Manrope', var(--font-family-primary);
-  font-size: 13px;
+  font-size: clamp(10px, 1.8vw, 13px);
   font-weight: 600;
   color: #065f46;
 }

@@ -7,6 +7,8 @@ import { LogoMarqueeV2 } from '../../components/LogoMarqueeV2';
 import { AgentsShowcaseV2 } from '../../components/AgentsShowcaseV2';
 import { ProblemSolution } from '../../components/ProblemSolution';
 import { FeatureBlock } from '../../components/FeatureBlock';
+import { LaunchSection } from '../../components/LaunchSection';
+import { ProductsSection } from '../../components/ProductsSection';
 import heroVideo from '../../assets/hero-video.mp4';
 import { IllustrationHero } from '../../components/Illustrations/IllustrationHero';
 
@@ -38,6 +40,10 @@ export function MainPage({ className = '', embedded = false }) {
         <ProblemSolution />
 
         <FeatureBlock />
+
+        <LaunchSection />
+
+        <ProductsSection />
       </main>
     </div>
   );

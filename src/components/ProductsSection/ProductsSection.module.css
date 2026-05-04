@@ -1,0 +1,268 @@
+/* ProductsSection — Product cards with gradient backgrounds */
+
+.section {
+  background: var(--color-base-white, #fff);
+  padding: clamp(60px, 8vw, 120px) 20px;
+}
+
+.container {
+  max-width: var(--container-max-width, 1200px);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 4vw, 48px);
+}
+
+/* Header */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 2vw, 36px);
+  text-align: center;
+  max-width: 1030px;
+}
+
+.title {
+  font-family: var(--font-family-heading);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  color: var(--color-base-black);
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-primary);
+  font-size: clamp(16px, 1.7vw, 24px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-text-dark-secondary, #505050);
+  margin: 0;
+  max-width: 720px;
+}
+
+/* Cards row */
+.cards {
+  display: flex;
+  gap: clamp(12px, 1.4vw, 20px);
+  width: 100%;
+}
+
+/* Single card */
+.card {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  border-radius: var(--radius-xl, 24px);
+  overflow: hidden;
+  padding: clamp(16px, 2vw, 20px);
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(320px, 33vw, 480px);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* Gradient background via SVG */
+.cardBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Shimmer overlay — subtle glow on hover */
+.cardShimmer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.12) 50%,
+    rgba(255, 255, 255, 0.08) 65%,
+    transparent 80%
+  );
+  background-size: 300% 100%;
+  filter: blur(8px);
+}
+
+.card:hover .cardShimmer {
+  opacity: 1;
+  animation: shimmerFlow 3s ease-in-out infinite;
+}
+
+@keyframes shimmerFlow {
+  0% { background-position: 200% center; }
+  100% { background-position: -100% center; }
+}
+
+/* Card content — above background */
+.cardContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(20px, 3vw, 36px);
+  flex: 1;
+}
+
+/* Top row: tag on left, "Подробнее" on right */
+.cardTopRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* Tag badge: icon + product name */
+.cardTag {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  border-radius: 16px;
+  padding: 6px 14px 6px 6px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover .cardTag {
+  background: #fff;
+  border-color: #fff;
+}
+
+.cardIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.cardName {
+  font-family: var(--font-family-primary);
+  font-size: clamp(13px, 1.1vw, 16px);
+  font-weight: 500;
+  color: var(--color-base-black);
+  white-space: nowrap;
+}
+
+/* "Подробнее" link + arrow */
+.cardLink {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .cardLink {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardLinkText {
+  font-family: var(--font-family-primary);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 500;
+  color: var(--color-base-black);
+  white-space: nowrap;
+}
+
+.cardDark .cardLinkText {
+  color: #fff;
+}
+
+.cardLinkArrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-base-white, #fff);
+  color: var(--color-base-black);
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.card:hover .cardLinkArrow {
+  transform: translateX(2px);
+}
+
+.cardLinkArrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Description */
+.cardDescription {
+  font-family: var(--font-family-primary);
+  font-size: clamp(14px, 1.1vw, 16px);
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--color-pink-dark, #3f0030);
+  margin: 0;
+  max-width: 460px;
+}
+
+.cardDark .cardDescription {
+  color: #fff;
+}
+
+/* Screenshot image — fills bottom of card, flush right and bottom */
+.cardImageWrap {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  margin-right: -24px;
+  margin-bottom: -24px;
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md, 12px) 0 0 0;
+}
+
+/* ==========================================
+   Responsive
+   ========================================== */
+
+@media (max-width: 960px) {
+  .cards {
+    flex-direction: column;
+  }
+
+  .card {
+    min-height: clamp(320px, 50vw, 420px);
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding: 48px 16px;
+  }
+
+  .cardLink {
+    display: none;
+  }
+}

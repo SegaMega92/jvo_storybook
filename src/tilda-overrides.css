@@ -2,16 +2,31 @@
   Tilda CSS Overrides
   Tilda's global styles (.tn-atom, button resets) override our component styles.
   This file adds higher specificity to protect our buttons and interactive elements.
+
+  IMPORTANT: Do NOT set font-size, padding, gap, or other size properties with !important here.
+  They will override our own responsive media queries and break mobile layouts.
+  Only protect: display, background, border, color, font-family, cursor, text-decoration.
 */
 
+/* Full CSS isolation — reset all inherited Tilda styles on our root */
+[id^="jvo-"] {
+  all: initial !important;
+  display: block !important;
+  font-family: 'Manrope', 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+}
+
+/* Restore box-sizing for children */
+[id^="jvo-"] * {
+  box-sizing: border-box;
+}
+
 /* Protect hero CTA button */
-#jvo-main-page-root .hero__button,
-#jvo-main-page-main .hero__button,
 [id^="jvo-"] a[class*="hero__button"] {
   background: #ff8fda !important;
   color: #3f0030 !important;
   border: none !important;
-  border-radius: 12px !important;
   text-decoration: none !important;
   font-family: 'RF Dewi Extended', 'Inter', Arial, sans-serif !important;
   cursor: pointer !important;
@@ -24,7 +39,6 @@
   border: none;
   cursor: pointer;
   background: transparent;
-  padding: 0;
   margin: 0;
   line-height: inherit;
 }
@@ -34,7 +48,6 @@
   background: #15181f !important;
   color: #fff !important;
   border: none !important;
-  border-radius: 12px !important;
   text-decoration: none !important;
   cursor: pointer !important;
 }
@@ -49,10 +62,14 @@
   cursor: pointer !important;
 }
 
-/* Protect command tags (IllustrationHero) */
+/* Protect command tags / suggests (IllustrationHero) */
 [id^="jvo-"] button[class*="commandTag"] {
-  border: 1px solid #e9ebf0 !important;
+  display: inline-flex !important;
   background: #f6f6f9 !important;
+  border: 1px solid #e9ebf0 !important;
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+  color: #2b2b2b !important;
+  white-space: nowrap !important;
   cursor: pointer !important;
 }
 
@@ -61,8 +78,71 @@
   text-decoration: none !important;
 }
 
-/* Prevent Tilda font overrides inside our components */
-[id^="jvo-"] {
-  font-family: 'Manrope', 'Inter', Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
+/* Protect result badges (IllustrationHero) */
+[id^="jvo-"] span[class*="resultValue"] {
+  background: #d1fae5 !important;
+  color: #065f46 !important;
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+}
+
+[id^="jvo-"] span[class*="resultLabel"] {
+  color: #2b2b2b !important;
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+}
+
+[id^="jvo-"] span[class*="resultItem"] {
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+/* Protect done row text */
+[id^="jvo-"] span[class*="doneText"] {
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+  color: #7c3aed !important;
+}
+
+/* Protect loader text */
+[id^="jvo-"] span[class*="loaderText"] {
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+  color: #2b2b2b !important;
+}
+
+/* Protect user bubble */
+[id^="jvo-"] div[class*="userBubble"] {
+  background: #f9f9f9 !important;
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+  color: #2b2b2b !important;
+}
+
+/* Protect AgentsShowcase tabs */
+[id^="jvo-"] div[class*="tabs"] {
+  display: flex !important;
+  background: #fff !important;
+  border: 1px solid #E9EBF0 !important;
+  border-radius: 38px !important;
+  box-shadow: 0 2px 9.2px rgba(0, 0, 0, 0.05) !important;
+}
+
+[id^="jvo-"] button[class*="tab"] {
+  display: flex !important;
+  border: none !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+}
+
+[id^="jvo-"] span[class*="tabLabel"] {
+  font-family: 'Manrope', 'Inter', Arial, sans-serif !important;
+  color: #15181f !important;
+  white-space: nowrap !important;
+}
+
+[id^="jvo-"] div[class*="tabIndicator"] {
+  background: #F6F6F9 !important;
+  border-radius: 100px !important;
+}
+
+/* Prevent Tilda .tn-atom from leaking into our components */
+[id^="jvo-"] .tn-atom {
+  all: unset !important;
 }
