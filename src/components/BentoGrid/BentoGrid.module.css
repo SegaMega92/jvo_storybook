@@ -5,6 +5,206 @@
   background: #ffffff;
 }
 
+/* ========================================
+   Ad variant — секция «Преимущества» Агента Рекламы
+   Тёмный фон, 3 ряда wide/narrow чередуются
+   ======================================== */
+
+.sectionAd {
+  padding: 0 clamp(16px, 3vw, 24px) clamp(60px, 8vw, 100px);
+  background: var(--color-base-white, #fff);
+}
+
+.sectionAd .grid {
+  background: #1a0d2e;
+  max-width: 1160px;
+}
+
+/* Позиционирование в "ad" варианте через nth-child */
+/* Row 1: wide (1-2) | narrow (3) */
+.sectionAd .block:nth-child(1) {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+}
+
+.sectionAd .block:nth-child(2) {
+  grid-column: 3;
+  grid-row: 1;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Row 2: narrow (1) | wide (2-3) */
+.sectionAd .block:nth-child(3) {
+  grid-column: 1;
+  grid-row: 2;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.sectionAd .block:nth-child(4) {
+  grid-column: 2 / span 2;
+  grid-row: 2;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Row 3: wide (1-2) | narrow (3) */
+.sectionAd .block:nth-child(5) {
+  grid-column: 1 / span 2;
+  grid-row: 3;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 20px;
+}
+
+.sectionAd .block:nth-child(6) {
+  grid-column: 3;
+  grid-row: 3;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Иллюстрации в ad-блоках */
+.sectionAd .adIllustration {
+  width: 340px;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sectionAd .adIllustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Маленькие иконки/бейджи для narrow блоков */
+.sectionAd .adBadge {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+}
+
+.sectionAd .adBadgeImg {
+  max-width: 109px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.sectionAd .adIconImg {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: contain;
+}
+
+.sectionAd .adModesImg {
+  width: 90px;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+/* Адаптив для ad-варианта */
+@media (max-width: 900px) {
+  .sectionAd .grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(5, auto);
+  }
+
+  /* Row 1: wide across both cols */
+  .sectionAd .block:nth-child(1) {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+  }
+
+  /* Row 2 */
+  .sectionAd .block:nth-child(2) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .sectionAd .block:nth-child(3) {
+    grid-column: 2;
+    grid-row: 2;
+    flex-direction: column;
+  }
+
+  .sectionAd .adModesImg {
+    display: none;
+  }
+
+  /* Row 3: wide */
+  .sectionAd .block:nth-child(4) {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+  }
+
+  .sectionAd .adIllustration {
+    width: 260px;
+    height: 160px;
+  }
+
+  /* Row 4 */
+  .sectionAd .block:nth-child(5) {
+    grid-column: 1 / span 2;
+    grid-row: 4;
+  }
+
+  /* Row 5 */
+  .sectionAd .block:nth-child(6) {
+    grid-column: 1 / span 2;
+    grid-row: 5;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .sectionAd .grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, auto);
+    padding: 14px;
+    gap: 14px;
+    border-radius: 24px;
+  }
+
+  .sectionAd .block:nth-child(n) {
+    grid-column: 1;
+    flex-direction: column;
+  }
+
+  .sectionAd .block:nth-child(1) { grid-row: 1; }
+  .sectionAd .block:nth-child(2) { grid-row: 2; }
+  .sectionAd .block:nth-child(3) { grid-row: 3; flex-direction: row; align-items: center; }
+  .sectionAd .block:nth-child(4) { grid-row: 4; }
+  .sectionAd .block:nth-child(5) { grid-row: 5; }
+  .sectionAd .block:nth-child(6) { grid-row: 6; flex-direction: row; align-items: center; }
+
+  .sectionAd .adIllustration {
+    width: 100%;
+    height: 180px;
+  }
+
+  .sectionAd .adModesImg {
+    display: block;
+    width: 60px;
+    height: 120px;
+  }
+
+  .sectionAd .adIllustration img {
+    object-fit: cover;
+  }
+}
+
 /* Основная сетка 3x3 */
 .grid {
   display: grid;

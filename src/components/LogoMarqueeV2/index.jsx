@@ -34,13 +34,13 @@ import vseMaykiLogo from '../../assets/logos/clients/vse-mayki.svg';
 import vkusvillLogo from '../../assets/logos/clients/вкуссвил.svg';
 import krasnayaLiniyaLogo from '../../assets/logos/clients/красная-линия.svg';
 import mayLogo from '../../assets/logos/clients/май.svg';
-import marketspaceLogo from '../../assets/logos/clients/маркетспейс.svg';
+import marketspaceLogo from '../../assets/logos/clients/marketspace.svg';
 import okeysiLogo from '../../assets/logos/clients/okeysi.png';
 import ortekaLogo from '../../assets/logos/clients/ортека.svg';
 import reliefCenterLogo from '../../assets/logos/clients/рельеф-центр.svg';
 import rivgoshLogo from '../../assets/logos/clients/рив-гош.svg';
 import syneregeticLogo from '../../assets/logos/clients/синергетик.svg';
-import tidyLogo from '../../assets/logos/clients/тайди.svg';
+import tidyLogo from '../../assets/logos/clients/taydi.svg';
 import eksmoLogo from '../../assets/logos/clients/эксмо.svg';
 
 const allLogos = [

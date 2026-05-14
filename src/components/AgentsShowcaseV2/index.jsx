@@ -23,10 +23,10 @@ const defaultAgents = [
     id: 'communications',
     tabLabel: 'Агент Коммуникаций',
     tabIcon: iconCommunications,
-    title: 'ИИ-агент коммуникаций',
+    title: 'ИИ-агент Коммуникаций',
     icon: iconCommunications,
     gradientBg: `url(${gradCommunications}) center/cover no-repeat`,
-    description: typograph('Отвечает на отзывы и вопросы в указанное вами время. Общается на языке вашего бренда, без шаблонов, сохраняет тон и стиль общения бренда.'),
+    description: typograph('Отвечает на отзывы и вопросы в указанное вами время. Общается на языке вашего бренда, без шаблонов, сохраняет тон и стиль общения бренда'),
     features: typographArray([
       'Отвечает клиентам 24/7',
       'Учитывает тон и стиль бренда',
@@ -44,7 +44,7 @@ const defaultAgents = [
     title: 'ИИ-агент Ценообразования',
     icon: iconPricing,
     gradientBg: `url(${gradPricing}) center/cover no-repeat`,
-    description: typograph('Управляет ценами, опираясь на события — удерживает маржу, активирует кросс-продажи и предотвращает Out-of-Stock.'),
+    description: typograph('Управляет ценами, опираясь на события — удерживает маржу, активирует кросс-продажи и предотвращает Out-of-Stock'),
     features: typographArray([
       'Самостоятельно управляет ценами товаров',
       'Учитывает маржу, остатки и спрос',

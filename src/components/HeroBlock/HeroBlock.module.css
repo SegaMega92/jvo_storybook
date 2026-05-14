@@ -121,19 +121,21 @@
 
 .flatContainer {
   display: flex;
-  gap: 0;
-  align-items: stretch;
+  gap: 72px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px 0;
+  border-radius: 16px;
   width: 100%;
 }
 
 .flatCard {
-  flex: 1;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 40px 0 0;
-  background: #ffffff;
-  border-radius: 32px;
+  gap: 24px;
+  align-items: stretch;
 }
 
 .flatFeatures {
@@ -147,24 +149,27 @@
 
 .flatFeatureItem {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
   padding: 10px 0;
+  width: 330px;
 }
 
 .flatFeatureText {
   font-family: var(--font-family-primary);
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
-  line-height: 1.2;
+  line-height: 1.4;
   color: #15181f;
+  flex: 1;
+  min-width: 0;
 }
 
 .flatMedia {
-  width: 722px;
-  height: 460px;
+  width: 630px;
+  height: 630px;
+  border-radius: 16px;
   flex-shrink: 0;
-  border-radius: 24px;
   overflow: hidden;
   position: relative;
 }
@@ -183,14 +188,26 @@
   object-fit: cover;
 }
 
-/* Кнопка десктоп — показываем */
-.flatButtonDesktop {
+/* Кнопка */
+.flatBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-}
-
-/* Кнопка мобильная — скрываем на десктопе */
-.flatButtonMobile {
-  display: none;
+  height: 44px;
+  padding: 14px 22px;
+  background: #ff8fda;
+  color: #3f0030;
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.16px;
+  border-radius: 12px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+  box-sizing: border-box;
 }
 
 /* ========================================
@@ -220,34 +237,23 @@
   .flatContainer {
     flex-direction: column;
     gap: 24px;
+    padding: 0;
   }
 
   .flatCard {
-    padding: 0;
-    border-radius: 0;
+    width: 100%;
     order: 2;
   }
 
-  .flatFeatureText {
-    font-size: 18px;
+  .flatFeatureItem {
+    width: 100%;
   }
 
   .flatMedia {
     width: 100%;
     height: auto;
-    aspect-ratio: 722 / 460;
+    aspect-ratio: 1;
     order: 1;
-  }
-
-  /* Скрываем десктопную кнопку, показываем мобильную */
-  .flatButtonDesktop {
-    display: none;
-  }
-
-  .flatButtonMobile {
-    display: block;
-    order: 3;
-    width: 100%;
   }
 }
 
@@ -286,10 +292,6 @@
   }
 
   /* Flat адаптив */
-  .flatCard {
-    padding: 0;
-  }
-
   .flatFeatures {
     gap: 8px;
   }
@@ -297,9 +299,5 @@
   .flatFeatureItem {
     gap: 12px;
     padding: 8px 0;
-  }
-
-  .flatFeatureText {
-    font-size: 16px;
   }
 }

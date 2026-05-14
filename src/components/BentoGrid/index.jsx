@@ -201,8 +201,53 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
     );
   };
 
+  // Ad variant: специальный рендер для секции «Преимущества» Агента Рекламы
+  const renderAdBlock = (item) => {
+    const blockClasses = [styles.block];
+
+    const renderAdImage = () => {
+      if (item.imageType === 'badge') {
+        return (
+          <div className={styles.adBadge}>
+            <img src={item.image} alt="" className={styles.adBadgeImg} />
+          </div>
+        );
+      }
+      if (item.imageType === 'icon') {
+        return (
+          <div className={styles.adBadge}>
+            <img src={item.image} alt="" className={styles.adIconImg} />
+          </div>
+        );
+      }
+      if (item.imageType === 'modes') {
+        return (
+          <img src={item.image} alt="" className={styles.adModesImg} />
+        );
+      }
+      // large illustration
+      return (
+        <div className={styles.adIllustration}>
+          <img src={item.image} alt="" />
+        </div>
+      );
+    };
+
+    return (
+      <div key={item.id} className={blockClasses.join(' ')}>
+        {renderAdImage()}
+        <div className={styles.textContent}>
+          <h3 className={styles.title}>{item.title}</h3>
+          {item.description && <p className={styles.description}>{item.description}</p>}
+        </div>
+      </div>
+    );
+  };
+
+  const isAd = variant === 'ad';
+
   const gridClasses = [
-    styles.section,
+    isAd ? styles.sectionAd : styles.section,
     variant === 'simple' ? styles.sectionSimple : '',
     className,
   ].filter(Boolean).join(' ');
@@ -210,7 +255,7 @@ export function BentoGrid({ items = defaultItems, variant = 'default', className
   return (
     <section className={gridClasses}>
       <div className={styles.grid} ref={gridRef}>
-        {items.map((item, index) => renderBlock(item, index))}
+        {items.map((item, index) => isAd ? renderAdBlock(item) : renderBlock(item, index))}
       </div>
     </section>
   );
@@ -223,13 +268,13 @@ BentoGrid.propTypes = {
       title: PropTypes.string.isRequired,
       description: PropTypes.string,
       image: PropTypes.string,
-      imageType: PropTypes.oneOf(['icon', 'badge', 'image']),
+      imageType: PropTypes.oneOf(['icon', 'badge', 'image', 'modes']),
       type: PropTypes.oneOf(['center']),
       size: PropTypes.oneOf(['wide']),
       layout: PropTypes.oneOf(['image-left', 'image-right']),
     })
   ),
-  variant: PropTypes.oneOf(['default', 'simple']),
+  variant: PropTypes.oneOf(['default', 'simple', 'ad']),
   className: PropTypes.string,
 };
 

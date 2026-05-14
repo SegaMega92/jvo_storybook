@@ -29,7 +29,7 @@ export function HeroBlock({
   if (isFlat) {
     return (
       <div className={`${styles.flatContainer} ${className}`}>
-        {/* Список фич */}
+        {/* Белая карточка с фичами и кнопкой */}
         <div className={styles.flatCard}>
           {features.length > 0 && (
             <ul className={styles.flatFeatures}>
@@ -42,16 +42,10 @@ export function HeroBlock({
             </ul>
           )}
 
-          {/* Кнопка на десктопе внутри карточки */}
           {buttonText && buttonHref && (
-            <Button
-              href={buttonHref}
-              variant="primary"
-              size="medium"
-              className={styles.flatButtonDesktop}
-            >
+            <a href={buttonHref} className={styles.flatBtn}>
               {buttonText}
-            </Button>
+            </a>
           )}
         </div>
 
@@ -78,20 +72,6 @@ export function HeroBlock({
             )
           )}
         </div>
-
-        {/* Кнопка на мобильных — отдельный элемент для управления order */}
-        {buttonText && buttonHref && (
-          <div className={styles.flatButtonMobile}>
-            <Button
-              href={buttonHref}
-              variant="primary"
-              size="medium"
-              fullWidth
-            >
-              {buttonText}
-            </Button>
-          </div>
-        )}
       </div>
     );
   }

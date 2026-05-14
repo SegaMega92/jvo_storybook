@@ -1,0 +1,15 @@
+.wrapper {
+  background: var(--color-base-white, #fff);
+}
+
+.title {
+  font-family: var(--font-family-heading);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -2px;
+  color: #15181f;
+  text-align: center;
+  margin: 0;
+  padding: clamp(60px, 8vw, 100px) clamp(16px, 3vw, 24px) clamp(32px, 4vw, 48px);
+}

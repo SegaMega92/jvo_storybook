@@ -12,7 +12,9 @@
     "build-storybook": "storybook build",
     "deploy-storybook": "npm run build-storybook && gh-pages -d storybook-static",
     "deploy": "npm run build && gh-pages -d dist",
-    "build:main-page": "vite build --config vite.main-page.config.js"
+    "build:main-page": "vite build --config vite.main-page.config.js",
+    "build:pricing": "vite build --config vite.pricing.config.js",
+    "build:ad-agent": "vite build --config vite.ad-agent.config.js"
   },
   "dependencies": {
     "gsap": "^3.14.2",

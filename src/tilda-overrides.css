@@ -33,6 +33,24 @@
   display: inline-flex !important;
 }
 
+/* Protect dark CTA button (Pricing page) */
+[id^="jvo-"] a[class*="ctaButtonDark"] {
+  background: #15181f !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+}
+
+/* Protect pink CTA button (Pricing page) */
+[id^="jvo-"] a[class*="ctaButtonPink"] {
+  background: #ff8fda !important;
+  color: #3f0030 !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+}
+
 /* Protect all buttons inside our root */
 [id^="jvo-"] button {
   font-family: inherit;

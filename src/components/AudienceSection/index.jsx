@@ -83,6 +83,8 @@ export function AudienceSection({
   tabs = defaultTabs,
   tagText = 'Системное управление и кратный рост без расширения штата',
   bottomText = 'Агент позволяет увеличить количество и скорость обрабатываемых артикулов без потери качества и необходимости найма новых сотрудников',
+  showTestimonial = true,
+  showBottomBlock = true,
   className = '',
 }) {
   const [activeTab, setActiveTab] = useState(0);
@@ -233,32 +235,36 @@ export function AudienceSection({
           <p className={styles.contentDescription}>{currentTab.description}</p>
 
           {/* Отзыв */}
-          <div className={styles.testimonial}>
-            <img
-              src={currentTab.testimonial.avatar}
-              alt=""
-              className={styles.testimonialAvatar}
-            />
-            <div className={styles.testimonialText}>
-              <p className={styles.testimonialName}>{currentTab.testimonial.name}</p>
-              <p className={styles.testimonialQuote}>{currentTab.testimonial.text}</p>
+          {showTestimonial && currentTab.testimonial && (
+            <div className={styles.testimonial}>
+              <img
+                src={currentTab.testimonial.avatar}
+                alt=""
+                className={styles.testimonialAvatar}
+              />
+              <div className={styles.testimonialText}>
+                <p className={styles.testimonialName}>{currentTab.testimonial.name}</p>
+                <p className={styles.testimonialQuote}>{currentTab.testimonial.text}</p>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Нижний блок с тегом */}
-      <div className={`${styles.bottomBlock} ${styles.animateIn}`}>
-        <div className={styles.tag}>
-          <span className={styles.tagIcon}>
-            <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M1 5L5 9L13 1" stroke="#C16FFB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
-          <span className={styles.tagText}>{tagText}</span>
+      {showBottomBlock && (
+        <div className={`${styles.bottomBlock} ${styles.animateIn}`}>
+          <div className={styles.tag}>
+            <span className={styles.tagIcon}>
+              <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 5L5 9L13 1" stroke="#C16FFB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <span className={styles.tagText}>{tagText}</span>
+          </div>
+          <p className={styles.bottomText}>{bottomText}</p>
         </div>
-        <p className={styles.bottomText}>{bottomText}</p>
-      </div>
+      )}
     </section>
   );
 }
@@ -274,11 +280,13 @@ AudienceSection.propTypes = {
         avatar: PropTypes.string,
         name: PropTypes.string.isRequired,
         text: PropTypes.string.isRequired,
-      }).isRequired,
+      }),
     })
   ),
   tagText: PropTypes.string,
   bottomText: PropTypes.string,
+  showTestimonial: PropTypes.bool,
+  showBottomBlock: PropTypes.bool,
   className: PropTypes.string,
 };
 

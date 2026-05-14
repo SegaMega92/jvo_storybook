@@ -1,0 +1,212 @@
+/* StrategiesSection — «5 готовых стратегий под разные задачи» */
+
+.section {
+  padding: clamp(60px, 8vw, 100px) 0;
+  background: #fff;
+  overflow-x: hidden; /* prevents horizontal scroll from peek cards */
+}
+
+/* ── Text block ──────────────────────────── */
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  text-align: center;
+  padding: 0 clamp(16px, 3vw, 24px);
+  margin-bottom: 72px;
+}
+
+.title {
+  font-family: var(--font-family-heading);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2.56px;
+  color: #15181f;
+  max-width: 962px;
+  margin: 0;
+}
+
+.subtitle {
+  font-family: var(--font-family-primary);
+  font-size: clamp(16px, 2vw, 24px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.24px;
+  color: #15181f;
+  max-width: 758px;
+  margin: 0;
+}
+
+/* ── Slider ──────────────────────────────── */
+
+/* Full-width so peek cards extend to screen edges without clipping */
+.sliderOuter {
+  width: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.sliderOuter:active {
+  cursor: grabbing;
+}
+
+.track {
+  display: flex;
+  gap: 72px;
+  align-items: center;
+  will-change: transform;
+}
+
+/* ── Card ────────────────────────────────── */
+
+.card {
+  flex-shrink: 0;
+  width: 460px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e9ebf0;
+  border-radius: 16px;
+  box-sizing: border-box;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.cardInactive {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.cardActive {
+  opacity: 1;
+  cursor: default;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px;
+}
+
+.iconBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: background 0.3s ease;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.cardTitle {
+  font-family: var(--font-family-primary);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.2px;
+  color: #15181f;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 0 10px;
+}
+
+.cardTags {
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.16px;
+  color: rgba(21, 24, 31, 0.4);
+  margin: 0;
+}
+
+.cardDesc {
+  font-family: var(--font-family-primary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.16px;
+  color: #15181f;
+  margin: 0;
+}
+
+/* ── Navigation ──────────────────────────── */
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 40px;
+}
+
+.navBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #e9ebf0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.navBtn:hover {
+  background: #dcdfe5;
+  transform: scale(1.05);
+}
+
+.navBtn:active {
+  transform: scale(0.95);
+}
+
+.navIcon {
+  width: 6px;
+  height: 10px;
+  display: block;
+}
+
+/* ── Responsive ──────────────────────────── */
+
+@media (max-width: 700px) {
+  .textBlock {
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .track {
+    gap: 16px;
+  }
+
+  .nav {
+    margin-top: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .textBlock {
+    margin-bottom: 32px;
+  }
+
+  .cardTitle {
+    font-size: 18px;
+  }
+}
