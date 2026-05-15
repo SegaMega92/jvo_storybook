@@ -319,6 +319,160 @@
   text-decoration: underline dotted;
 }
 
+/* ── Illustration switch animation ─────────────────── */
+
+@keyframes illustrationFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.illustrationContent {
+  position: absolute;
+  inset: 0;
+  animation: illustrationFadeIn 0.3s ease both;
+}
+
+/* ── Campaign illustration (pause / launch) ─────────── */
+
+.campaignCard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, calc(100% - 40px));
+  background: #fff;
+  border-radius: 16px;
+  padding: 16px 20px 4px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.08);
+}
+
+.campaignHeader {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 4px;
+}
+
+.scheduleBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 13px;
+  font-weight: 500;
+  color: #5b5b5b;
+  background: #f5f5f5;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  padding: 5px 10px;
+}
+
+.campaignRowItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.campaignRowItem:last-child {
+  border-bottom: none;
+  padding-bottom: 8px;
+}
+
+.campaignLabel {
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 11px;
+  font-weight: 400;
+  color: #aaa;
+  margin: 0;
+}
+
+.campaignRowTop {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.campaignName {
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.campaignBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 6px;
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.campaignBadgeGreen {
+  background: #e6f9ed;
+  color: #1a8a45;
+}
+
+.campaignBadgeYellow {
+  background: #fff8e0;
+  color: #9a7200;
+}
+
+.campaignDetails {
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 11px;
+  font-weight: 400;
+  color: #aaa;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Tooltip accent color ────────────────────────────── */
+
+/* Shared pink accent used by: cluster "Исключён", DRR labels/values, rate-test accent rows */
+.accentPink {
+  color: #da8ad1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Position step styling ───────────────────────────── */
+
+.positionSteps {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.posStepGroup {
+  display: inline-flex;
+  align-items: center;
+}
+
+.posStep {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.posFinal {
+  color: #b0fcbf;
+}
+
+.posArrow {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 11px;
+  padding: 0 2px;
+}
+
 /* ── Responsive ─────────────────────────────────────── */
 
 @media (max-width: 1100px) {
