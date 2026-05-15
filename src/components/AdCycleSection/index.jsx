@@ -320,7 +320,11 @@ export function AdCycleSection({ className = '' }) {
                 className={`${styles.accordionItem} ${isActive ? styles.active : ''}`}
                 onClick={() => { setActiveId(action.id); setPaused(true); }}
               >
-                <div className={styles.divider} />
+                <div className={styles.divider}>
+                  {isActive && !paused && (
+                    <div key={activeId} className={styles.dividerFill} />
+                  )}
+                </div>
                 <div className={styles.accordionRow}>
                   <span className={`${styles.dot} ${isActive ? styles.dotVisible : ''}`} />
                   <div className={styles.accordionText}>
@@ -330,11 +334,6 @@ export function AdCycleSection({ className = '' }) {
                     )}
                   </div>
                 </div>
-                {isActive && !paused && (
-                  <div key={activeId} className={styles.progressTrack}>
-                    <div className={styles.progressBar} />
-                  </div>
-                )}
               </div>
             );
           })}
