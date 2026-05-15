@@ -1,0 +1,3 @@
+import{F as o}from"./index-c41Gd7N2.js";import"./iframe-BoinLcQy.js";import"./preload-helper-D7k33qEn.js";import"./index-Y_KbqFHJ.js";import"./typograph-BZ_HRgl2.js";const p={title:"Sections/FeatureBlock",component:o,parameters:{layout:"fullscreen",docs:{description:{component:"Секция с тремя блоками: иконка + заголовок + описание + иллюстрация. Чередующийся лейаут."}}},tags:["autodocs"]},e={args:{}};e.parameters={...e.parameters,docs:{...e.parameters?.docs,source:{originalSource:`{
+  args: {}
+}`,...e.parameters?.docs?.source}}};const m=["Default"];export{e as Default,m as __namedExportsOrder,p as default};
