@@ -1,7 +1,7 @@
 /* ComparisonSlider - 3D карусель сравнения */
 
 .section {
-  padding: 40px 24px;
+  padding: clamp(60px, 8vw, 100px) 24px;
   background: #ffffff;
   overflow: hidden;
 }
