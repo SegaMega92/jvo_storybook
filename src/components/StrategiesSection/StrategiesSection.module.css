@@ -21,8 +21,8 @@
 .title {
   font-family: var(--font-family-heading);
   font-size: clamp(36px, 5vw, 64px);
-  font-weight: 900;
-  line-height: 1;
+  font-weight: 800;
+  line-height: 0.9;
   letter-spacing: -2.56px;
   color: #15181f;
   max-width: 962px;
@@ -31,10 +31,10 @@
 
 .subtitle {
   font-family: var(--font-family-primary);
-  font-size: clamp(16px, 2vw, 24px);
-  font-weight: 600;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 500;
   line-height: 1.6;
-  letter-spacing: -0.24px;
+  letter-spacing: -0.2px;
   color: #15181f;
   max-width: 758px;
   margin: 0;

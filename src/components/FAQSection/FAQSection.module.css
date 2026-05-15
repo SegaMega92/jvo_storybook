@@ -33,11 +33,11 @@
 }
 
 .title {
-  font-family: 'RF Dewi Extended', var(--font-family-primary);
+  font-family: var(--font-family-heading);
   font-size: 64px;
-  font-weight: 700;
+  font-weight: 800;
   line-height: 0.9;
-  letter-spacing: -0.04em;
+  letter-spacing: -2.56px;
   color: #ffffff;
   margin: 0;
   max-width: 686px;
