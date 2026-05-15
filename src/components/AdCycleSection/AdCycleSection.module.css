@@ -489,6 +489,18 @@
   padding: 0 2px;
 }
 
+/* Inline visual — скрыт на десктопе, показывается внутри аккордеона на мобильном */
+.inlineVisual {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
 /* Краткая подсказка из тултипа — видна только на мобильном */
 .eventMobileHint {
   display: none;
@@ -548,11 +560,13 @@
     width: 100%;
   }
 
+  /* Правая колонка скрыта — иллюстрация показывается внутри аккордеона */
   .visual {
-    flex: none;
-    width: 100%;
-    aspect-ratio: 1;
-    height: auto;
+    display: none;
+  }
+
+  .inlineVisual {
+    display: block;
   }
 
   .eventCard {
@@ -577,11 +591,5 @@
 
   .tooltip {
     display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .visual {
-    aspect-ratio: 4 / 3;
   }
 }

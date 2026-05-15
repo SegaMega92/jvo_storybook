@@ -42,8 +42,6 @@ const actions = [
   },
 ];
 
-// Illustration data per action. `type: 'campaign'` uses a different layout;
-// the default type uses an event card + optional dark tooltip.
 const ILLUS = {
   rate: {
     eventName: 'Изменение ставки',
@@ -289,6 +287,69 @@ function TooltipBody({ tooltip }) {
   return null;
 }
 
+function IllustrationInner({ illus }) {
+  return (
+    <div className={styles.illustrationContent}>
+      {illus.type === 'campaign' ? (
+        <div className={styles.campaignCard}>
+          <div className={styles.campaignHeader}>
+            <span className={styles.scheduleBtn}>
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <rect x="1" y="2.5" width="12" height="10.5" rx="2" stroke="#5b5b5b" strokeWidth="1.2" />
+                <path d="M1 5.5h12" stroke="#5b5b5b" strokeWidth="1.2" />
+                <path d="M4.5 1v3M9.5 1v3" stroke="#5b5b5b" strokeWidth="1.2" strokeLinecap="round" />
+              </svg>
+              Расписание кампании
+            </span>
+          </div>
+          {illus.campaigns.map((c, i) => (
+            <div key={i} className={styles.campaignRowItem}>
+              <p className={styles.campaignLabel}>{c.label}</p>
+              <div className={styles.campaignRowTop}>
+                <span className={styles.campaignName}>{c.name}</span>
+                <span className={`${styles.campaignBadge} ${c.statusType === 'green' ? styles.campaignBadgeGreen : styles.campaignBadgeYellow}`}>
+                  {c.status}
+                </span>
+              </div>
+              <p className={styles.campaignDetails}>{c.details}</p>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className={styles.eventCard}>
+            <div className={styles.eventLeft}>
+              <p className={styles.eventName}>{illus.eventName}</p>
+              <p className={styles.eventLink}>Данные анализа, на основе которых совершено действие</p>
+            </div>
+            <div className={styles.eventRight}>
+              <div className={styles.eventRightTop}>
+                <span className={styles.badge}>{illus.badge}</span>
+              </div>
+              <div className={styles.eventRightBottom}>
+                <span className={styles.eventStatusText}>{illus.action}</span>
+                {illus.count && <span className={styles.badge}>{illus.count}</span>}
+              </div>
+            </div>
+            {illus.mobileHint && (
+              <p className={styles.eventMobileHint}>{illus.mobileHint}</p>
+            )}
+          </div>
+
+          {illus.tooltip && (
+            <div className={styles.tooltip}>
+              <div className={styles.tooltipArrow} />
+              <div className={styles.tooltipBody}>
+                <TooltipBody tooltip={illus.tooltip} />
+              </div>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
 const DURATION = 3000;
 
 export function AdCycleSection({ className = '' }) {
@@ -340,6 +401,12 @@ export function AdCycleSection({ className = '' }) {
                     )}
                   </div>
                 </div>
+                {isActive && (
+                  <div className={styles.inlineVisual}>
+                    <img src={imgCycleBg} alt="" className={styles.bgImg} />
+                    <IllustrationInner illus={illus} />
+                  </div>
+                )}
               </div>
             );
           })}
@@ -347,65 +414,7 @@ export function AdCycleSection({ className = '' }) {
 
         <div className={styles.visual}>
           <img src={imgCycleBg} alt="" className={styles.bgImg} />
-
-          <div key={activeId} className={styles.illustrationContent}>
-            {illus.type === 'campaign' ? (
-              <div className={styles.campaignCard}>
-                <div className={styles.campaignHeader}>
-                  <span className={styles.scheduleBtn}>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <rect x="1" y="2.5" width="12" height="10.5" rx="2" stroke="#5b5b5b" strokeWidth="1.2" />
-                      <path d="M1 5.5h12" stroke="#5b5b5b" strokeWidth="1.2" />
-                      <path d="M4.5 1v3M9.5 1v3" stroke="#5b5b5b" strokeWidth="1.2" strokeLinecap="round" />
-                    </svg>
-                    Расписание кампании
-                  </span>
-                </div>
-                {illus.campaigns.map((c, i) => (
-                  <div key={i} className={styles.campaignRowItem}>
-                    <p className={styles.campaignLabel}>{c.label}</p>
-                    <div className={styles.campaignRowTop}>
-                      <span className={styles.campaignName}>{c.name}</span>
-                      <span className={`${styles.campaignBadge} ${c.statusType === 'green' ? styles.campaignBadgeGreen : styles.campaignBadgeYellow}`}>
-                        {c.status}
-                      </span>
-                    </div>
-                    <p className={styles.campaignDetails}>{c.details}</p>
-                  </div>
-                ))}
-              </div>
-            ) : (
-              <>
-                <div className={styles.eventCard}>
-                  <div className={styles.eventLeft}>
-                    <p className={styles.eventName}>{illus.eventName}</p>
-                    <p className={styles.eventLink}>Данные анализа, на основе которых совершено действие</p>
-                  </div>
-                  <div className={styles.eventRight}>
-                    <div className={styles.eventRightTop}>
-                      <span className={styles.badge}>{illus.badge}</span>
-                    </div>
-                    <div className={styles.eventRightBottom}>
-                      <span className={styles.eventStatusText}>{illus.action}</span>
-                      {illus.count && <span className={styles.badge}>{illus.count}</span>}
-                    </div>
-                  </div>
-                  {illus.mobileHint && (
-                    <p className={styles.eventMobileHint}>{illus.mobileHint}</p>
-                  )}
-                </div>
-
-                {illus.tooltip && (
-                  <div className={styles.tooltip}>
-                    <div className={styles.tooltipArrow} />
-                    <div className={styles.tooltipBody}>
-                      <TooltipBody tooltip={illus.tooltip} />
-                    </div>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+          <IllustrationInner key={activeId} illus={illus} />
         </div>
       </div>
     </section>

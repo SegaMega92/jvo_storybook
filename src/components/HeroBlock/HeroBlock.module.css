@@ -251,8 +251,8 @@
 
   .flatMedia {
     width: 100%;
-    height: auto;
-    aspect-ratio: 1;
+    height: 480px;
+    aspect-ratio: auto;
     order: 1;
   }
 }
@@ -302,6 +302,7 @@
   }
 
   .flatMedia {
-    aspect-ratio: 4 / 3;
+    height: 540px;
+    aspect-ratio: auto;
   }
 }
