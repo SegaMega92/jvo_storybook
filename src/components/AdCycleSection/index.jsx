@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './AdCycleSection.module.css';
 import { typograph } from '../../utils/typograph';
@@ -283,9 +283,23 @@ function TooltipBody({ tooltip }) {
   return null;
 }
 
+const DURATION = 3000;
+
 export function AdCycleSection({ className = '' }) {
   const [activeId, setActiveId] = useState('rate');
+  const [paused, setPaused] = useState(false);
   const illus = ILLUS[activeId];
+
+  useEffect(() => {
+    if (paused) return;
+    const timer = setTimeout(() => {
+      setActiveId((prev) => {
+        const idx = actions.findIndex((a) => a.id === prev);
+        return actions[(idx + 1) % actions.length].id;
+      });
+    }, DURATION);
+    return () => clearTimeout(timer);
+  }, [activeId, paused]);
 
   return (
     <section className={`${styles.section} ${className}`}>
@@ -304,7 +318,7 @@ export function AdCycleSection({ className = '' }) {
               <div
                 key={action.id}
                 className={`${styles.accordionItem} ${isActive ? styles.active : ''}`}
-                onClick={() => setActiveId(action.id)}
+                onClick={() => { setActiveId(action.id); setPaused(true); }}
               >
                 <div className={styles.divider} />
                 <div className={styles.accordionRow}>
@@ -316,6 +330,11 @@ export function AdCycleSection({ className = '' }) {
                     )}
                   </div>
                 </div>
+                {isActive && !paused && (
+                  <div key={activeId} className={styles.progressTrack}>
+                    <div className={styles.progressBar} />
+                  </div>
+                )}
               </div>
             );
           })}

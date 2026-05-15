@@ -319,6 +319,28 @@
   text-decoration: underline dotted;
 }
 
+/* ── Accordion progress bar ─────────────────────────── */
+
+.progressTrack {
+  height: 2px;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 2px;
+  overflow: hidden;
+  margin: -10px 0 10px 32px;
+}
+
+@keyframes progressFill {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+.progressBar {
+  height: 100%;
+  background: #c16ffb;
+  transform-origin: left;
+  animation: progressFill 3s linear forwards;
+}
+
 /* ── Illustration switch animation ─────────────────── */
 
 @keyframes illustrationFadeIn {
