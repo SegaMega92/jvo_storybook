@@ -202,12 +202,10 @@ export function StrategiesSection({ className = '' }) {
                   <span className={styles.cardTitle}>{s.title}</span>
                 </div>
 
-                {isActive && (
-                  <div className={styles.cardBody}>
-                    <p className={styles.cardTags}>{s.tags}</p>
-                    <p className={styles.cardDesc}>{s.description}</p>
-                  </div>
-                )}
+                <div className={`${styles.cardBody} ${!isActive ? styles.cardBodyHidden : ''}`}>
+                  <p className={styles.cardTags}>{s.tags}</p>
+                  <p className={styles.cardDesc}>{s.description}</p>
+                </div>
               </div>
             );
           })}
