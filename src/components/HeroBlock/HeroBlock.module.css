@@ -300,4 +300,8 @@
     gap: 12px;
     padding: 8px 0;
   }
+
+  .flatMedia {
+    aspect-ratio: 4 / 3;
+  }
 }

@@ -50,6 +50,7 @@ const ILLUS = {
     badge: 'Успешно',
     action: 'Ставка обновлена',
     count: '18 кластеров',
+    mobileHint: 'теплая шапка 120→80 ₽  ·  вязаная 95→75 ₽',
     tooltip: {
       type: 'price',
       rows: [
@@ -84,6 +85,7 @@ const ILLUS = {
     badge: 'Успешно',
     action: 'Убрано из РК',
     count: '3 артикула',
+    mobileHint: 'теплая шапка ДРР 67%  ·  вязаная зимняя 54%',
     tooltip: {
       type: 'remove',
       rows: [
@@ -99,6 +101,7 @@ const ILLUS = {
     badge: 'Успешно',
     action: 'Исключено',
     count: '256 кластеров',
+    mobileHint: 'красная шапочка: 124 показа / 0 заказов',
     tooltip: {
       type: 'cluster',
       keyword: 'красная шапочка',
@@ -112,6 +115,7 @@ const ILLUS = {
     badge: 'Успешно',
     action: 'Дневной лимит снижен',
     count: '25 кластеров',
+    mobileHint: 'Целевой ДРР 18%  ·  Фактический 34%',
     tooltip: {
       type: 'drr',
       target: '18%',
@@ -123,6 +127,7 @@ const ILLUS = {
     badge: 'Завершено',
     action: 'Позиция обновлена',
     count: '47 кластеров',
+    mobileHint: 'теплая шапка: 4→5→6  ·  вязаная: 7→4→3',
     tooltip: {
       type: 'positions',
       rows: [
@@ -138,6 +143,7 @@ const ILLUS = {
     badge: 'Завершено',
     action: 'Ставка возвращена',
     count: null,
+    mobileHint: '↑ 70 ₽ → рост не обнаружен → возврат ↓ 60 ₽',
     tooltip: {
       type: 'rate-test',
       rows: [
@@ -384,6 +390,9 @@ export function AdCycleSection({ className = '' }) {
                       {illus.count && <span className={styles.badge}>{illus.count}</span>}
                     </div>
                   </div>
+                  {illus.mobileHint && (
+                    <p className={styles.eventMobileHint}>{illus.mobileHint}</p>
+                  )}
                 </div>
 
                 {illus.tooltip && (

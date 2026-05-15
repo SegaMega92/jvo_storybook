@@ -14,7 +14,7 @@ const CARD_WIDTH = 460;
 const CARD_GAP = 72;
 const CARD_STEP = CARD_WIDTH + CARD_GAP;
 const MOBILE_GAP = 16;
-const MOBILE_BP = 700;
+const MOBILE_BP = 701;
 
 const strategies = [
   {

@@ -489,6 +489,19 @@
   padding: 0 2px;
 }
 
+/* Краткая подсказка из тултипа — видна только на мобильном */
+.eventMobileHint {
+  display: none;
+  flex-basis: 100%;
+  font-family: 'Golos Text', var(--font-family-primary);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #da8ad1;
+  margin: 0;
+  padding: 8px 8px 0;
+}
+
 /* ── Responsive ─────────────────────────────────────── */
 
 @media (max-width: 1100px) {
@@ -500,13 +513,16 @@
     flex: 0 0 360px;
   }
 
+  /* Гибкая ширина вместо фиксированных 500px — не допускает
+     горизонтального overflow на экранах 860–940px */
   .visual {
-    width: 500px;
+    width: auto;
     height: 500px;
+    flex-shrink: 1;
   }
 
   .eventCard {
-    width: 460px;
+    width: min(460px, calc(100% - 40px));
     top: 170px;
   }
 
@@ -533,10 +549,10 @@
   }
 
   .visual {
+    flex: none;
     width: 100%;
     aspect-ratio: 1;
     height: auto;
-    flex-shrink: 0;
   }
 
   .eventCard {
@@ -555,7 +571,17 @@
     flex: 1 0 120px;
   }
 
+  .eventMobileHint {
+    display: block;
+  }
+
   .tooltip {
     display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .visual {
+    aspect-ratio: 4 / 3;
   }
 }

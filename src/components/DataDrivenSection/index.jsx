@@ -85,7 +85,7 @@ export function DataDrivenSection({ className = '' }) {
             <div
               key={m.id}
               className={`${styles.pill} ${m.id === activeId ? styles.pillActive : ''}`}
-              style={{ left: m.x, top: m.y }}
+              style={{ left: `${(m.x / 520) * 100}%`, top: `${(m.y / 300) * 100}%` }}
               onMouseEnter={() => { setActiveId(m.id); setPaused(true); }}
             >
               {m.label}
