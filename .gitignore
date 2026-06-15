@@ -25,3 +25,11 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+# Build outputs for landing pages
+dist-landing
+
+# Working folders (raw assets, not used in code)
+inbox
+client_logo
+src/assets/hero-video-original.mp4
