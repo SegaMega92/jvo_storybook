@@ -71,7 +71,7 @@ const defaultAgents = [
       'Ускоряет рост, сохраняя прибыль',
     ]),
     buttonText: 'Узнать больше',
-    buttonHref: '/requestdemo',
+    buttonHref: 'https://jvo.ru/agent-reklamy',
     illustration: <IllustrationAdvertising />,
   },
 ];

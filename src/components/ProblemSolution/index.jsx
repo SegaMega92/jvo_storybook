@@ -10,11 +10,11 @@ import { typograph } from '../../utils/typograph';
 
 const defaultTags = [
   { label: typograph('Просадка динамики продаж'), lossBadge: typograph('↓ 11% выручка'), autoBadge: typograph('Автоматизировано 48 задач'), priority: 'Критично' },
-  { label: typograph('Образования неликвида'), lossBadge: typograph('↓ 4% расходы'), autoBadge: typograph('Автоматизировано 36 задач'), priority: 'Критично' },
+  { label: typograph('Образования неликвида'), lossBadge: typograph('↑ 4% расходы'), autoBadge: typograph('Автоматизировано 36 задач'), priority: 'Критично' },
   { label: typograph('Просадки в воронке продаж'), lossBadge: typograph('↓ 1% выручка'), autoBadge: typograph('Автоматизировано 26 задач'), priority: 'Важно' },
-  { label: typograph('Затраты на логистику и возвраты'), lossBadge: typograph('↓ 2% расходы'), autoBadge: typograph('Автоматизировано 18 задач'), priority: 'Критично' },
-  { label: typograph('Высокий процент возвратов'), lossBadge: typograph('↓ 12% расходы'), autoBadge: typograph('Автоматизировано 22 задач'), priority: 'Важно' },
-  { label: typograph('Неэффективная реклама'), lossBadge: typograph('↓ 7% расходы'), autoBadge: typograph('Автоматизировано 31 задач'), priority: 'Критично' },
+  { label: typograph('Затраты на логистику и возвраты'), lossBadge: typograph('↑ 2% расходы'), autoBadge: typograph('Автоматизировано 18 задач'), priority: 'Критично' },
+  { label: typograph('Высокий процент возвратов'), lossBadge: typograph('↑ 12% расходы'), autoBadge: typograph('Автоматизировано 22 задач'), priority: 'Важно' },
+  { label: typograph('Неэффективная реклама'), lossBadge: typograph('↑ 7% расходы'), autoBadge: typograph('Автоматизировано 31 задач'), priority: 'Критично' },
   { label: typograph('OOS и риск OOS'), lossBadge: typograph('↓ 15% выручка'), autoBadge: typograph('Автоматизировано 54 задач'), priority: 'Критично' },
   { label: typograph('Региональная экспансия'), lossBadge: typograph('↓ 9% выручка'), autoBadge: typograph('Автоматизировано 128 задач'), priority: 'Рекомендовано' },
   { label: typograph('Отсутствие кросс-продаж'), lossBadge: typograph('↓ 3% выручка'), autoBadge: typograph('Автоматизировано 67 задач'), priority: 'Важно' },

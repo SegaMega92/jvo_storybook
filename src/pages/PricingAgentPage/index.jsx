@@ -40,7 +40,7 @@ import bentoStockIconImg from '../../assets/pricing-agent/bento-stock-icon.png';
 import bentoEconomyIconImg from '../../assets/pricing-agent/bento-economy-icon.png';
 
 // Tag icon
-import tagIconPricingAgent from '../../assets/icons/tag-pricing-agent.png';
+import tagIconPricingAgent from '../../assets/products/pricing-agent-icon.png';
 
 // Avatar images for AudienceSection
 import avatarSupplierMedium from '../../assets/pricing-agent/avatars/avatar-supplier-medium.png';
@@ -632,7 +632,7 @@ const audienceTabs = [
     description: typograph('Избавляет от операционного хаоса и ручного контроля матрицы. Позволяет расти без найма людей, фокусируясь на точках прибыли, которые нашёл Агент.'),
     testimonial: {
       avatar: avatarSupplierMedium,
-      name: 'Алёна, владелец магазина (товары для дома)',
+      name: 'Алексей, владелец магазина (товары для дома)',
       text: typograph('«Сначала не верил в автоматику — думал, сам лучше знаю свои цены. Но когда Агент за неделю поднял маржу на 4% без падения продаж, я просто перестал лезть руками. Теперь только смотрю отчёты»'),
     },
   },
