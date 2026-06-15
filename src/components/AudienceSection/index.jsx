@@ -237,15 +237,8 @@ export function AudienceSection({
           {/* Отзыв */}
           {showTestimonial && currentTab.testimonial && (
             <div className={styles.testimonial}>
-              <img
-                src={currentTab.testimonial.avatar}
-                alt=""
-                className={styles.testimonialAvatar}
-              />
-              <div className={styles.testimonialText}>
-                <p className={styles.testimonialName}>{currentTab.testimonial.name}</p>
-                <p className={styles.testimonialQuote}>{currentTab.testimonial.text}</p>
-              </div>
+              <p className={styles.testimonialName}>{currentTab.testimonial.name}</p>
+              <p className={styles.testimonialQuote}>{currentTab.testimonial.text}</p>
             </div>
           )}
         </div>

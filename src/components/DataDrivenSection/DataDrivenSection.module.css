@@ -52,6 +52,12 @@
   z-index: 1;
 }
 
+.pillsGrid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 .pill {
   position: absolute;
   display: inline-flex;
@@ -150,19 +156,42 @@
 /* ── Responsive ─────────────────────────────────────── */
 
 @media (max-width: 580px) {
+  /* Диаграмма становится вертикальным flow: карточка метрики сверху, пиллы — рядами снизу.
+     Решает «уезжание» пиллов (CTR/CPC) за экран на телефонах. */
   .diagram {
     width: 100%;
-    height: 280px;
-  }
-
-  .pill {
-    font-size: 16px;
-    padding: 3px 14px 5px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
   }
 
   .metricCard {
-    width: 260px;
+    position: static;
+    transform: none;
+    width: 100%;
+    order: 0;
     padding: 14px;
+  }
+
+  .pillsGrid {
+    position: static;
+    pointer-events: auto;
+    order: 1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+
+  /* !important перебивает inline-стили left/top, заданные в JSX */
+  .pill {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    font-size: 15px;
+    padding: 4px 14px 6px;
   }
 
   .metricFormula,

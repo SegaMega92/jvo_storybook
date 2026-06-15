@@ -81,16 +81,19 @@ export function DataDrivenSection({ className = '' }) {
         </h2>
 
         <div className={styles.diagram}>
-          {metrics.map((m) => (
-            <div
-              key={m.id}
-              className={`${styles.pill} ${m.id === activeId ? styles.pillActive : ''}`}
-              style={{ left: `${(m.x / 520) * 100}%`, top: `${(m.y / 300) * 100}%` }}
-              onMouseEnter={() => { setActiveId(m.id); setPaused(true); }}
-            >
-              {m.label}
-            </div>
-          ))}
+          <div className={styles.pillsGrid}>
+            {metrics.map((m) => (
+              <div
+                key={m.id}
+                className={`${styles.pill} ${m.id === activeId ? styles.pillActive : ''}`}
+                style={{ left: `${(m.x / 520) * 100}%`, top: `${(m.y / 300) * 100}%` }}
+                onMouseEnter={() => { setActiveId(m.id); setPaused(true); }}
+                onClick={() => { setActiveId(m.id); setPaused(true); }}
+              >
+                {m.label}
+              </div>
+            ))}
+          </div>
 
           <div className={styles.metricCard}>
             <div key={activeId} className={styles.metricContent}>
