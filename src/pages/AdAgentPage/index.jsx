@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import styles from './AdAgentPage.module.css';
-import { Header } from '../../components/Header';
 import { HeroBlock } from '../../components/HeroBlock';
 import { AdCycleSection } from '../../components/AdCycleSection';
 import { DataDrivenSection } from '../../components/DataDrivenSection';
@@ -216,8 +215,6 @@ const adAgentFaqs = [
 export function AdAgentPage({ className = '', embedded = false }) {
   return (
     <div className={`${styles.page} ${className}`}>
-      {!embedded && <Header />}
-
       <main className={styles.main}>
 
         {/* Hero */}
@@ -243,7 +240,7 @@ export function AdAgentPage({ className = '', embedded = false }) {
             variant="flat"
             features={heroFeatures}
             buttonText={typograph('Подключить ИИ-агента')}
-            buttonHref="https://jvo.ru/requestdemo"
+            buttonHref="#form"
             illustration={
               <div className={styles.heroIllustration}>
                 <img src={heroGradientImg} alt="" className={styles.heroGradientBg} />
