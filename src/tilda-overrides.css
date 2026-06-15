@@ -164,3 +164,31 @@
 [id^="jvo-"] .tn-atom {
   all: unset !important;
 }
+
+/* Make the AdCycle accordion interactive inside Tilda.
+   Tilda's record pseudo-elements intercept clicks and its global styles
+   suppress pointer-events, so the accordion (hover-to-preview, click-to-pin)
+   stops working. These overrides restore interactivity and the hover/active
+   visual states inside our root. */
+[id^="jvo-"] [class*="accordionItem"] {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+[id^="jvo-"] [class*="accordionItem"]:hover {
+  opacity: 0.7 !important;
+}
+
+[id^="jvo-"] [class*="accordionItem"][class*="active"] {
+  opacity: 1 !important;
+}
+
+.t-rec:after,
+.t-rec:before {
+  pointer-events: none !important;
+}
+
+#jvo-ad-agent-root,
+#jvo-ad-agent-root * {
+  pointer-events: auto;
+}

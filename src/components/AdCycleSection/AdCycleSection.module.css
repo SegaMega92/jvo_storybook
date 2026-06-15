@@ -62,6 +62,10 @@
   transition: opacity 0.25s;
 }
 
+.accordionItem:hover {
+  opacity: 0.7;
+}
+
 .accordionItem.active {
   opacity: 1;
 }

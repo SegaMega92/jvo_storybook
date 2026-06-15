@@ -384,7 +384,9 @@ export function AdCycleSection({ className = '' }) {
             return (
               <div
                 key={action.id}
+                data-cycle-id={action.id}
                 className={`${styles.accordionItem} ${isActive ? styles.active : ''}`}
+                onMouseEnter={() => setActiveId(action.id)}
                 onClick={() => { setActiveId(action.id); setPaused(true); }}
               >
                 <div className={styles.divider}>
