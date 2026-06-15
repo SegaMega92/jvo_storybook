@@ -2,8 +2,19 @@
    JVO Fonts - RF Dewi + RF Dewi Extended + Manrope
    =========================================== */
 
+/* Manrope (weights 400/500/600) - matches prod (jvo.ru) Google Fonts load.
+   Self-hosted faces below only cover 400/500/700, so weight 600 must come
+   from here to avoid the browser faux-bolding it. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap');
+
 /* RF Dewi (regular width) - Body text */
-@import url('https://db.onlinewebfonts.com/c/bfb30c2677ae3236b6f893704c76f019?family=RF+Dewi');
+@font-face {
+  font-family: 'RF Dewi';
+  src: url('./RFDewi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* RF Dewi Extended - Headings */
 @font-face {
